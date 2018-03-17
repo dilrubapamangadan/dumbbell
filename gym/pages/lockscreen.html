@@ -1,0 +1,124 @@
+<style type="text/css">
+body {
+	overflow: hidden !important;
+}
+
+
+
+.now-ur-locked {
+	position: fixed !important;
+	width: 100% !important;
+	height: 100% !important;
+	z-index: 99999999 !important;
+	left: 0 !important;
+	top: 0 !important;
+	bottom: 0 !important;
+	right: 0 !important;
+	width: 100wh;
+	height: 90vh;
+	color: #fff;
+	background: linear-gradient(-45deg, #ffffff, #b1b1b1, #656565, #212121);
+	/* linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);*/
+
+	background-size: 400% 400%;
+	-webkit-animation: Gradient 15s ease infinite;
+	-moz-animation: Gradient 15s ease infinite;
+	animation: Gradient 15s ease infinite;
+}
+
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+.lockscreen-credentials input {
+	padding-right: 30px;
+}
+
+.my-ico-ico {
+	position: absolute; 
+	right: 10px; 
+	top: 0px;
+}
+</style>
+
+
+<div class="now-ur-locked  animated fadeInDown "  >
+	<div class="lockscreen-wrapper">
+
+		<div class="lockscreen-logo">
+			<a style="color: white;"><b style="padding-right: 10px;">LockScreen</b>Admin</a>
+		</div>
+		<div class="lockscreen-box-body">
+
+			<!-- START LOCK SCREEN ITEM -->
+			<div class="lockscreen-item">
+				<!-- lockscreen image -->
+				<div class="lockscreen-image "> 
+					<img src="admin/images/user1-128x128.jpg" alt="User Image">
+				</div>
+				<!-- /.lockscreen-image -->	
+
+				<!-- User name -->
+				<div class="lockscreen-name margin-top-20"><h3 style="text-align: center;">name Doe</h3></div>
+
+				<!-- lockscreen credentials (contains the form) -->
+				<form class="lockscreen-credentials skin-border-color form-element margin-top-20"  ng-submit="lockLogin()" > 
+					<div class="form-group has-feedback">
+						<input  name="password"   id="autofocusme"  type="password" class="form-control" 
+						placeholder="Password" autofocus="" ng-model='authentication.password' >
+						<span class="ion ion-locked form-control-feedback my-ico-ico " style=" "></span>
+					</div>
+					<div>
+						<div ng-show="authentication.invalidPassword" id="alterMepassword" class="alert alert-danger alert-dismissable animated    "  >   <p> invalid password</p></div>
+					</div>
+					<!-- /.col -->
+					<div class="text-center">
+						<button type="submit"   class="btn btn-info btn-block margin-top-10 skin-background-color">LOGIN</button>
+					</div>
+					<!-- /.col -->
+				</form>
+				<!-- /.lockscreen credentials -->
+
+			</div>
+			<!-- /.lockscreen-item -->
+			<div class="help-block text-center margin-top-20">
+				Enter your password to retrieve your session
+			</div>
+			<div class="text-center">
+				Or <a  ><b>Sign In</b></a> as a Different User
+			</div>
+		</div>
+	</div>
+</div>

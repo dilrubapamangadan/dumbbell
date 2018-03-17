@@ -1,0 +1,648 @@
+<section class="content-header">
+	<h1>
+		Doctor
+		<small>View</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="admin-dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="breadcrumb-item active"><a href="admin-doctor-view">Doctors</a></li>
+		<li class="breadcrumb-item active">Single</li>
+	</ol>
+</section>
+
+<style type="text/css">
+.image_base_n {
+	position: relative;
+}
+.nowUpdateImgClick {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	text-align: center;	
+	padding: 50px;
+	vertical-align: text-top;	
+	display:none;
+}
+.nowUpdateImgClick i {
+	font-size: 50px;
+	cursor: pointer;
+	padding: 10%;
+	background: #0000001a;
+	border-radius: 50%;
+}
+
+.image_base_n>img:hover {
+	opacity:0.7;
+}
+
+
+.image_base_n>img:hover +span{ 
+	display: block;
+}
+
+.image_base_n>span:hover { 
+	display: block;
+}
+.image_base_n i:hover -span{ 	
+	background: red; 
+	animation-name: none;
+}
+
+
+
+
+
+</style>
+
+<section class="content">
+
+	<div class="row">
+		<div class="col-xl-4 col-lg-5">
+
+			<!-- Profile Image -->
+			<div class="box">
+				<div class="box-body box-profile">
+					<div class="image_base_n">
+						<img class="profile-user-img rounded-circle img-fluid mx-auto d-block"
+						ng-src src="{{profile.image}}"  alt="User profile picture">
+
+					</div>
+					<h3 class="profile-username text-center">{{profile.fname + profile.lname}}</h3>
+
+					<p class="text-muted text-center">doctor </p>
+
+					<div class="row social-states">
+			<!-- 			<div class="col-6 text-right"><a href="#" class="link"><i class="ion ion-ios-people-outline"></i> 254</a></div>
+				<div class="col-6 text-left"><a href="#" class="link"><i class="ion ion-images"></i> 54</a></div> -->
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<div class="profile-user-info">
+						<p>Email address </p>
+						<h6 class="margin-bottom">{{profile.email}}</h6>
+						<p>Phone</p>
+						<h6 class="margin-bottom">+91 {{profile.phone}}</h6> 
+						<p>Address</p>
+						<h6 class="margin-bottom">{{profile.address}}</h6>
+						<div class="map-box">
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+</div>
+<!-- /.col -->
+<div class="col-xl-8 col-lg-7">
+	<div class="nav-tabs-custom">
+		<ul class="nav nav-tabs">
+
+			<li><a class="active"  nr-href="#activity" data-toggle="tab">Activity</a></li>
+			<li><a nr-href="#settings" data-toggle="tab">Edit</a></li>
+		</ul>
+
+		<div class="tab-content">
+
+
+			<div class="active tab-pane" id="activity">
+
+
+
+
+				<ul class="timeline"  ng-repeat="logDay in logData" style="margin-bottom: 0px; padding-bottom: 1px;">
+					<!-- timeline time label -->
+					<li class="time-label">
+						<span class="bg-info">
+							{{ reformatDate (logDay[0].day) }}
+						</span>
+					</li>
+					<!-- /.timeline-label -->
+					<!-- timeline item -->
+
+					<li ng-repeat="logOne in logDay">
+						<i class="ion ion-clock  "  ng-class="{ 'bg-red' : (logOne.result == 0), 'bg-green' : !(logOne.result == 0) }"></i>
+
+						<div class="timeline-item"> 
+
+							<h3 class="timeline-header"><b>{{logOne.date|timeago}}</b> <small class="float-right">{{logOne.date}}</small></h3>
+
+							<div class="timeline-body">
+								{{logOne.remark}}
+								<small class="float-right" ng-show="logOne.to_who">{{logOne.to_who}}</small>
+							</div>
+
+						</div> 
+					</li>
+					<!-- END timeline item -->
+
+					<!-- END timeline item -->
+
+				</ul>
+
+				<ul class="timeline"    style="margin-bottom: 30px; padding-bottom: 1px;"> 
+
+					<li>
+						<i class="fa fa-clock-o bg-gray" ng-show=" ! isLoadingLog"></i>
+						<i class="fa fa-refresh fa-spin fa-3x fa-fw margin-bottom bg-yellow" ng-show="isLoadingLog"></i>
+						<div style="position: absolute; left: 0; right: 0; "> 
+							<p class="text-center noselect" style="margin-top: 10px; cursor: pointer;" ng-click=" moreLogs()" ng-show="moreLogR"> more ....</p>
+						</div>
+					</li>
+				</ul>
+
+			</div>
+
+			<!-- /.tab-pane -->
+			<style type="text/css">
+
+		</style>
+		<div class="tab-pane" id="settings">
+			<form name="singleDoctor"  class="form-horizontal form-element col-12"  ng-submit="singleDoctorSubmit()" >
+
+
+				<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : singleDoctor.fname.$valid, 'has-error' : singleDoctor.fname.$invalid && !singleDoctor.fname.$pristine }">
+
+					<label  >First Name :<span class="danger">*</span></label>
+
+					<div class="col-sm-12">
+
+						<input type="text" name="fname" class="form-control"  placeholder="Enter your first name"  ng-model="profile.fname"  ng-minlength="2" ng-maxlength="255" ng-pattern="/^[a-zA-Z\s]*$/"
+						required>
+
+						<span class="glyphicon form-control-feedback"  aria-hidden="true"
+						ng-class="{ 'glyphicon-ok' : singleDoctor.fname.$valid, 'glyphicon-remove' : singleDoctor.fname.$invalid && !singleDoctor.fname.$pristine }" ></span>
+						<span span ng-show="singleDoctor.fname.$invalid && singleDoctor.fname.$error.required" class="help-block">Your first name is required.</span>            
+						<span ng-show="singleDoctor.fname.$invalid && singleDoctor.fname.$error.minlength" class="help-block">first name is too short.</span>
+						<span ng-show="singleDoctor.fname.$invalid && singleDoctor.fname.$error.maxlength" class="help-block">first name is too long.</span>
+					</div>
+				</div>
+				
+
+
+				<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : singleDoctor.lname.$valid, 'has-error' : singleDoctor.lname.$invalid && !singleDoctor.lname.$pristine }">
+
+					<label  >Last Name :<span class="danger">*</span></label>
+
+					<div class="col-sm-12">
+						<input type="text" name="lname" ng-pattern="/^[a-zA-Z\s]*$/"
+						class="form-control"  placeholder="Enter your last name"  ng-model="profile.lname"    ng-maxlength="255"  required>
+
+						<span class="glyphicon form-control-feedback"  aria-hidden="true"
+						ng-class="{ 'glyphicon-ok' : singleDoctor.lname.$valid, 'glyphicon-remove' : singleDoctor.lname.$invalid && !singleDoctor.lname.$pristine }" ></span>
+						<span span ng-show="singleDoctor.lname.$invalid && singleDoctor.lname.$error.required" class="help-block">Your last name is required.</span>      
+						<span ng-show="singleDoctor.lname.$invalid && singleDoctor.lname.$error.maxlength" class="help-block">last name is too long.</span>
+
+					</div>
+				</div>
+
+				
+
+				<div class="form-group  has-feedback " ng-class="{ 'has-success' : singleDoctor.sex.$valid, 'has-error' : singleDoctor.sex.$invalid && !singleDoctor.sex.$pristine }">
+					<label  >Sex
+						<span class="danger">*</span>
+					</label>
+					<div class="col-sm-12">
+						<div class="form-control">
+
+							<input type="radio" name="sex" id="sexm"   value="male" ng-model="profile.sex" required >  &nbsp;&nbsp;&nbsp;
+							<label for="sexm">Male</label>
+							<input type="radio" name="sex" id="sexf"   value="female" ng-model="profile.sex" required >  &nbsp;&nbsp;&nbsp;
+							<label for="sexf">Female</label>
+							<input type="radio" name="sex" id="sexo"   value="other" ng-model="profile.sex"  required>  &nbsp;&nbsp;&nbsp;
+							<label for="sexo">Other</label>
+
+						</div>
+						<span class="glyphicon form-control-feedback"  aria-hidden="true"
+						ng-class="{ 'glyphicon-ok' : singleDoctor.sex.$valid, 'glyphicon-remove' : singleDoctor.sex.$invalid && !singleDoctor.sex.$pristine }" ></span>
+						<span span ng-show="singleDoctor.sex.$invalid && singleDoctor.sex.$error.required" class="help-block">Your sex is required.</span>    
+					</div>
+
+				</div>
+
+
+				
+				<div class="form-group  has-feedback " ng-class="{ 'has-success' : singleDoctor.dob.$valid, 'has-error' : singleDoctor.dob.$invalid && !singleDoctor.dob.$pristine }">
+					<label  >DOB
+						<span class="danger">*</span></label>
+
+						<div class="col-sm-12">
+							<datepicker date-format="yyyy-MM-dd" selector="form-control" date-min-limit="new Date()">
+								<div class="input-group">
+									<input  name="dob"  class="form-control" placeholder="Select your dob" ng-model="profile.dob"  required/>
+									<span class="input-group-addon" style="cursor: pointer">
+										<i class="fa fa-lg fa-calendar"></i>
+									</span>
+								</div>
+							</datepicker>
+
+							<br>
+							<span class="glyphicon form-control-feedback"  aria-hidden="true"
+							ng-class="{ 'glyphicon-ok' : singleDoctor.dob.$valid, 'glyphicon-remove' : singleDoctor.dob.$invalid && !singleDoctor.dob.$pristine }" ></span>
+							<span span ng-show="singleDoctor.dob.$invalid && singleDoctor.dob.$error.required" class="help-block">Your dob is required.</span>    
+						</div>
+
+					</div>
+
+
+
+					<div class="form-group 	 has-feedback" ng-class="{ 'has-success' : singleDoctor.email.$valid, 'has-error' : singleDoctor.email.$invalid && !singleDoctor.email.$pristine }">
+
+						<label  >Email :
+							<span class="danger">*</span></label>
+							<div class="col-sm-12">
+								<input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" ng-model="profile.email" ng-maxlength="255" required  ng-blur="checkMaEmail( profile.email )" ng-change="chageEmail()">
+								<span class="glyphicon form-control-feedback"  aria-hidden="true"
+								ng-class="{ 'glyphicon-ok' : singleDoctor.email.$valid, 'glyphicon-remove' : singleDoctor.email.$invalid && !singleDoctor.email.$pristine }" ></span>
+								<span span ng-show="singleDoctor.email.$invalid && singleDoctor.email.$error.required" class="help-block">Your email is required.</span>   
+								<span ng-show="singleDoctor.email.$invalid && singleDoctor.email.$error.maxlength" class="help-block">email is too long.</span>
+								<span ng-show="singleDoctor.email.$invalid && singleDoctor.email.$error.email" class="help-block">Invalid email address.</span>
+								<span ng-show="singleDoctor.email.$invalid && emailErrorServer" class="help-block">{{emailErrorServer}}</span>
+							</div>
+
+						</div>
+
+
+
+
+						<div class="form-group  has-feedback  " ng-class="{ 'has-success' : singleDoctor.phone.$valid, 'has-error' : singleDoctor.phone.$invalid && !singleDoctor.phone.$pristine }">
+							<label for="inputPhone"  >Phone :
+								<span class="danger">*</span></label>
+								<div class="col-sm-12">
+									<input name="phone" type="number" class="form-control" id="inputPhone" placeholder="Enter your phone" ng-model="profile.phone" ng-maxlength="10"  ng-minlength="10"  ng-blur="checkMaPhone( profile.phone )" ng-change="chagePhone()" required >
+									<span class="glyphicon form-control-feedback"  aria-hidden="true"
+									ng-class="{ 'glyphicon-ok' : singleDoctor.phone.$valid, 'glyphicon-remove' : singleDoctor.phone.$invalid && !singleDoctor.phone.$pristine }" ></span>
+									<span span ng-show="singleDoctor.phone.$invalid && singleDoctor.phone.$error.required" class="help-block">Your phone is required.</span>   
+									<span ng-show="singleDoctor.phone.$invalid && singleDoctor.phone.$error.minlength" class="help-block">phone is too short.</span>
+									<span ng-show="singleDoctor.phone.$invalid && singleDoctor.phone.$error.maxlength" class="help-block">phone is too long.</span>
+
+									<span ng-show="singleDoctor.phone.$invalid && singleDoctor.phone.$error.number" class="help-block">Invalid phone number.</span>
+									<span ng-show="singleDoctor.phone.$invalid && phoneErrorServer" class="help-block">{{phoneErrorServer}}</span>
+
+								</div> 
+							</div>
+
+							<div class="form-group  has-feedback  " ng-class="{ 'has-success' : singleDoctor.landline.$valid, 'has-error' : singleDoctor.landline.$invalid && !singleDoctor.landline.$pristine }">
+								<label for="inputPhone" >Landline :</label>
+								<div class="col-sm-12">
+									<input name="landline" type="number" class="form-control" id="inputLandline" placeholder="Enter your landline" ng-model="profile.landline" ng-maxlength="14"  ng-minlength="10"   >
+									<span class="glyphicon form-control-feedback"  aria-hidden="true"
+									ng-class="{ 'glyphicon-ok' : singleDoctor.landline.$valid, 'glyphicon-remove' : singleDoctor.landline.$invalid && !singleDoctor.landline.$pristine }" ></span> 
+									<span ng-show="singleDoctor.landline.$invalid && singleDoctor.landline.$error.minlength" class="help-block">landline is too short.</span>
+									<span ng-show="singleDoctor.landline.$invalid && singleDoctor.landline.$error.number" class="help-block">Invalid landline number.</span>
+									<span ng-show="singleDoctor.landline.$invalid && singleDoctor.landline.$error.maxlength" class="help-block">landline is too long.</span>
+
+								</div>
+							</div>
+
+
+
+							<div class="form-group  has-feedback  " ng-class="{ 'has-success' : singleDoctor.officephone.$valid, 'has-error' : singleDoctor.officephone.$invalid && !singleDoctor.officephone.$pristine }">
+								<label for="inputPhone" >office phone :</label>
+								<div class="col-sm-12">
+									<input name="officephone" type="number" class="form-control" id="inputLandline" placeholder="Enter your officephone" ng-model="profile.officephone" ng-maxlength="14"  ng-minlength="10"   >
+									<span class="glyphicon form-control-feedback"  aria-hidden="true"
+									ng-class="{ 'glyphicon-ok' : singleDoctor.officephone.$valid, 'glyphicon-remove' : singleDoctor.officephone.$invalid && !singleDoctor.officephone.$pristine }" ></span> 
+									<span ng-show="singleDoctor.officephone.$invalid && singleDoctor.officephone.$error.minlength" class="help-block">office phone number is too short.</span>
+									<span ng-show="singleDoctor.officephone.$invalid && singleDoctor.officephone.$error.number" class="help-block">Invalid office phone number.</span>
+									<span ng-show="singleDoctor.officephone.$invalid && singleDoctor.officephone.$error.maxlength" class="help-block">office phone number is too long.</span>
+								</div>
+							</div>
+
+
+
+							<div class="form-group  has-feedback  " ng-class="{ 'has-success' : singleDoctor.address.$valid, 'has-error' : singleDoctor.address.$invalid && !singleDoctor.address.$pristine }">
+								<label >Address :</label>
+								<div class="col-sm-12">
+									<textarea name="address" class="form-control" id="inputAddress" placeholder="Enter your address" ng-model="profile.address"  ng-minlength="3"     ></textarea>
+
+									<span class="glyphicon form-control-feedback"  aria-hidden="true"
+									ng-class="{ 'glyphicon-ok' : singleDoctor.address.$valid, 'glyphicon-remove' : singleDoctor.address.$invalid && !singleDoctor.address.$pristine }" ></span> 
+									<span ng-show="singleDoctor.address.$invalid && singleDoctor.address.$error.minlength" class="help-block">address is too short.</span>
+								</div>
+
+							</div>
+
+
+							
+							<div class="form-group  	 has-feedback  " ng-class="{ 'has-success' : singleDoctor.location.$valid, 'has-error' : singleDoctor.location.$invalid && !singleDoctor.location.$pristine }">
+								<label >Location/ Panchayath :
+									<span class="danger">*</span>
+								</label>
+								<div class="col-sm-12">
+									<input type="text" name="location" class="form-control" id="inputName" placeholder="Enter your location"  ng-model="profile.location"  ng-minlength="2" ng-maxlength="255"  required>
+
+									<span class="glyphicon form-control-feedback"  aria-hidden="true"
+									ng-class="{ 'glyphicon-ok' : singleDoctor.location.$valid, 'glyphicon-remove' : singleDoctor.location.$invalid && !singleDoctor.location.$pristine }" ></span>
+									<span span ng-show="singleDoctor.location.$invalid && singleDoctor.location.$error.required" class="help-block">Your Location is required.</span>            
+									<span ng-show="singleDoctor.location.$invalid && singleDoctor.location.$error.minlength" class="help-block">Location is too short.</span>
+									<span ng-show="singleDoctor.location.$invalid && singleDoctor.location.$error.maxlength" class="help-block">Location is too long.</span>
+								</div>
+							</div>
+
+
+
+
+							
+							<div class="form-group  	 has-feedback  " ng-class="{ 'has-success' : singleDoctor.state.$valid, 'has-error' : singleDoctor.state.$invalid && !singleDoctor.state.$pristine }">
+								<label >State :
+									<span class="danger">*</span>
+								</label>
+								<div class="col-sm-12">
+									<select class="form-control"  name="state" ng-model="profile.state"  required >
+										<option value="">Select State</option>
+										<option ng-repeat="eachOne in states" value="{{eachOne}}" ng-selected="{{ (eachOne == 'Kerala') }}">{{eachOne}}</option>
+									</select>  
+
+
+									<span class="glyphicon form-control-feedback"  aria-hidden="true"
+									ng-class="{ 'glyphicon-ok' : singleDoctor.state.$valid, 'glyphicon-remove' : singleDoctor.state.$invalid && !singleDoctor.state.$pristine }" ></span>
+									<span span ng-show="singleDoctor.state.$invalid && singleDoctor.state.$error.required" class="help-block">Your State is required.</span>            
+									<span ng-show="singleDoctor.state.$invalid && singleDoctor.state.$error.minlength" class="help-block">State is too short.</span>
+									<span ng-show="singleDoctor.state.$invalid && singleDoctor.state.$error.maxlength" class="help-block">State is too long.</span>
+
+								</div>
+							</div>
+
+
+							
+							<div class="form-group  	 has-feedback  " ng-class="{ 'has-success' : singleDoctor.city.$valid, 'has-error' : singleDoctor.city.$invalid && !singleDoctor.city.$pristine }">
+								<label >City :
+									<span class="danger">*</span>
+								</label>
+								<div class="col-sm-12">
+									<select class="form-control"  name="city" ng-model="profile.city" required >
+										<option  disabled deleted >Select City</option>
+										<option ng-repeat="eachOne in cities  track by $index" value="{{eachOne}}">{{eachOne}}</option>
+									</select>  
+									
+
+									<span class="glyphicon form-control-feedback"  aria-hidden="true"
+									ng-class="{ 'glyphicon-ok' : singleDoctor.city.$valid, 'glyphicon-remove' : singleDoctor.city.$invalid && !singleDoctor.city.$pristine }" ></span>
+
+									<span span ng-show="singleDoctor.statecityalid && singleDoctor.statecityor.required" class="help-block">Your City is required.</span>            
+									<span ng-show="singleDoctor.statecityalid && singleDoctor.statecityor.minlength" class="help-block">City is too short.</span>
+									<span ng-show="singleDoctor.statecityalid && singleDoctor.statecityor.maxlength" class="help-block">City is too long.</span>
+								</div>
+							</div>
+
+
+
+
+
+
+							
+
+
+							<div class="form-group  has-feedback  " ng-class="{ 'has-success' : singleDoctor.pin.$valid, 'has-error' : singleDoctor.pin.$invalid && !singleDoctor.pin.$pristine }">
+								<label for="inputPhone"  >Pin :
+									<span class="danger">*</span></label>
+									<div class="col-sm-12">
+										<input name="pin" type="number" class="form-control" id="inputPhone" placeholder="Enter your pin" ng-model="profile.pin" ng-maxlength="6"  ng-minlength="6" required >
+										<span class="glyphicon form-control-feedback"  aria-hidden="true"
+										ng-class="{ 'glyphicon-ok' : singleDoctor.pin.$valid, 'glyphicon-remove' : singleDoctor.pin.$invalid && !singleDoctor.pin.$pristine }" ></span>
+										<span span ng-show="singleDoctor.pin.$invalid && singleDoctor.pin.$error.required" class="help-block">Your Pin is required.</span>   
+										<span ng-show="singleDoctor.pin.$invalid && singleDoctor.pin.$error.minlength" class="help-block">Pin is too short.</span>
+										<span ng-show="singleDoctor.pin.$invalid && singleDoctor.pin.$error.maxlength" class="help-block">Pin is too long.</span>
+
+										<span ng-show="singleDoctor.pin.$invalid && singleDoctor.pin.$error.number" class="help-block">Invalid Pin number.</span>
+									</div>
+								</div> 
+
+
+
+
+								<div class="form-group  has-feedback  " ng-class="{ 'has-success' : singleDoctor.oaddress.$valid, 'has-error' : singleDoctor.oaddress.$invalid && !singleDoctor.oaddress.$pristine }">
+									<label >Other Address :</label>
+									<div class="col-sm-12">
+										<textarea name="oaddress" class="form-control" id="inputAddress" placeholder="Enter your oaddress" ng-model="profile.oaddress"  ng-minlength="3"     ></textarea>
+
+										<span class="glyphicon form-control-feedback"  aria-hidden="true"
+										ng-class="{ 'glyphicon-ok' : singleDoctor.oaddress.$valid, 'glyphicon-remove' : singleDoctor.oaddress.$invalid && !singleDoctor.oaddress.$pristine }" ></span> 
+										<span ng-show="singleDoctor.oaddress.$invalid && singleDoctor.oaddress.$error.minlength" class="help-block">other address is too short.</span>
+									</div>
+
+								</div>
+
+
+
+
+
+								<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : singleDoctor.qualification.$valid, 'has-error' : singleDoctor.qualification.$invalid && !singleDoctor.qualification.$pristine }">
+
+									<label  >qualification :<span class="danger">*</span></label>
+									<div class="col-sm-12">
+
+
+										<textarea name="qualification" class="form-control" id="inputAddress" placeholder="Enter your qualification" ng-model="profile.qualification"  ng-minlength="3"   required  ></textarea>
+
+										<span class="glyphicon form-control-feedback"  aria-hidden="true"
+										ng-class="{ 'glyphicon-ok' : singleDoctor.qualification.$valid, 'glyphicon-remove' : singleDoctor.qualification.$invalid && !singleDoctor.qualification.$pristine }" ></span>
+										<span span ng-show="singleDoctor.qualification.$invalid && singleDoctor.qualification.$error.required" class="help-block"> qualification is required.</span>  
+										<span ng-show="singleDoctor.qualification.$invalid && singleDoctor.qualification.$error.minlength" class="help-block">qualification is too short.</span> 
+
+									</div>
+								</div>
+
+
+
+								<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : singleDoctor.remark.$valid, 'has-error' : singleDoctor.remark.$invalid && !singleDoctor.remark.$pristine }">
+
+									<label  >Remark:<span class="danger">*</span></label>
+
+
+									<div class="col-sm-12">
+										<textarea name="remark" class="form-control" id="inputAddress" placeholder="Enter your remark" ng-model="profile.remark"  ng-minlength="3"     ></textarea>
+
+										<span class="glyphicon form-control-feedback"  aria-hidden="true"
+										ng-class="{ 'glyphicon-ok' : singleDoctor.remark.$valid, 'glyphicon-remove' : singleDoctor.remark.$invalid && !singleDoctor.remark.$pristine }" ></span> 
+										<span ng-show="singleDoctor.remark.$invalid && singleDoctor.remark.$error.minlength" class="help-block">remark is too short.</span> 
+
+									</div>
+								</div>
+
+
+
+
+								<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : singleDoctor.image.$valid, 'has-error' : singleDoctor.image.$invalid && !singleDoctor.image.$pristine }">
+
+									<label  >Images</label>
+
+									<div class="col-sm-12">
+										<div class="image_base_n">
+											<img class="profile-user-img rounded-circle img-fluid mx-auto d-block"
+											ng-src src="{{profile.image}}"  alt="User profile picture">
+											<span class="nowUpdateImgClick  animated  infinite bounce"><i class="ti-upload "  ng-click="uploadImgTriggen()"></i></span>
+											<input type="file" id="fileInputM"  style="display:none;"  accept="image/*"   onchange="angular.element(this).scope().fileNameChanged()"/>
+											<!-- onchange="angular.element(this).scope().fileNameChanged()"  -->
+										</div>
+
+									</div>
+
+								</div>
+
+
+
+
+
+
+
+
+
+								<div class="form-group row">
+									<div class="ml-auto col-sm-10">
+										<button type="submit" class="btn btn-success"   ng-disabled="singleDoctor.$invalid || singleDoctor.$pristine ">Submit</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<!-- /.tab-pane -->
+					</div>
+					<!-- /.tab-content -->
+				</div>
+				<!-- /.nav-tabs-custom -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+
+	</section>
+
+
+	<style type="text/css">
+	.ng-modal-overlay {
+		/* A dark translucent div that covers the whole screen */
+		position:absolute;
+		z-index:1030;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		background-color:#000000;
+		opacity: 0.8;
+		right: 0;
+		bottom: 0;
+	}
+	.ng-modal-dialog { 
+		z-index:1031;
+		position: fixed;
+		width: 70%; /* Default */
+
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		-webkit-transform: translate(-50%, -50%);
+		-moz-transform: translate(-50%, -50%);
+
+		background-color: #fff;
+		box-shadow: 4px 4px 80px #000;
+	}
+	.ng-modal-dialog-content {
+		padding:10px;
+		text-align: left;
+	}
+	.ng-modal-close {
+		position: fixed;
+		top: 3px;
+		right: 5px;
+		padding: 5px;
+		cursor: pointer;
+		font-size: 120%;
+		display: inline-block;
+		font-weight: bold;
+		font-family: 'arial', 'sans-serif';
+	}
+	.margin-0 {
+		margin:0;
+	}
+
+	.cropArea {
+		background: #E4E4E4;
+		margin: auto;
+		overflow: hidden;
+	}
+	.cropArea.big {
+		width:auto;
+		height:550px;
+	}
+
+	.padding-a {
+		padding: 5px 0px 5px 2px;
+	}
+	.now_ex_img {
+		padding-left: 5px;
+	}
+	.pos-reatvie { 
+	}
+	.pos-reatvie>div {
+		position: absolute; 
+		bottom: 0;
+
+	}
+
+</style>
+
+
+
+<div class='ng-modal' ng-show="enableCrop"   >
+	<div class='ng-modal-overlay'  >x</div>
+	<div class='ng-modal-dialog panel'  > 
+		<div class='ng-modal-dialog-content col-md-12' >
+			<div class="row margin-0 ">
+				
+				<div class="col-md-8">
+					<div ng-if="enableCrop" class="cropArea" ng-class="{'big':size=='big', 'medium':size=='medium', 'small':size=='small'}">
+						<img-crop image="imageDataURI"
+						result-image="$parent.resImageDataURI"
+						change-on-fly="changeOnFly"
+						area-type="{{type}}"
+						area-min-size="selMinSize"
+						result-image-format="{{resImgFormat}}"
+						result-image-quality="resImgQuality"
+						result-image-size="resImgSize"
+						on-change="onChange($dataURI)"
+						on-load-begin="onLoadBegin()"
+						on-load-done="onLoadDone()"
+						on-load-error="onLoadError()"
+						></img-crop>
+						<!--aspect-ratio="aspectRatio"-->
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div>
+						<img  src="{{resImageDataURI}}" />
+					</div>
+
+					<div class="row padding-a ">
+						<div class="col-md-8">
+							<img  src="{{resImageDataURI}}" id="opImageSrc" />
+						</div>
+						<div class="col-md-4 now_ex_img">
+							<img class="padding-a" src="{{resImageDataURI}}" />
+							<img class="padding-a" src="{{resImageDataURIa}}" />
+						</div>
+					</div> 
+
+					<div class="pos-reatvie">
+						<div class="input-group col-sm-12">
+							<span class="  col-sm-6 ">
+								<button type="button" class="btn btn-block btn-danger btn-sm" ng-click="clearImageNow()">clear</button>
+							</span>
+							<span class=" col-sm-6 ">
+								<button type="button" class="btn btn-block btn-success btn-sm" ng-click="doneImageCrop()">save</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,162 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		Class
+		<small>Control panel</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="admin-dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="breadcrumb-item active">Class</li>
+	</ol>
+</section>
+
+
+<!-- Main content -->
+
+
+<section class="content">
+
+	<!-- Step wizard -->
+	<div class="box">
+		<div class="box-header with-border">
+			<h3 class="box-title">Add new Class </h3>
+			<h6 class="box-subtitle">You can add and view classes</h6>
+
+			<div class="box-tools pull-right"> 
+				<!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button> -->
+			</div>
+		</div>
+
+
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<form name="questionClass"  class="form-horizontal form-element col-12"  ng-submit="questionClassSubmit()" >
+
+
+					<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : questionClass.name.$valid, 'has-error' : questionClass.name.$invalid && !questionClass.name.$pristine }">
+
+						<label  > Name :<span class="danger">*</span></label>
+
+						<div class="col-sm-12">
+
+							<input type="text" name="name" class="form-control"  placeholder="Enter  name"  ng-model="class.name"  ng-minlength="2" ng-maxlength="255" ng-pattern="/^[a-zA-Z\s]*$/"
+							required>
+
+							<span class="glyphicon form-control-feedback"  aria-hidden="true"
+							ng-class="{ 'glyphicon-ok' : questionClass.name.$valid, 'glyphicon-remove' : questionClass.name.$invalid && !questionClass.name.$pristine }" ></span>
+							<span span ng-show="questionClass.name.$invalid && questionClass.name.$error.required" class="help-block">  name is required.</span>            
+							<span ng-show="questionClass.name.$invalid && questionClass.name.$error.minlength" class="help-block">  name is too short.</span>
+							<span ng-show="questionClass.name.$invalid && questionClass.name.$error.maxlength" class="help-block">  name is too long.</span>
+						</div>
+					</div>
+
+					
+
+
+
+
+					<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : questionClass.weigh.$valid, 'has-error' : questionClass.weigh.$invalid && !questionClass.weigh.$pristine }">
+
+						<label  > Weight :<span class="danger">*</span></label>
+
+						<div class="col-sm-12">
+
+							<input type="number" name="weigh" class="form-control"  placeholder="Enter  weigh"  ng-model="class.weigh"   ng-min="1" ng-max="10"
+							required>
+
+							<span class="glyphicon form-control-feedback"  aria-hidden="true"
+							ng-class="{ 'glyphicon-ok' : questionClass.weigh.$valid, 'glyphicon-remove' : questionClass.weigh.$invalid && !questionClass.weigh.$pristine }" ></span>
+							<span span ng-show="questionClass.weigh.$invalid && questionClass.weigh.$error.required" class="help-block">  weight is required.</span>            
+							<span ng-show="questionClass.weigh.$invalid && questionClass.weigh.$error.minlength" class="help-block">  weight is too short.</span>
+							<span ng-show="questionClass.weigh.$invalid && questionClass.weigh.$error.maxlength" class="help-block">  weight is too long.</span>
+						</div>
+					</div>
+					
+					
+					
+
+					<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : questionClass.remark.$valid, 'has-error' : questionClass.remark.$invalid && !questionClass.remark.$pristine }">
+
+						<label  >Remark:<span class="danger">*</span></label>
+
+
+						<div class="col-sm-12">
+							<textarea name="remark" class="form-control" id="inputAddress" placeholder="Enter your remark" ng-model="class.remark"  ng-minlength="3"     ></textarea>
+
+							<span class="glyphicon form-control-feedback"  aria-hidden="true"
+							ng-class="{ 'glyphicon-ok' : questionClass.remark.$valid, 'glyphicon-remove' : questionClass.remark.$invalid && !questionClass.remark.$pristine }" ></span> 
+							<span ng-show="questionClass.remark.$invalid && questionClass.remark.$error.minlength" class="help-block">remark is too short.</span> 
+
+						</div>
+					</div>
+					
+
+
+
+
+
+					<div class="form-group row">
+						<div class="ml-auto col-sm-10">
+							<button type="submit" class="btn btn-success"   ng-disabled="questionClass.$invalid || questionClass.$pristine ">Submit</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			
+
+
+			<style type="text/css">
+			code {
+				margin: 10px;
+				display:block;
+				overflow:auto;
+			}
+			.grid-container {
+				height: 340px; overflow-y: auto;
+			}
+			.grid-container table {
+				margin: 0;
+			}
+			.sg-dummy-row  {
+				display: none;
+			}
+		</style>
+
+		<div ng-form="gridForm">
+			<h3>Added  ></h3>
+			<div simple-grid="gridConfig" class="grid-container"></div>
+
+			<div style="text-align:center">
+				Page: {{ gridConfig.options.pageNum + 1 }}
+				<div class="btn-group">
+					<button type="button" class="btn btn-sm btn-primary" ng-click="movePage(-1)">
+						&lt; Prev
+					</button>
+					<button type="button" class="btn btn-sm btn-primary" ng-click="movePage(1)">
+						&gt; Next
+					</button>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+</div>      
+
+
+<!-- /.row -->
+
+</section>
+<!-- /.content -->

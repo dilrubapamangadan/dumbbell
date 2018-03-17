@@ -1,0 +1,32 @@
+
+
+img-crop{
+  cursor: default;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  min-height: 400px;
+}
+
+img-crop canvas {
+  display: block;
+  width: auto; 
+}
+
+img-crop {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+img-crop canvas {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  
+}

@@ -1,0 +1,331 @@
+<section class="content-header">
+	<h1>
+		Admin
+		<small>Control panel</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="admin-dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="breadcrumb-item active">Profile</li>
+	</ol>
+</section>
+
+<style type="text/css">
+.image_base_n {
+	position: relative;
+}
+.nowUpdateImgClick {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	text-align: center;	
+	padding: 50px;
+	vertical-align: text-top;	
+	display:none;
+}
+.nowUpdateImgClick i {
+	font-size: 50px;
+	cursor: pointer;
+	padding: 10%;
+	background: #0000001a;
+	border-radius: 50%;
+}
+
+.image_base_n>img:hover {
+	opacity:0.7;
+}
+
+
+.image_base_n>img:hover +span{ 
+	display: block;
+}
+
+.image_base_n>span:hover { 
+	display: block;
+}
+.image_base_n i:hover -span{ 	
+	background: red; 
+	animation-name: none;
+}
+
+
+
+
+
+</style>
+
+<section class="content">
+
+	<div class="row">
+		<div class="col-xl-4 col-lg-5">
+
+			<!-- Profile Image -->
+			<div class="box">
+				<div class="box-body box-profile">
+					<div class="image_base_n">
+						<img class="profile-user-img rounded-circle img-fluid mx-auto d-block"
+						ng-src src="{{profile.image}}"  alt="User profile picture">
+						<span class="nowUpdateImgClick  animated  infinite bounce"><i class="ti-upload "  ng-click="uploadImgTriggen()"></i></span>
+						<input type="file" id="fileInputM"  style="display:none;"  accept="image/*"   onchange="angular.element(this).scope().fileNameChanged()"/>
+						<!-- onchange="angular.element(this).scope().fileNameChanged()"  -->
+					</div>
+					<h3 class="profile-username text-center">{{profile.name}}</h3>
+
+					<p class="text-muted text-center">admin </p>
+
+					<div class="row social-states">
+			<!-- 			<div class="col-6 text-right"><a href="#" class="link"><i class="ion ion-ios-people-outline"></i> 254</a></div>
+				<div class="col-6 text-left"><a href="#" class="link"><i class="ion ion-images"></i> 54</a></div> -->
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<div class="profile-user-info">
+						<p>Email address </p>
+						<h6 class="margin-bottom">{{profile.email}}</h6>
+						<p>Phone</p>
+						<h6 class="margin-bottom">+91 {{profile.phone}}</h6> 
+						<div class="map-box">
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+</div>
+<!-- /.col -->
+<div class="col-xl-8 col-lg-7">
+	<div class="nav-tabs-custom">
+		<ul class="nav nav-tabs"> 
+			<li><a nr-href="#settings" data-toggle="tab">Edit</a></li>
+		</ul>
+
+		<div class="tab-content">
+
+			<div class="tab-pane active" id="settings">
+				<form name="adminProfile"  class="form-horizontal form-element col-12"  ng-submit="adminProfileSubmit()" >
+
+
+
+					<div class="form-group  	 has-feedback row" ng-class="{ 'has-success' : adminProfile.name.$valid, 'has-error' : adminProfile.name.$invalid && !adminProfile.name.$pristine }">
+						<label for="inputName" class="col-sm-2 control-label">Name</label>
+
+						<div class="col-sm-10" >
+							<input type="text" name="name" class="form-control" id="inputName" placeholder="Enter your name"  ng-model="profile.name"  ng-minlength="2" ng-maxlength="255"  required>
+
+							<span class="glyphicon form-control-feedback"  aria-hidden="true"
+							ng-class="{ 'glyphicon-ok' : adminProfile.name.$valid, 'glyphicon-remove' : adminProfile.name.$invalid && !adminProfile.name.$pristine }" ></span>
+							<span span ng-show="adminProfile.name.$invalid && adminProfile.name.$error.required" class="help-block">Your name is required.</span>            
+							<span ng-show="adminProfile.name.$invalid && adminProfile.name.$error.minlength" class="help-block">name is too short.</span>
+							<span ng-show="adminProfile.name.$invalid && adminProfile.name.$error.maxlength" class="help-block">name is too long.</span>
+
+						</div>
+					</div>
+
+
+
+					<div class="form-group 	 has-feedback row" ng-class="{ 'has-success' : adminProfile.email.$valid, 'has-error' : adminProfile.email.$invalid && !adminProfile.email.$pristine }">
+
+						<label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+						<div class="col-sm-10">
+							<input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" ng-model="profile.email" ng-maxlength="255" required >
+							<span class="glyphicon form-control-feedback"  aria-hidden="true"
+							ng-class="{ 'glyphicon-ok' : adminProfile.email.$valid, 'glyphicon-remove' : adminProfile.email.$invalid && !adminProfile.email.$pristine }" ></span>
+							<span span ng-show="adminProfile.email.$invalid && adminProfile.email.$error.required" class="help-block">Your email is required.</span>   
+							<span ng-show="adminProfile.email.$invalid && adminProfile.email.$error.maxlength" class="help-block">email is too long.</span>
+							<span ng-show="adminProfile.email.$invalid && adminProfile.email.$error.email" class="help-block">Invalid email address.</span>
+
+
+						</div>
+					</div>
+
+
+					<div class="form-group  has-feedback row" ng-class="{ 'has-success' : adminProfile.phone.$valid, 'has-error' : adminProfile.phone.$invalid && !adminProfile.phone.$pristine }">
+						<label for="inputPhone" class="col-sm-2 control-label">Phone</label>
+
+						<div class="col-sm-10">
+							<input name="phone" type="number" class="form-control" id="inputPhone" placeholder="Enter your phone" ng-model="profile.phone" ng-maxlength="10"  ng-minlength="10" required >
+							<span class="glyphicon form-control-feedback"  aria-hidden="true"
+							ng-class="{ 'glyphicon-ok' : adminProfile.phone.$valid, 'glyphicon-remove' : adminProfile.phone.$invalid && !adminProfile.phone.$pristine }" ></span>
+							<span span ng-show="adminProfile.phone.$invalid && adminProfile.phone.$error.required" class="help-block">Your phone is required.</span>   
+							<span ng-show="adminProfile.phone.$invalid && adminProfile.phone.$error.minlength" class="help-block">phone is too short.</span>
+							<span ng-show="adminProfile.phone.$invalid && adminProfile.phone.$error.maxlength" class="help-block">phone is too long.</span>
+
+							<span ng-show="adminProfile.phone.$invalid && adminProfile.phone.$error.number" class="help-block">Invalid phone number.</span>
+
+						</div>
+					</div>
+
+
+
+					
+					
+					<div class="form-group  has-feedback row" ng-class="{ 'has-success' : adminProfile.agree.$valid, 'has-error' : adminProfile.agree.$invalid && !adminProfile.agree.$pristine }">
+						<div class="ml-auto col-sm-10">
+							<div class="checkbox">
+								<input name="agree" type="checkbox" id="basic_checkbox_1" checked="" required value="true"  ng-model="profile.agree" >
+								<label for="basic_checkbox_1"> I agree to the</label>
+								&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Terms and Conditions</a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+								<span style="display: block;" span ng-show="adminProfile.agree.$invalid && adminProfile.agree.$error.required" class="help-block">must agree to terms and conditions</span>   
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<div class="ml-auto col-sm-10">
+							<button type="submit" class="btn btn-success">Submit</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- /.tab-pane -->
+		</div>
+		<!-- /.tab-content -->
+	</div>
+	<!-- /.nav-tabs-custom -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->
+
+</section>
+
+
+<style type="text/css">
+.ng-modal-overlay {
+	/* A dark translucent div that covers the whole screen */
+	position:absolute;
+	z-index:1030;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background-color:#000000;
+	opacity: 0.8;
+	right: 0;
+	bottom: 0;
+}
+.ng-modal-dialog { 
+	z-index:1031;
+	position: fixed;
+	width: 70%; /* Default */
+
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+
+	background-color: #fff;
+	box-shadow: 4px 4px 80px #000;
+}
+.ng-modal-dialog-content {
+	padding:10px;
+	text-align: left;
+}
+.ng-modal-close {
+	position: fixed;
+	top: 3px;
+	right: 5px;
+	padding: 5px;
+	cursor: pointer;
+	font-size: 120%;
+	display: inline-block;
+	font-weight: bold;
+	font-family: 'arial', 'sans-serif';
+}
+.margin-0 {
+	margin:0;
+}
+
+.cropArea {
+	background: #E4E4E4;
+	margin: auto;
+	overflow: hidden;
+}
+.cropArea.big {
+	width:auto;
+	height:550px;
+}
+
+.padding-a {
+	padding: 5px 0px 5px 2px;
+}
+.now_ex_img {
+	padding-left: 5px;
+}
+.pos-reatvie { 
+}
+.pos-reatvie>div {
+	position: absolute; 
+	bottom: 0;
+
+}
+
+</style>
+
+
+
+<div class='ng-modal' ng-show="enableCrop"   >
+	<div class='ng-modal-overlay'  >x</div>
+	<div class='ng-modal-dialog panel'  > 
+		<div class='ng-modal-dialog-content col-md-12' >
+			<div class="row margin-0 ">
+				
+				<div class="col-md-8">
+					<div ng-if="enableCrop" class="cropArea" ng-class="{'big':size=='big', 'medium':size=='medium', 'small':size=='small'}">
+						<img-crop image="imageDataURI"
+						result-image="$parent.resImageDataURI"
+						change-on-fly="changeOnFly"
+						area-type="{{type}}"
+						area-min-size="selMinSize"
+						result-image-format="{{resImgFormat}}"
+						result-image-quality="resImgQuality"
+						result-image-size="resImgSize"
+						on-change="onChange($dataURI)"
+						on-load-begin="onLoadBegin()"
+						on-load-done="onLoadDone()"
+						on-load-error="onLoadError()"
+						></img-crop>
+						<!--aspect-ratio="aspectRatio"-->
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div>
+						<img  src="{{resImageDataURI}}" />
+					</div>
+
+					<div class="row padding-a ">
+						<div class="col-md-8">
+							<img  src="{{resImageDataURI}}" id="opImageSrc" />
+						</div>
+						<div class="col-md-4 now_ex_img">
+							<img class="padding-a" src="{{resImageDataURI}}" />
+							<img class="padding-a" src="{{resImageDataURIa}}" />
+						</div>
+					</div> 
+
+					<div class="pos-reatvie">
+						<div class="input-group col-sm-12">
+							<span class="  col-sm-6 ">
+								<button type="button" class="btn btn-block btn-danger btn-sm" ng-click="clearImageNow()">clear</button>
+							</span>
+							<span class=" col-sm-6 ">
+								<button type="button" class="btn btn-block btn-success btn-sm" ng-click="doneImageCrop()">save</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,22 @@
+RewriteEngine on
+
+
+
+
+#view renamed 
+#RewriteRule ^dashboard$ index.php [L]    
+#RewriteRule ^profile$ index.php/profile [L]    
+
+
+
+RewriteRule ^js/$ index.php [L]  
+RewriteRule ^css/$ index.php [L]   
+RewriteRule ^images/$ index.php [L]  
+RewriteRule ^pages/$ index.php [L]  
+
+RewriteRule ^logout$ logout.php [L]  
+RewriteRule ^exit$ logout.php [L]  
+
+
+#RewriteRule ^single/([^/]+)$ index.php/single?product=$1 [L]  
+

@@ -1,0 +1,73 @@
+    <section class="content-header">
+    	<h1>
+    		
+    		<small>View </small>
+    	</h1>
+    	<ol class="breadcrumb">
+    		<li class="breadcrumb-item"><a href="admin-dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+    		<li class="breadcrumb-item active">Doctor</li>
+    		<li class="breadcrumb-item active">View</li>
+    	</ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+    	<div class="row">
+
+
+    		<div class="col-6 col-md-6 col-lg-4 col-xl-3 animated fadeInLeft myAmimateTe"  ng-repeat=" doctor in showDoctors"  >
+    			<div class="box box-body">
+    				<div class="flexbox align-items-center">
+    					<label class="toggler toggler-yellow">
+    						<input type="checkbox" checked>
+    						<i class="fa fa-star"></i>
+    					</label>
+    					<div class="dropdown">
+    						<a data-toggle="dropdown" href="#" aria-expanded="false"><i class="ion-android-more-vertical"></i></a>
+    						<div class="dropdown-menu dropdown-menu-right">
+    							<a class="dropdown-item" href=""   ng-click =" viewSingleDoctor( doctor.id )" ><i class="fa fa-fw fa-user"></i> Profile</a>
+    							<a class="dropdown-item"   href="mailto:{{doctor.email}}"><i class="fa fa-fw fa-envelope"></i> Email</a>
+    							<a class="dropdown-item"  href="tel:{{doctor.phone}}"><i class="fa fa-fw fa-phone"></i> Call</a>
+    							<div class="dropdown-divider"></div>
+    							<a class="dropdown-item" href="#"><i class="fa fa-fw fa-remove"></i> Remove</a>
+    						</div>
+    					</div>
+    				</div>
+    				<div class="text-center pt-3">
+    					<a href=""  ng-click =" viewSingleDoctor( doctor.id ) ">
+    						<img class="avatar avatar-xxl" ng-src src="{{doctor.image}}">
+    					</a>
+    					<h5 class="mt-15 mb-0"><a href="" ng-click =" viewSingleDoctor( doctor.id ) ">{{doctor.name}}</a></h5>
+    					<span>{{doctor.q}}</span> 
+    				</div>
+    			</div>
+    		</div>
+
+
+
+
+
+
+
+
+    	</div>
+
+    	<nav>
+    		<ul class="pagination justify-content-center">
+    			<li class="page-item " ng-class="{ 'disabled' : (showOffset <= 0)}">
+    				<a class="page-link" href="#"  ng-click=" showOffset = showOffset - 1 ;"  ng-disabled="showOffset < 1">
+    					<span class="ion-ios-arrow-thin-left"></span>
+    				</a>
+    			</li>
+    			<li class="page-item  " ng-repeat=" (key, value) in doctors"  ng-if="value.length" ng-class="{ 'active' : (key == showOffset )}"><a class="page-link" href="#" ng-click="addOfset(key )">{{key + 1 }}</a> </li>
+
+    			<li class="page-item" ng-class="{ 'disabled' : (showOffset >= (doctors.length - 2)) }">
+    				<a class="page-link" href="#" ng-click=" showOffset = showOffset + 1 ;"  ng-disabled="(showOffset >= (doctors.length - 2))">
+    					<span class="ion-ios-arrow-thin-right"></span>
+    				</a>
+    			</li>
+    		</ul>
+    	</nav>
+
+    </section>

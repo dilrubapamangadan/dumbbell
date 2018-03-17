@@ -1,4 +1,55 @@
-RewriteEngine on
+ RewriteEngine on
 
-# disable directory browsing
-Options All -Indexes 
+
+
+ RewriteCond %{REQUEST_FILENAME} !-f 
+ RewriteCond %{REQUEST_FILENAME} !-d 
+
+
+ #view renamed  admin
+ # RewriteRule ^admin-login$  admin/#!admin-login [L]   
+
+
+ RewriteRule ^admin-login$ admin/login.php [L]   
+ RewriteRule ^admin-dashboard$ admin/index.php [L]   
+ RewriteRule ^admin-dashboard$  admin/index.php/#!admin-dashboard [L]   
+ RewriteRule ^admin-profile$  admin/index.php/#!admin-profile [L]   
+
+ RewriteRule ^admin-class$  admin/index.php/#!admin-class [L]    
+
+
+
+ #view renamed  gym 
+
+
+ RewriteRule ^gym-login$ gym/login.php [L]   
+ RewriteRule ^gym-dashboard$ gym/index.php [L]   
+
+
+
+ RewriteRule ^global.php$ index.php [L]  
+ RewriteRule ^assets/$ index.php [L]  
+ RewriteRule ^pages/$ index.php [L]   
+ RewriteRule ^root/$ index.php [L]  
+ RewriteRule ^uploads/$ index.php [L]  
+
+
+ #RewriteRule ^root/ajax.php$ index.php [L]  
+ RewriteRule ^root/functions.php$ index.php [L]  
+ RewriteRule ^root/processes.php$ index.php [L]  
+ #RewriteRule ^root/connection.php$ index.php [L]  
+ #RewriteRule ^root/login.php$ index.php [L]  
+
+ RewriteRule ^root/save_image.php$ index.php [L]  
+
+
+
+ RewriteRule ^logout$ logout.php [L]  
+ RewriteRule ^exit$ logout.php [L]  
+
+
+
+ # disable directory browsing
+ #Options All -Indexes 
+
+ 

@@ -1,0 +1,207 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		Settings
+		<small>Control panel</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="admin-dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="breadcrumb-item active">Settings</li>
+	</ol>
+</section>
+
+
+<!-- Main content -->
+<section class="content"> 
+
+	<div class="row">
+		<div class="col-lg-12 col-xl-6">
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<!-- <h3 class="box-title">Collapsible Accordion</h3> -->
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<div class="panel">
+						<div class="panel-body">
+							<div class="tab-content">
+								<!-- Categroy 1 -->
+								<div class=" tab-pane animation-fade active" id="category-1" role="tabpanel">
+									<div class="panel-group panel-group-simple panel-group-continuous" id="accordion2" aria-multiselectable="true" role="tablist">
+										<!-- Question 1 -->
+										<div class="panel">
+											<div class="panel-heading" id="question-1" role="tab">
+												<a class="panel-title collapsed " aria-controls="answer-1" aria-expanded="false" data-toggle="collapse" nr-href="#answer-1" data-parent="#accordion2" style=" cursor: pointer;">
+													change password
+												</a>
+											</div>
+											<div class="panel-collapse collapse" id="answer-1" aria-labelledby="question-1" role="tabpanel" style="">
+												<div class="panel-body">
+
+
+													<div class="box">
+														<div class="box-header with-border"> 
+														</div>
+														<!-- /.box-header -->
+														<!-- form start -->
+														<form  name="adminLogin"  class="form-horizontal form-element"  ng-submit="adminLoginSubmit()" >
+															<div class="box-body">
+
+
+
+
+
+																<div class="form-group row has-feedback"  
+																ng-class="{ 'has-success' : adminLogin.password.$valid, 'has-error' : adminLogin.password.$invalid && !adminLogin.password.$pristine }">
+
+																<label class="col-sm-2 control-label" for="inputWarning2">current password</label>
+
+																<div class="col-sm-10">
+																	<input type="password" class="form-control" name="password" id="password" placeholder="Current password" ng-model="login.password"  ng-minlength="6" ng-maxlength="255" required >
+																	
+																	<span span ng-show="adminLogin.password.$invalid && adminLogin.password.$error.required" class="help-block">Your password is required.</span>            
+																	<span ng-show="adminLogin.password.$invalid && adminLogin.password.$error.minlength" class="help-block">password is too short.</span>
+																	<span ng-show="adminLogin.password.$invalid && adminLogin.password.$error.maxlength" class="help-block">password is too long.</span>
+
+																	<span ng-show="adminLogin.password.$invalid && errorPassword" class="help-block">{{ errorPassword }}</span>
+
+
+																</div>
+															</div>  
+
+
+
+
+
+
+															<div class="form-group row has-feedback" 
+															ng-class="{ 'has-success' : adminLogin.newpassword.$valid, 'has-error' : adminLogin.newpassword.$invalid && !adminLogin.newpassword.$pristine }">
+
+															<label  class="col-sm-2 control-label" for="inputWarning2">new password</label>
+															<div class="col-sm-10">
+																<input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="New password" ng-model="login.newpassword"  ng-minlength="6" ng-maxlength="255" required >
+																
+																<span span ng-show="adminLogin.newpassword.$invalid && adminLogin.newpassword.$error.required" class="help-block">Your new password is required.</span>            
+																<span ng-show="adminLogin.newpassword.$invalid && adminLogin.newpassword.$error.minlength" class="help-block">new password is too short.</span>
+																<span ng-show="adminLogin.newpassword.$invalid && adminLogin.newpassword.$error.maxlength" class="help-block">new password is too long.</span>
+
+																<span ng-show="adminLogin.newpassword.$invalid && errorNewPassword" class="help-block">{{ errorNewPassword }}</span>
+															</div>
+														</div>  
+
+
+
+
+														<div  class="form-group row  has-feedback"
+														ng-class="{ 'has-success' : adminLogin.repassword.$valid, 'has-error' : adminLogin.repassword.$invalid && !adminLogin.repassword.$pristine }">
+
+														<label  class="col-sm-2 control-label" for="inputWarning2">re-enter password</label>
+														<div class="col-sm-10">
+															<input type="password" class="form-control" name="repassword" id="repassword" placeholder="New repassword" ng-model="login.repassword"  ng-minlength="6" ng-maxlength="255" required >
+
+															<span span ng-show="adminLogin.repassword.$invalid && adminLogin.repassword.$error.required" class="help-block">Your password is required.</span>            
+															<span ng-show="adminLogin.repassword.$invalid && adminLogin.repassword.$error.minlength" class="help-block">password is too short.</span>
+															<span ng-show="adminLogin.repassword.$invalid && adminLogin.repassword.$error.maxlength" class="help-block">password is too long.</span>
+															<span ng-show="adminLogin.repassword.$invalid && misMPassword" class="help-block">{{ misMPassword }}</span>
+														</div>
+													</div>  
+
+
+
+
+
+
+
+												</div>
+												<!-- /.box-body -->
+												<div class="box-footer">
+													<button type="reset" class="btn btn-default">Cancel</button>
+													<button type="submit" class="btn btn-info pull-right"  ng-disabled="adminLogin.$invalid || adminLogin.$pristine " >Save</button>
+												</div>
+												<!-- /.box-footer -->
+											</form>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<!-- End Question 1 -->
+							<!-- Question 2 -->
+							<!-- <div class="panel">
+								<div class="panel-heading" id="question-2" role="tab">
+									<a class="panel-title collapsed" aria-controls="answer-2" aria-expanded="false" data-toggle="collapse" nr-href="#answer-2" data-parent="#accordion2">
+										How much does it cost to use Lorem ipsum?
+									</a>
+								</div>
+								<div class="panel-collapse collapse" id="answer-2" aria-labelledby="question-2" role="tabpanel" style="">
+									<div class="panel-body">
+										Laborum commodo cupidatat adipisicing aliqua qui in dolore occaecat labore nisi
+										occaecat enim dolor sit exercitation sit Duis minim tempor
+										est aliquip sit nostrud ea ea sit nostrud dolore cillum
+										exercitation officia sunt pariatur consequat velit id
+										nulla id Duis minim sunt sint culpa amet veniam commodo
+										nisi reprehenderit tempor irure sunt enim in eu reprehenderit
+										anim nulla tempor pariatur nisi fugiat consectetur sint
+										deserunt elit voluptate in in labore eiusmod nostrud
+										eiusmod est ullamco sit qui ut ut velit in veniam in
+										Ut nulla pariatur reprehenderit deserunt laboris sed
+										cupidatat est dolore adipisicing Duis in ut dolore dolor
+										sunt aute ut Excepteur sint consectetur.
+									</div>
+								</div>
+							</div> -->
+							<!-- End Question 2 -->
+							<!-- Question 3 -->
+							<!-- <div class="panel">
+								<div class="panel-heading" id="question-3" role="tab">
+									<a class="panel-title collapsed" aria-controls="answer-3" aria-expanded="false" data-toggle="collapse" nr-href="#answer-3" data-parent="#accordion2">
+										What is the lorem ipsum pariatur?
+									</a>
+								</div>
+								<div class="panel-collapse collapse" id="answer-3" aria-labelledby="question-3" role="tabpanel" style="">
+									<div class="panel-body">
+										Lorem ipsum Esse pariatur sit reprehenderit non culpa sint ullamco qui in aliquip
+										enim exercitation laborum ut eu voluptate exercitation
+										Duis dolore amet pariatur id occaecat incididunt deserunt
+										nulla esse proident.
+									</div>
+								</div>
+							</div> -->
+							<!-- End Question 3 -->
+							<!-- Question 4 -->
+						<!-- 	<div class="panel">
+								<div class="panel-heading" id="question-4" role="tab">
+									<a class="panel-title collapsed" aria-controls="answer-4" aria-expanded="false" data-toggle="collapse" nr-href="#answer-4" data-parent="#accordion2">
+										Lorem ipsum commodo adipisicing sunt ad aliqua velit nulla?
+									</a>
+								</div>
+								<div class="panel-collapse collapse" id="answer-4" aria-labelledby="question-4" role="tabpanel" style="">
+									<div class="panel-body">
+										Lorem ipsum Do cupidatat in culpa magna voluptate ullamco et anim nulla cupidatat
+										dolor culpa consequat quis dolor eu aliqua Ut eiusmod
+										ullamco sint reprehenderit commodo veniam ea irure sit
+										reprehenderit sunt sed sed proident ea incididunt esse
+										cillum cupidatat officia Duis.
+									</div>
+								</div>
+							</div> -->
+							<!-- End Question 4 -->
+						</div>
+					</div> 
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+<!-- /.col -->
+
+</div>
+
+</section>
+<!-- /.content -->
+

@@ -1,0 +1,832 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		Doctor
+		<small>Add new</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="admin-dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="breadcrumb-item active">Doctor</li>
+		<li class="breadcrumb-item active">New</li>
+	</ol>
+</section>
+
+<style type="text/css">
+.myStyleProp section {
+	display: none;
+}
+.myStyleProp section.current {
+	display: block;
+}
+.danger {
+	color: #FF0000;
+}
+.has-feedback .glyphicon.form-control-feedback {
+	position: absolute;
+	right: 15px;
+	top: 37px;
+}
+.wizard-content .wizard, .wizard-content .wizard>.content { 
+	overflow: inherit;
+}
+</style>
+
+
+<style type="text/css">
+.image_base_n {
+	position: relative;
+}
+.nowUpdateImgClick {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	text-align: center;	
+	padding: 50px;
+	vertical-align: text-top;	
+	display:none;
+}
+.nowUpdateImgClick i {
+	font-size: 50px;
+	cursor: pointer;
+	padding: 10%;
+	background: #0000001a;
+	border-radius: 50%;
+}
+
+.image_base_n>img:hover {
+	opacity:0.7;
+}
+
+
+.image_base_n>img:hover +span{ 
+	display: block;
+}
+
+.image_base_n>span:hover { 
+	display: block;
+}
+.image_base_n i:hover -span{ 	
+	background: red; 
+	animation-name: none;
+}
+
+
+
+
+
+</style>
+
+
+
+<section class="content">
+
+	<!-- Step wizard -->
+	<div class="box">
+		<div class="box-header with-border">
+			<h3 class="box-title">Add new Doctor </h3>
+			<h6 class="box-subtitle">You can view added doctors  <a href="admin-doctor-view"  >here </a></h6>
+
+			<div class="box-tools pull-right">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+				<!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button> -->
+			</div>
+		</div>
+		<!-- /.box-header -->
+		<div class="box-body wizard-content">
+			<div   class="tab-wizard wizard-circle wizard clearfix" role="application" id="steps-uid-0">
+				<div class="steps clearfix">
+					<ul role="tablist">
+						<li role="tab" class="first "  ng-class="{  'current' : (addDoctor.stepShow == 1) , 'done' : (addDoctor.stepShow != 1) && ( addDoctor.stepCompete1 == 1) }"   aria-disabled="false" aria-selected="true">
+							<a id="steps-uid-0-t-0"  aria-controls="steps-uid-0-p-0"  ">
+								<span class="current-info audible">current step: </span>
+								<span class="step">1</span> 
+								Personal Info
+							</a>
+						</li>
+						<li role="tab" class="disabled" aria-disabled="true"  ng-class="{  'current' : (addDoctor.stepShow == 2) , 'done' : (addDoctor.stepShow != 2) && ( addDoctor.stepCompete2 == 1) }" >
+							<a id="steps-uid-0-t-1"   aria-controls="steps-uid-0-p-1"  >
+								<span class="step">2</span> Contacts Info
+							</a>
+						</li>
+						<li role="tab" class="disabled" aria-disabled="true"  ng-class="{  'current' : (addDoctor.stepShow == 3) , 'done' : (addDoctor.stepShow != 3) && ( addDoctor.stepCompete3 == 1) }" >
+							<a id="steps-uid-0-t-2"   aria-controls="steps-uid-0-p-2"  >
+								<span class="step">3</span> Qualification
+							</a>
+						</li>
+						<li role="tab" class="disabled last" aria-disabled="true"  ng-class="{  'current' : (addDoctor.stepShow == 4) , 'done' : (addDoctor.stepShow != 4) && ( addDoctor.stepCompete4 == 1) }" >
+							<a id="steps-uid-0-t-3"   aria-controls="steps-uid-0-p-3" >
+								<span class="step">4</span> Image /Final
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="content clearfix myStyleProp">
+					<!-- Step 1 -->
+					<h6 id="steps-uid-0-h-0" tabindex="-1" class="title current">Personal Info</h6>
+					<section id="steps-uid-0-p-0" role="tabpanel" aria-labelledby="steps-uid-0-h-0" class="body "  	ng-class="{ 'current' : (addDoctor.stepShow == 1) }" 	aria-hidden="false">
+						<form name="formFirstStep" ng-submit=" addDoctor.stepShow = 2; addDoctor.stepCompete1 = 1;">
+							<div class="row">
+								<div class="col-md-6">
+
+
+
+									<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : formFirstStep.fname.$valid, 'has-error' : formFirstStep.fname.$invalid && !formFirstStep.fname.$pristine }">
+
+										<label  >First Name :<span class="danger">*</span></label>
+
+
+										<input type="text" name="fname" class="form-control"  placeholder="Enter your first name"  ng-model="profile.fname"  ng-minlength="2" ng-maxlength="255" ng-pattern="/^[a-zA-Z\s]*$/"
+										required>
+
+										<span class="glyphicon form-control-feedback"  aria-hidden="true"
+										ng-class="{ 'glyphicon-ok' : formFirstStep.fname.$valid, 'glyphicon-remove' : formFirstStep.fname.$invalid && !formFirstStep.fname.$pristine }" ></span>
+										<span span ng-show="formFirstStep.fname.$invalid && formFirstStep.fname.$error.required" class="help-block">Your first name is required.</span>            
+										<span ng-show="formFirstStep.fname.$invalid && formFirstStep.fname.$error.minlength" class="help-block">first name is too short.</span>
+										<span ng-show="formFirstStep.fname.$invalid && formFirstStep.fname.$error.maxlength" class="help-block">first name is too long.</span>
+
+									</div>
+
+
+
+								</div>
+
+								<div class="col-md-6">
+
+
+
+									<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : formFirstStep.lname.$valid, 'has-error' : formFirstStep.lname.$invalid && !formFirstStep.lname.$pristine }">
+
+										<label  >Last Name :<span class="danger">*</span></label>
+
+
+										<input type="text" name="lname" ng-pattern="/^[a-zA-Z\s]*$/"
+										class="form-control"  placeholder="Enter your last name"  ng-model="profile.lname"    ng-maxlength="255"  required>
+
+										<span class="glyphicon form-control-feedback"  aria-hidden="true"
+										ng-class="{ 'glyphicon-ok' : formFirstStep.lname.$valid, 'glyphicon-remove' : formFirstStep.lname.$invalid && !formFirstStep.lname.$pristine }" ></span>
+										<span span ng-show="formFirstStep.lname.$invalid && formFirstStep.lname.$error.required" class="help-block">Your last name is required.</span>      
+										<span ng-show="formFirstStep.lname.$invalid && formFirstStep.lname.$error.maxlength" class="help-block">last name is too long.</span>
+
+									</div>
+
+
+
+								</div>
+
+
+
+							</div>
+							<div class="row">
+
+
+
+								<div class="col-md-6">
+
+									<div class="form-group  has-feedback " ng-class="{ 'has-success' : formFirstStep.sex.$valid, 'has-error' : formFirstStep.sex.$invalid && !formFirstStep.sex.$pristine }">
+										<label  >Sex
+											<span class="danger">*</span>
+										</label>
+										<div class="form-control">
+											
+											<input type="radio" name="sex" id="sexm"   value="male" ng-model="profile.sex" required >  &nbsp;&nbsp;&nbsp;
+											<label for="sexm">Male</label>
+											<input type="radio" name="sex" id="sexf"   value="female" ng-model="profile.sex" required >  &nbsp;&nbsp;&nbsp;
+											<label for="sexf">Female</label>
+											<input type="radio" name="sex" id="sexo"   value="other" ng-model="profile.sex"  required>  &nbsp;&nbsp;&nbsp;
+											<label for="sexo">Other</label>
+
+										</div>
+										<span class="glyphicon form-control-feedback"  aria-hidden="true"
+										ng-class="{ 'glyphicon-ok' : formFirstStep.sex.$valid, 'glyphicon-remove' : formFirstStep.sex.$invalid && !formFirstStep.sex.$pristine }" ></span>
+										<span span ng-show="formFirstStep.sex.$invalid && formFirstStep.sex.$error.required" class="help-block">Your sex is required.</span>    
+
+
+									</div>
+
+
+
+								</div>
+
+
+
+
+								<div class="col-md-6">
+									<div class="form-group  has-feedback " ng-class="{ 'has-success' : formFirstStep.dob.$valid, 'has-error' : formFirstStep.dob.$invalid && !formFirstStep.dob.$pristine }">
+										<label  >DOB
+											<span class="danger">*</span></label>
+
+
+											<datepicker date-format="yyyy-MM-dd" selector="form-control" date-min-limit="new Date()">
+												<div class="input-group">
+													<input  name="dob"  class="form-control" placeholder="Select your dob" ng-model="profile.dob"  required/>
+													<span class="input-group-addon" style="cursor: pointer">
+														<i class="fa fa-lg fa-calendar"></i>
+													</span>
+												</div>
+											</datepicker>
+
+											<br>
+											<span class="glyphicon form-control-feedback"  aria-hidden="true"
+											ng-class="{ 'glyphicon-ok' : formFirstStep.dob.$valid, 'glyphicon-remove' : formFirstStep.dob.$invalid && !formFirstStep.dob.$pristine }" ></span>
+											<span span ng-show="formFirstStep.dob.$invalid && formFirstStep.dob.$error.required" class="help-block">Your dob is required.</span>    
+
+
+										</div>
+									</div>
+
+
+
+								</div>
+
+
+
+
+								<div class=" row float-right  ">
+									<div class=" 	 col-md-12   float-right padding-10">
+
+										<button type="button" class="btn    btn-default btn-xs-6"   	ng-class="{ 'disabled' : (addDoctor.stepShow < 2 ) }"   >Previous</button>
+										<button type="submit" class="btn   btn-primary btn-xs-6"   ng-disabled="formFirstStep.$invalid || formFirstStep.$pristine ">Next</button>
+
+
+									</div> 
+								</div>
+
+							</form>
+						</section>
+						<!-- Step 2 -->
+						<h6 id="steps-uid-0-h-1" tabindex="-1" class="title">Job Status</h6>
+						<section id="steps-uid-0-p-1" role="tabpanel" aria-labelledby="steps-uid-0-h-1" class="body" aria-hidden="true" 	ng-class="{ 'current' : (addDoctor.stepShow == 2) }">
+
+							<form name="formSecoStep" ng-submit=" addDoctor.stepShow = 3; addDoctor.stepCompete2 = 1;">
+								<div class="row">
+
+									<div class="col-md-6">
+
+
+
+										<div class="form-group 	 has-feedback" ng-class="{ 'has-success' : formSecoStep.email.$valid, 'has-error' : formSecoStep.email.$invalid && !formSecoStep.email.$pristine }">
+
+											<label  >Email :
+												<span class="danger">*</span></label>
+
+												<input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" ng-model="profile.email" ng-maxlength="255" required  ng-blur="checkMaEmail( profile.email )" ng-change="chageEmail()">
+												<span class="glyphicon form-control-feedback"  aria-hidden="true"
+												ng-class="{ 'glyphicon-ok' : formSecoStep.email.$valid, 'glyphicon-remove' : formSecoStep.email.$invalid && !formSecoStep.email.$pristine }" ></span>
+												<span span ng-show="formSecoStep.email.$invalid && formSecoStep.email.$error.required" class="help-block">Your email is required.</span>   
+												<span ng-show="formSecoStep.email.$invalid && formSecoStep.email.$error.maxlength" class="help-block">email is too long.</span>
+												<span ng-show="formSecoStep.email.$invalid && formSecoStep.email.$error.email" class="help-block">Invalid email address.</span>
+												<span ng-show="formSecoStep.email.$invalid && emailErrorServer" class="help-block">{{emailErrorServer}}</span>
+
+
+											</div>
+
+
+
+										</div>
+										<div class="col-md-6">
+
+
+
+											<div class="form-group  has-feedback  " ng-class="{ 'has-success' : formSecoStep.phone.$valid, 'has-error' : formSecoStep.phone.$invalid && !formSecoStep.phone.$pristine }">
+												<label for="inputPhone"  >Phone :
+													<span class="danger">*</span></label>
+
+													<input name="phone" type="number" class="form-control" id="inputPhone" placeholder="Enter your phone" ng-model="profile.phone" ng-maxlength="10"  ng-minlength="10"  ng-blur="checkMaPhone( profile.phone )" ng-change="chagePhone()" required >
+													<span class="glyphicon form-control-feedback"  aria-hidden="true"
+													ng-class="{ 'glyphicon-ok' : formSecoStep.phone.$valid, 'glyphicon-remove' : formSecoStep.phone.$invalid && !formSecoStep.phone.$pristine }" ></span>
+													<span span ng-show="formSecoStep.phone.$invalid && formSecoStep.phone.$error.required" class="help-block">Your phone is required.</span>   
+													<span ng-show="formSecoStep.phone.$invalid && formSecoStep.phone.$error.minlength" class="help-block">phone is too short.</span>
+													<span ng-show="formSecoStep.phone.$invalid && formSecoStep.phone.$error.maxlength" class="help-block">phone is too long.</span>
+
+													<span ng-show="formSecoStep.phone.$invalid && formSecoStep.phone.$error.number" class="help-block">Invalid phone number.</span>
+													<span ng-show="formSecoStep.phone.$invalid && phoneErrorServer" class="help-block">{{phoneErrorServer}}</span>
+
+												</div> 
+
+											</div>
+										</div>
+
+
+										<div class="row">
+
+											<div class="col-md-6">
+
+
+												<div class="form-group  has-feedback  " ng-class="{ 'has-success' : formSecoStep.landline.$valid, 'has-error' : formSecoStep.landline.$invalid && !formSecoStep.landline.$pristine }">
+													<label for="inputPhone" >Landline :</label>
+
+													<input name="landline" type="number" class="form-control" id="inputLandline" placeholder="Enter your landline" ng-model="profile.landline" ng-maxlength="14"  ng-minlength="10"   >
+													<span class="glyphicon form-control-feedback"  aria-hidden="true"
+													ng-class="{ 'glyphicon-ok' : formSecoStep.landline.$valid, 'glyphicon-remove' : formSecoStep.landline.$invalid && !formSecoStep.landline.$pristine }" ></span> 
+													<span ng-show="formSecoStep.landline.$invalid && formSecoStep.landline.$error.minlength" class="help-block">landline is too short.</span>
+													<span ng-show="formSecoStep.landline.$invalid && formSecoStep.landline.$error.number" class="help-block">Invalid landline number.</span>
+													<span ng-show="formSecoStep.landline.$invalid && formSecoStep.landline.$error.maxlength" class="help-block">landline is too long.</span>
+
+												</div>
+
+
+
+
+											</div>
+											<div class="col-md-6">
+
+
+
+												<div class="form-group  has-feedback  " ng-class="{ 'has-success' : formSecoStep.officephone.$valid, 'has-error' : formSecoStep.officephone.$invalid && !formSecoStep.officephone.$pristine }">
+													<label for="inputPhone" >office phone :</label>
+
+													<input name="officephone" type="number" class="form-control" id="inputLandline" placeholder="Enter your officephone" ng-model="profile.officephone" ng-maxlength="14"  ng-minlength="10"   >
+													<span class="glyphicon form-control-feedback"  aria-hidden="true"
+													ng-class="{ 'glyphicon-ok' : formSecoStep.officephone.$valid, 'glyphicon-remove' : formSecoStep.officephone.$invalid && !formSecoStep.officephone.$pristine }" ></span> 
+													<span ng-show="formSecoStep.officephone.$invalid && formSecoStep.officephone.$error.minlength" class="help-block">office phone number is too short.</span>
+													<span ng-show="formSecoStep.officephone.$invalid && formSecoStep.officephone.$error.number" class="help-block">Invalid office phone number.</span>
+													<span ng-show="formSecoStep.officephone.$invalid && formSecoStep.officephone.$error.maxlength" class="help-block">office phone number is too long.</span>
+
+												</div>
+
+
+
+											</div>
+										</div>
+
+
+
+
+
+
+
+										<div class="row">
+
+											<div class="col-md-6">
+
+												<div class="form-group  has-feedback  " ng-class="{ 'has-success' : formSecoStep.address.$valid, 'has-error' : formSecoStep.address.$invalid && !formSecoStep.address.$pristine }">
+													<label >Address :</label>
+
+													<textarea name="address" class="form-control" id="inputAddress" placeholder="Enter your address" ng-model="profile.address"  ng-minlength="3"     ></textarea>
+
+													<span class="glyphicon form-control-feedback"  aria-hidden="true"
+													ng-class="{ 'glyphicon-ok' : formSecoStep.address.$valid, 'glyphicon-remove' : formSecoStep.address.$invalid && !formSecoStep.address.$pristine }" ></span> 
+													<span ng-show="formSecoStep.address.$invalid && formSecoStep.address.$error.minlength" class="help-block">address is too short.</span>
+
+
+												</div>
+
+
+
+
+											</div>
+
+
+											<div class="col-md-6">
+
+
+												
+												<div class="form-group  	 has-feedback  " ng-class="{ 'has-success' : formSecoStep.location.$valid, 'has-error' : formSecoStep.location.$invalid && !formSecoStep.location.$pristine }">
+													<label >Location/ Panchayath :
+														<span class="danger">*</span>
+													</label>
+
+													<input type="text" name="location" class="form-control" id="inputName" placeholder="Enter your location"  ng-model="profile.location"  ng-minlength="2" ng-maxlength="255"  required>
+
+													<span class="glyphicon form-control-feedback"  aria-hidden="true"
+													ng-class="{ 'glyphicon-ok' : formSecoStep.location.$valid, 'glyphicon-remove' : formSecoStep.location.$invalid && !formSecoStep.location.$pristine }" ></span>
+													<span span ng-show="formSecoStep.location.$invalid && formSecoStep.location.$error.required" class="help-block">Your Location is required.</span>            
+													<span ng-show="formSecoStep.location.$invalid && formSecoStep.location.$error.minlength" class="help-block">Location is too short.</span>
+													<span ng-show="formSecoStep.location.$invalid && formSecoStep.location.$error.maxlength" class="help-block">Location is too long.</span>
+
+												</div>
+
+
+
+
+											</div>
+
+										</div>
+
+
+
+
+
+
+
+
+										<div class="row">
+
+											<div class="col-md-6">
+
+
+												
+												<div class="form-group  	 has-feedback  " ng-class="{ 'has-success' : formSecoStep.state.$valid, 'has-error' : formSecoStep.state.$invalid && !formSecoStep.state.$pristine }">
+													<label >State :
+														<span class="danger">*</span>
+													</label>
+
+													<select class="form-control"  name="state" ng-model="profile.state"  required >
+														<option value="">Select State</option>
+														<option ng-repeat="eachOne in states" value="{{eachOne}}" ng-selected="{{ (eachOne == 'Kerala') }}">{{eachOne}}</option>
+													</select>  
+
+
+													<span class="glyphicon form-control-feedback"  aria-hidden="true"
+													ng-class="{ 'glyphicon-ok' : formSecoStep.state.$valid, 'glyphicon-remove' : formSecoStep.state.$invalid && !formSecoStep.state.$pristine }" ></span>
+													<span span ng-show="formSecoStep.state.$invalid && formSecoStep.state.$error.required" class="help-block">Your State is required.</span>            
+													<span ng-show="formSecoStep.state.$invalid && formSecoStep.state.$error.minlength" class="help-block">State is too short.</span>
+													<span ng-show="formSecoStep.state.$invalid && formSecoStep.state.$error.maxlength" class="help-block">State is too long.</span>
+
+												</div>
+
+
+
+
+											</div>
+											<div class="col-md-6">
+												
+												<div class="form-group  	 has-feedback  " ng-class="{ 'has-success' : formSecoStep.city.$valid, 'has-error' : formSecoStep.city.$invalid && !formSecoStep.city.$pristine }">
+													<label >City :
+														<span class="danger">*</span>
+													</label>
+
+													<select class="form-control"  name="city" ng-model="profile.city" required >
+														<option  disabled deleted >Select City</option>
+														<option ng-repeat="eachOne in cities  track by $index" value="{{eachOne}}">{{eachOne}}</option>
+													</select>  
+
+
+													<span class="glyphicon form-control-feedback"  aria-hidden="true"
+													ng-class="{ 'glyphicon-ok' : formSecoStep.statecityid, 'glyphicon-remove' : formSecoStep.statecityalid && !formSecoStep.statecitystine }" ></span>
+													<span span ng-show="formSecoStep.statecityalid && formSecoStep.statecityor.required" class="help-block">Your City is required.</span>            
+													<span ng-show="formSecoStep.statecityalid && formSecoStep.statecityor.minlength" class="help-block">City is too short.</span>
+													<span ng-show="formSecoStep.statecityalid && formSecoStep.statecityor.maxlength" class="help-block">City is too long.</span>
+
+												</div>
+
+
+
+
+
+
+
+											</div>
+										</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+										<div class="row">
+
+											<div class="col-md-6">
+
+
+												
+
+
+												<div class="form-group  has-feedback  " ng-class="{ 'has-success' : formSecoStep.pin.$valid, 'has-error' : formSecoStep.pin.$invalid && !formSecoStep.pin.$pristine }">
+													<label for="inputPhone"  >Pin :
+														<span class="danger">*</span></label>
+
+														<input name="pin" type="number" class="form-control" id="inputPhone" placeholder="Enter your pin" ng-model="profile.pin" ng-maxlength="6"  ng-minlength="6" required >
+														<span class="glyphicon form-control-feedback"  aria-hidden="true"
+														ng-class="{ 'glyphicon-ok' : formSecoStep.pin.$valid, 'glyphicon-remove' : formSecoStep.pin.$invalid && !formSecoStep.pin.$pristine }" ></span>
+														<span span ng-show="formSecoStep.pin.$invalid && formSecoStep.pin.$error.required" class="help-block">Your Pin is required.</span>   
+														<span ng-show="formSecoStep.pin.$invalid && formSecoStep.pin.$error.minlength" class="help-block">Pin is too short.</span>
+														<span ng-show="formSecoStep.pin.$invalid && formSecoStep.pin.$error.maxlength" class="help-block">Pin is too long.</span>
+
+														<span ng-show="formSecoStep.pin.$invalid && formSecoStep.pin.$error.number" class="help-block">Invalid Pin number.</span>
+
+													</div> 
+
+
+
+
+
+												</div>
+												<div class="col-md-6">
+
+													<div class="form-group  has-feedback  " ng-class="{ 'has-success' : formSecoStep.oaddress.$valid, 'has-error' : formSecoStep.oaddress.$invalid && !formSecoStep.oaddress.$pristine }">
+														<label >Other Address :</label>
+
+														<textarea name="oaddress" class="form-control" id="inputAddress" placeholder="Enter your oaddress" ng-model="profile.oaddress"  ng-minlength="3"     ></textarea>
+
+														<span class="glyphicon form-control-feedback"  aria-hidden="true"
+														ng-class="{ 'glyphicon-ok' : formSecoStep.oaddress.$valid, 'glyphicon-remove' : formSecoStep.oaddress.$invalid && !formSecoStep.oaddress.$pristine }" ></span> 
+														<span ng-show="formSecoStep.oaddress.$invalid && formSecoStep.oaddress.$error.minlength" class="help-block">other address is too short.</span>
+
+
+													</div>
+
+
+
+
+
+
+
+
+												</div>
+											</div>
+
+
+
+
+
+
+
+											<div class=" row float-right  ">
+												<div class=" 	 col-md-12   float-right padding-10">
+
+													<button type="button" class="btn    btn-default btn-xs-6"   	ng-click=" addDoctor.stepShow = 1; ">Previous</button>
+													<button type="submit" class="btn   btn-primary btn-xs-6"   ng-disabled="formSecoStep.$invalid || formSecoStep.$pristine ">Next</button>
+
+
+												</div> 
+											</div>
+										</form>
+									</section>
+									<!-- Step 3 -->
+									<h6 id="steps-uid-0-h-2" tabindex="-1" class="title">Qualification</h6>
+									<section id="steps-uid-0-p-2" role="tabpanel" aria-labelledby="steps-uid-0-h-2" class="body" 	ng-class="{ 'current' : (addDoctor.stepShow == 3) }" aria-hidden="true"  >
+
+
+
+
+										<form name="formThrdStep" ng-submit=" addDoctor.stepShow = 4; addDoctor.stepCompete3 = 1;">
+											<div class="row">
+												<div class="col-md-6">
+
+
+
+													<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : formThrdStep.qualification.$valid, 'has-error' : formThrdStep.qualification.$invalid && !formThrdStep.qualification.$pristine }">
+
+														<label  >qualification :<span class="danger">*</span></label>
+
+
+
+														<textarea name="qualification" class="form-control" id="inputAddress" placeholder="Enter your qualification" ng-model="profile.qualification"  ng-minlength="3"   required  ></textarea>
+
+														<span class="glyphicon form-control-feedback"  aria-hidden="true"
+														ng-class="{ 'glyphicon-ok' : formThrdStep.qualification.$valid, 'glyphicon-remove' : formThrdStep.qualification.$invalid && !formThrdStep.qualification.$pristine }" ></span>
+														<span span ng-show="formThrdStep.qualification.$invalid && formThrdStep.qualification.$error.required" class="help-block"> qualification is required.</span>  
+														<span ng-show="formThrdStep.qualification.$invalid && formThrdStep.qualification.$error.minlength" class="help-block">qualification is too short.</span> 
+
+													</div>
+
+
+
+												</div>
+
+												<div class="col-md-6">
+
+
+
+
+
+													<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : formThrdStep.remark.$valid, 'has-error' : formThrdStep.remark.$invalid && !formThrdStep.remark.$pristine }">
+
+														<label  >Remark:<span class="danger">*</span></label>
+
+
+
+														<textarea name="remark" class="form-control" id="inputAddress" placeholder="Enter your remark" ng-model="profile.remark"  ng-minlength="3"     ></textarea>
+
+														<span class="glyphicon form-control-feedback"  aria-hidden="true"
+														ng-class="{ 'glyphicon-ok' : formThrdStep.remark.$valid, 'glyphicon-remove' : formThrdStep.remark.$invalid && !formThrdStep.remark.$pristine }" ></span> 
+														<span ng-show="formThrdStep.remark.$invalid && formThrdStep.remark.$error.minlength" class="help-block">remark is too short.</span> 
+
+													</div>
+
+
+
+												</div>
+
+
+
+											</div>
+
+
+
+											<div class=" row float-right  ">
+												<div class=" 	 col-md-12   float-right padding-10">
+
+													<button type="button" class="btn    btn-default btn-xs-6"   	ng-click=" addDoctor.stepShow = 2; ">Previous</button>
+													<button type="submit" class="btn   btn-primary btn-xs-6"   ng-disabled="formThrdStep.$invalid || formThrdStep.$pristine ">Next</button>
+
+
+												</div> 
+											</div>
+
+										</form>
+
+
+									</section>
+									<!-- Step 4 -->
+									<h6 id="steps-uid-0-h-3" tabindex="-1" class="title">Finish</h6>
+									<section id="steps-uid-0-p-3" role="tabpanel" aria-labelledby="steps-uid-0-h-3" class="body" aria-hidden="true" 	ng-class="{ 'current' : (addDoctor.stepShow == 4) }">
+										
+
+
+
+
+										<form name="formForthStep" ng-submit="doctorProfileSubmit()">
+											<div class="row">
+												<div class="col-md-6">
+
+
+													<div class="image_base_n">
+														<img class="profile-user-img rounded-circle img-fluid mx-auto d-block"
+														ng-src src="{{profile.image}}"  alt="User profile picture">
+														<span class="nowUpdateImgClick  animated  infinite bounce"><i class="ti-upload "  ng-click="uploadImgTriggen()"></i></span>
+														<input type="file" id="fileInputM"  style="display:none;"  accept="image/*"   onchange="angular.element(this).scope().fileNameChanged()"/>
+														<!-- onchange="angular.element(this).scope().fileNameChanged()"  -->
+													</div>
+
+
+												</div>
+
+												<div class="col-md-6">
+
+
+
+
+
+													<div class="form-group  	  float-right padding-10">
+
+														<button type="button" class="btn    btn-default btn-xs-6"   	ng-click=" addDoctor.stepShow = 3; ">Previous</button>
+														<button type="submit" class="btn   btn-success btn-xs-6"   >Finish</button>
+
+
+													</div>
+
+
+
+												</div>
+
+
+
+											</div>
+
+
+
+										</form>
+
+
+
+									</section>
+
+
+								</div> </div>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+
+
+					</section>
+
+
+
+
+					<style type="text/css">
+					.ng-modal-overlay {
+						/* A dark translucent div that covers the whole screen */
+						position:absolute;
+						z-index:1030;
+						top:0;
+						left:0;
+						width:100%;
+						height:100%;
+						background-color:#000000;
+						opacity: 0.8;
+						right: 0;
+						bottom: 0;
+					}
+					.ng-modal-dialog { 
+						z-index:1031;
+						position: fixed;
+						width: 70%; /* Default */
+
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+						-webkit-transform: translate(-50%, -50%);
+						-moz-transform: translate(-50%, -50%);
+
+						background-color: #fff;
+						box-shadow: 4px 4px 80px #000;
+					}
+					.ng-modal-dialog-content {
+						padding:10px;
+						text-align: left;
+					}
+					.ng-modal-close {
+						position: fixed;
+						top: 3px;
+						right: 5px;
+						padding: 5px;
+						cursor: pointer;
+						font-size: 120%;
+						display: inline-block;
+						font-weight: bold;
+						font-family: 'arial', 'sans-serif';
+					}
+					.margin-0 {
+						margin:0;
+					}
+
+					.cropArea {
+						background: #E4E4E4;
+						margin: auto;
+						overflow: hidden;
+					}
+					.cropArea.big {
+						width:auto;
+						height:550px;
+					}
+
+					.padding-a {
+						padding: 5px 0px 5px 2px;
+					}
+					.now_ex_img {
+						padding-left: 5px;
+					}
+					.pos-reatvie { 
+					}
+					.pos-reatvie>div {
+						position: absolute; 
+						bottom: 0;
+
+					}
+
+				</style>
+
+
+
+				<div class='ng-modal' ng-show="enableCrop"   >
+					<div class='ng-modal-overlay'  >x</div>
+					<div class='ng-modal-dialog panel'  > 
+						<div class='ng-modal-dialog-content col-md-12' >
+							<div class="row margin-0 ">
+
+								<div class="col-md-8">
+									<div ng-if="enableCrop" class="cropArea" ng-class="{'big':size=='big', 'medium':size=='medium', 'small':size=='small'}">
+										<img-crop image="imageDataURI"
+										result-image="$parent.resImageDataURI"
+										change-on-fly="changeOnFly"
+										area-type="{{type}}"
+										area-min-size="selMinSize"
+										result-image-format="{{resImgFormat}}"
+										result-image-quality="resImgQuality"
+										result-image-size="resImgSize"
+										on-change="onChange($dataURI)"
+										on-load-begin="onLoadBegin()"
+										on-load-done="onLoadDone()"
+										on-load-error="onLoadError()"
+										></img-crop>
+										<!--aspect-ratio="aspectRatio"-->
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div>
+										<img  src="{{resImageDataURI}}" />
+									</div>
+
+									<div class="row padding-a ">
+										<div class="col-md-8">
+											<img  src="{{resImageDataURI}}" id="opImageSrc" />
+										</div>
+										<div class="col-md-4 now_ex_img">
+											<img class="padding-a" src="{{resImageDataURI}}" />
+											<img class="padding-a" src="{{resImageDataURIa}}" />
+										</div>
+									</div> 
+
+									<div class="pos-reatvie">
+										<div class="input-group col-sm-12">
+											<span class="  col-sm-6 ">
+												<button type="button" class="btn btn-block btn-danger btn-sm" ng-click="clearImageNow()">clear</button>
+											</span>
+											<span class=" col-sm-6 ">
+												<button type="button" class="btn btn-block btn-success btn-sm" ng-click="doneImageCrop()">save</button>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
