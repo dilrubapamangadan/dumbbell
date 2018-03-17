@@ -53,9 +53,9 @@ define( 'PATH_GYM', PATH . MAIN02 );
 
 
 
-define('DISPLAY_COLLEGE_NAME', 'RIT');
-define('DISPLAY_COLLEGE_LOC', 'KOTTAYAM');
-define("DISPLAY_TEAM", "team benana");
+define('DISPLAY_COLLEGE_NAME', '');
+define('DISPLAY_COLLEGE_LOC', ' ');
+define("DISPLAY_TEAM", "");
 
 
 define( 'TERMS__CONDITIONS_URL', '#');
