@@ -234,7 +234,7 @@ function checkUser ( $type ){
 
 
 				$xarray =  $result[0];
-				
+
 
 
 				$array =  array( 
@@ -839,4 +839,242 @@ function checkUser ( $type ){
 
 
 
-					?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					function	addCategory( $name, $remark , $weigh  ) {
+
+
+
+
+
+						global $a;
+						$done = true ;
+						$myActivity_status = 0;
+						$myActivity_who = 0;
+						$result = 0;
+
+						$result = selectFromTable ('  id  ', ' gym_class ',  '  class_name =  "' . $name . '"  '    , $a );
+
+						if(isset($result)) 
+							if($result > 0)
+								$done = false;
+
+							if( $done  ) {
+
+
+
+
+
+
+								try { 
+
+
+									$array = array(   
+										"class_name"  => $name,
+										"remark"  => $remark,
+										'amount' => $weigh, 
+										"date" => date("Y-m-d H:i:s")
+									);
+
+									$result  = insertInToTable ('gym_class', $array, $a, true );
+
+
+									if($result > 0)
+										$myActivity_status = 1; 
+
+
+									$myActivity_who = $result;
+
+
+
+									$returnArray['success'] = $myActivity_status;
+									$returnArray['remark'] = "added successfully";
+
+									$returnArray['data'] = selectFromTable ('   id, class_name, remark, amount, delete_status, date   ', ' gym_class ',  '  id = ' . $result    , $a );
+									$returnArray['data'] = $returnArray['data'][0];
+
+
+
+								} catch (Exception $e) {
+
+									$returnArray['success'] = 2;
+									$returnArray['remark'] = "invalid request";
+								}
+
+
+
+							} else {
+								$returnArray['success'] = 11;
+								$returnArray['remark'] = "already exists";
+
+							}
+
+					//( $remark , $status = 1, $action = 1, $targ_table = NULL, $targ_id = 0) {
+
+
+							return  $returnArray;
+
+						}
+
+
+
+
+
+
+
+
+
+
+
+						function getCategory (){
+
+
+
+
+							global $a;
+
+							$returnArray = array('success' => 0, 
+								'data' => null ,
+								'remark' => "Invalid request");
+
+
+
+							try {
+
+								/**/
+
+							//IF ( CHAR_LENGTH(fname) > 2 , CONCAT (SUBSTR(fname, 1, 2), "..") , fname ) 
+								$result = selectFromTable ('   id, class_name, remark, amount, delete_status, date   ', ' gym_class ',  ' 1=1 ORDER BY date DESC'  , $a );
+
+								$returnArray['success'] = 3;
+								$returnArray['data'] =  $result ; 
+								$returnArray['remark'] = "data fetching success";
+
+
+							} catch (Exception $e) {
+
+								$returnArray['success'] = 2;
+								$returnArray['remark'] = "invalid request";
+							}
+
+
+
+							return  $returnArray;
+
+
+
+						}
+
+
+						function updateCategory( $id, $name, $details, $delete, $weigh ) {
+
+							global $a;
+
+							$returnArray = array('success' => 2, 
+								'data' => null, 
+								'remark' => "Invalid data");
+
+							$authentication = true;
+
+
+							try {
+
+
+
+								$result = selectFromTable (' * ', '   gym_class   ',  ' id <> ' . $id. ' AND class_name = "' . $name.  '"    '    , $a );
+
+
+								if(isset($result))
+									if(! is_null( $result))  {
+										$authentication = false;
+										$returnArray['data'] = ' id <>  ' . $id. ' AND gym_class = "' . $name.  '"    '  ;
+
+									}
+
+
+
+								} catch (Exception $e) {
+
+									$authentication = false;
+								}
+
+
+
+
+
+								if( ! $authentication     ) { 
+									$returnArray['success'] = 2;
+									$returnArray['remark'] = "name already used."; 
+								}
+
+
+
+								if( $authentication   ) {
+
+
+
+									$array =  array( 
+										'class_name' => $name, 
+										"remark" => $details,
+										'amount' => $weigh,
+										"delete_status" => $delete 
+									);
+
+									try { 
+
+										$result  = updateTable (' gym_class ', $array,  ' id = ' . $id . '  '  , $a ); 
+
+
+										$returnArray['success'] = $result;
+										$returnArray['remark'] = "gym class updated successfully"; 
+
+									} catch (Exception $e) {
+
+										$returnArray['success'] = 2;
+										$returnArray['remark'] = "invalid data";
+									}
+
+
+
+								} else {
+
+									
+
+								}
+
+
+
+
+
+
+
+								return  $returnArray;
+							}
+
+
+
+
+
+
+
+							?>

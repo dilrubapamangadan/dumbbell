@@ -128,6 +128,86 @@ if( isset($_POST['action']) &&  IS_AJAX  &&  decrypt($_SESSION[ SYSTEM_NAME .'ty
 
 
 		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		//add new category
+
+		case 'add-category':  
+
+
+		$weigh  = $_POST['weigh'];  
+		$name  = $_POST['name'];  
+		$remark  = $_POST['remark'];  
+
+
+		$returnArray = addCategory( $name, $remark, $weigh   );
+		break;
+
+
+
+
+		case 'get-category':    
+		$returnArray = getCategory();
+		break;
+
+
+		case 'update-category':    
+
+		$id  = $_POST['id'];  
+		$weigh  = $_POST['weigh'];  
+		$name  = $_POST['name'];  
+		$details  = $_POST['details'];  
+		$delete  = $_POST['delete'];  
+
+		$returnArray = updateCategory( $id, $name, $details, $delete, $weigh );
+		break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
 		
 
 

@@ -17,6 +17,9 @@
 
  RewriteRule ^admin-class$  admin/index.php/#!admin-class [L]    
 
+ RewriteRule ^admin-gym-add$  admin/index.php/#!admin-gym-add [L]    
+ RewriteRule ^admin-gym-view$  admin/index.php/#!admin-gym-view [L]    
+
 
 
  #view renamed  gym 

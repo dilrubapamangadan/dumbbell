@@ -452,4 +452,10 @@ function setSelectedMenu ($this, $count) {
 
  
 
+ $(document).on('click', '.grid-container input[type="submit"]', function(event) {
+   event.preventDefault();
+   console.log("clicked");
+   /* Act on the event */
+ });
+
 });
