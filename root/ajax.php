@@ -195,13 +195,78 @@ if( isset($_POST['action']) &&  IS_AJAX  &&  decrypt($_SESSION[ SYSTEM_NAME .'ty
 
 
 
+		case 'add-gym':    
+
+		$gym_licenseid  = $_POST['gym_licenseid'];  
+		$gym_name  = $_POST['gym_name'];  
+		$gym_owner  = $_POST['gym_owner'];  
+		$gym_email  = $_POST['gym_email'];  
+		$city  = $_POST['city'];  
+		$longitude  = $_POST['longitude'];   
+		$latitude  = $_POST['latitude'];   
+		$amount =  $_POST['amount'];
+		$class_id =  $_POST['class_id'];
+		$max_take =  $_POST['max_take'];
+		$gym_contact =  $_POST['gym_contact']; 
+		$class =  $_POST['class_id'];
+		$gym_fee =  $_POST['amount'];
+		$attachment =  $_POST['attachment']; 
+		$files = $_FILES; 
+
+
+		$returnArray = addGym( 	$gym_licenseid , $gym_name, $gym_owner, $gym_email , $city , $longitude , $latitude , 
+			$amount, 	$class_id, $max_take , $gym_contact ,   $class , $gym_fee , $attachment , $files  );
+		break;
+
+
+		case 'get-gym':    
+		$count = $_POST['count'];
+		$offset = $_POST['offset'];  
+		$returnArray = getGym( $count, $offset);
+		break;
 
 
 
+		case 'update-gym':    
+		$gym_licenseid  = $_POST['gym_licenseid'];  
+		$gym_name  = $_POST['gym_name'];  
+		$gym_owner  = $_POST['gym_owner'];  
+		$gym_email  = $_POST['gym_email'];  
+		$city  = $_POST['city'];  
+		$longitude  = $_POST['longitude'];   
+		$latitude  = $_POST['latitude'];   
+		$amount =  $_POST['amount'];
+		$class_id =  $_POST['class_id'];
+		$max_take =  $_POST['max_take'];
+		$gym_contact =  $_POST['gym_contact']; 
+		$class =  $_POST['class_id'];
+		$gym_fee =  $_POST['amount'];
+		$attachment =  $_POST['attachment']; 
+		$files = $_FILES; 
 
 
 
+		if( isset($_FILES['file']))
+			$files = $_FILES; 
 
+
+
+		$returnArray = updateGym(	$gym_licenseid , $gym_name, $gym_owner, $gym_email , $city , $longitude , $latitude , 
+			$amount, 	$class_id, $max_take , $gym_contact ,   $class , $gym_fee , $attachment , $files  );
+		break;  
+
+		case 'remove-gym':    
+		$id = $_POST['id']; 
+		$delete = $_POST['delete']; 
+		$returnArray = removeGym( $id , $delete);
+		break;
+
+
+
+		case 'get-single-gym':    
+		$id = $_POST['id']; 
+		$returnArray = getSingleGym( $id );
+		break;
 
 
 

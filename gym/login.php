@@ -96,7 +96,7 @@ footer {
   <div class="login-box" >
     <div class="login-logo" style=" background: rgba(0, 0, 0, 0.54); padding: 10px; ">  
       <a  class="login-a" ><b><?php  echo DISPLAY_NAME; ?></b></a>
-      <p class="login-b" > <small> <?php  echo DISPLAY_TEAM; ?></small> </p>
+      <p class="login-b" > <small> <?php  echo DISPLAY_TEAM; ?> GYM LOGIN</small> </p>
       <p class="login-c" > <small><?php  echo DISPLAY_COLLEGE_NAME; ?></small> <span>, <?php  echo DISPLAY_COLLEGE_LOC; ?></span></p>
     </div>
     <!-- /.login-logo -->
@@ -227,7 +227,7 @@ footer {
 
 
 
-        var dataString =   {action:'login-1', 
+        var dataString =   {action:'login-2', 
         username:form.username.value, 
         password: form.password.value
       };

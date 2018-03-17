@@ -1,0 +1,438 @@
+
+
+<style type="text/css">
+
+table { border-collapse: collapse; }
+.percent {
+	position: absolute; width: 100%; height: 14px; z-index: 1; text-align: center; font-size: 0.8em; color: white;
+	right: 0;
+	color: red;
+	top: 50px;
+}
+.progress-bar {
+	width: 100%; height: 14px;
+	border-radius: 0px;
+	border: 1px solid #CCC;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#6666cc), to(#4b4b95));
+	border-image: initial;
+}
+.uploaded {
+	padding: 0;
+	height: 14px;
+	border-radius: 0px;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#66cc00), to(#4b9500));
+	border-image: initial;
+}
+.dropbox {
+	height: 3em;
+	border: 2px solid #DDD;
+	border-radius: 1px;
+	background-color: #FEFFEC;
+	text-align: center;
+	color: #BBB;
+	font-size: 2em;
+	font-family: Arial, sans-serif;
+}
+.dropbox span {
+	margin-top: 0.9em;
+	display: block;
+}
+.dropbox.not-available {
+	background-color: #F88;
+}
+.dropbox.over {
+	background-color: #bfb;
+}
+
+[type=radio]:checked, [type=radio]:not(:checked) {
+	position: unset !important;
+	left: unset !important;
+	opacity: unset !important;
+}
+
+</style>
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>
+		Gym
+		<small>Control panel</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="admin-dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="breadcrumb-item active">Gym</li>
+	</ol>
+</section>
+
+
+<!-- Main content -->
+
+
+<section class="content">
+
+	<!-- Step wizard -->
+	<div class="box">
+		<div class="box-header with-border">
+			<h3 class="box-title">Add new Gym </h3>
+			<h6 class="box-subtitle">You can add and view gyms</h6>
+
+			<div class="box-tools pull-right">
+				<!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button> -->
+			</div>
+		</div>
+
+
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<form name="gymGym"  class="form-horizontal form-element col-12"  ng-submit="gymGymSubmit($event)" >
+
+
+					<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : gymGym.gym_licenseid.$valid, 'has-error' : gymGym.gym_licenseid.$invalid && !gymGym.gym_licenseid.$pristine }">
+
+						<label  > gym licenseid :<span class="danger">*</span></label>
+
+						<div class="col-sm-12">
+
+							<input type="text" name="gym_licenseid" class="form-control"  placeholder="Enter gym name"  ng-model="gym.gym_licenseid"  ng-minlength="2" ng-maxlength="255"
+							required>
+
+							<span class="glyphicon form-control-feedback"  aria-hidden="true"
+							ng-class="{ 'glyphicon-ok' : gymGym.gym_licenseid.$valid, 'glyphicon-remove' : gymGym.gym_licenseid.$invalid && !gymGym.gym_licenseid.$pristine }" ></span>
+							<span span ng-show="gymGym.gym_licenseid.$invalid && gymGym.gym_licenseid.$error.required" class="help-block">  gym licenseid is required.</span>
+
+							
+						</div>
+					</div>
+
+					<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : gymGym.gym_name.$valid, 'has-error' : gymGym.gym_name.$invalid && !gymGym.gym_name.$pristine }">
+
+						<label  > Name :<span class="danger">*</span></label>
+
+						<div class="col-sm-12">
+
+							<input type="text" name="gym_name" class="form-control"  placeholder="Enter gym name"  ng-model="gym.gym_name"  ng-minlength="2" ng-maxlength="255"
+							required>
+
+							<span class="glyphicon form-control-feedback"  aria-hidden="true"
+							ng-class="{ 'glyphicon-ok' : gymGym.gym_name.$valid, 'glyphicon-remove' : gymGym.gym_name.$invalid && !gymGym.gym_name.$pristine }" ></span>
+							<span span ng-show="gymGym.gym_name.$invalid && gymGym.gym_name.$error.required" class="help-block">  Name is required.</span>
+
+							
+						</div>
+					</div>
+
+
+
+					<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : gymGym.gym_owner.$valid, 'has-error' : gymGym.gym_owner.$invalid && !gymGym.gym_owner.$pristine }">
+
+						<label  > Owner :<span class="danger">*</span></label>
+
+						<div class="col-sm-12">
+
+							<input type="text" name="gym_owner" class="form-control"  placeholder="Enter owner name"  ng-model="gym.gym_owner"  ng-minlength="2" ng-maxlength="255"
+							required>
+
+							<span class="glyphicon form-control-feedback"  aria-hidden="true"
+							ng-class="{ 'glyphicon-ok' : gymGym.gym_owner.$valid, 'glyphicon-remove' : gymGym.gym_owner.$invalid && !gymGym.gym_owner.$pristine }" ></span>
+							<span span ng-show="gymGym.gym_owner.$invalid && gymGym.gym_owner.$error.required" class="help-block">  Owner name is required.</span>
+
+							
+						</div>
+					</div>
+
+
+					<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : gymGym.gym_email.$valid, 'has-error' : gymGym.gym_email.$invalid && !gymGym.gym_email.$pristine }"  >
+
+						<label  > Email :<span class="danger">*</span></label>
+
+						<div class="col-sm-12">
+
+							<input type="email" name="gym_email" class="form-control"  placeholder="Enter an email id"  ng-model="gym.gym_email"  ng-min="0" ng-max="9"
+							required>
+
+							<span class="glyphicon form-control-feedback"  aria-hidden="true"
+							ng-class="{ 'glyphicon-ok' : gymGym.gym_email.$valid, 'glyphicon-remove' : gymGym.gym_email.$invalid && !gymGym.gym_email.$pristine }" ></span>
+							<span span ng-show="gymGym.gym_email.$invalid && gymGym.gym_email.$error.email" class="help-block">  Enter a valid email address.</span>
+
+						</div>
+					</div>
+
+
+					<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : gymGym.gym_contact.$valid, 'has-error' : gymGym.gym_contact.$invalid && !gymGym.gym_contact.$pristine }"  >
+
+						<label  > Mobile :<span class="danger">*</span></label>
+
+						<div class="col-sm-12">
+
+							<input type="number" name="gym_contact" class="form-control"  placeholder="Enter  contact number"  ng-model="gym.gym_contact"  ng-minlength="0" ng-maxlength="9" 
+							required>
+
+							<span class="glyphicon form-control-feedback"  aria-hidden="true"
+							ng-class="{ 'glyphicon-ok' : gymGym.gym_contact.$valid, 'glyphicon-remove' : gymGym.gym_contact.$invalid && !gymGym.gym_contact.$pristine }" ></span>
+							<span span ng-show="gymGym.gym_contact.$invalid && gymGym.gym_contact.$error.required" class="help-block">  Number is required.</span>
+							<span ng-show="gymGym.gym_contact.$invalid && gymGym.gym_contact.$error.minlength" class="help-block">  Enter a valid number.</span>
+							<span ng-show="gymGym.gym_contact.$invalid && gymGym.gym_contact.$error.maxlength" class="help-block">  Enter a valid number.</span>
+						</div>
+					</div>
+
+					<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : gymGym.gym_city.$valid, 'has-error' : gymGym.gym_city.$invalid && !gymGym.gym_city.$pristine }">
+
+						<label  > City :<span class="danger">*</span></label>
+
+						<div class="col-sm-12">
+
+							<input type="text" name="gym_city" class="form-control"  placeholder="Enter gym city"  ng-model="gym.city"  ng-minlength="2" ng-maxlength="255"
+							required>
+
+							<span class="glyphicon form-control-feedback"  aria-hidden="true"
+							ng-class="{ 'glyphicon-ok' : gymGym.gym_city.$valid, 'glyphicon-remove' : gymGym.gym_city.$invalid && !gymGym.gym_city.$pristine }" ></span>
+							<span span ng-show="gymGym.gym_city.$invalid && gymGym.gym_city.$error.required" class="help-block">  City is required.</span>
+							
+							
+						</div>
+					</div>
+
+				<!-- 	<div class="form-group  	 has-feedback "  >
+
+						<label  > Cities :<span class="danger">*</span></label>
+
+						<div class="col-sm-12">
+
+							<div  id="nowMap" style="height: 170px;" ></div>
+							
+						</div>
+					</div>
+				-->
+
+
+				<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : gymGym.gym_longitude.$valid, 'has-error' : gymGym.gym_longitude.$invalid && !gymGym.gym_longitude.$pristine }">
+
+					<label  > Longitude :<span class="danger">*</span></label>
+
+					<div class="col-sm-12">
+
+						<input type="text" name="gym_longitude" class="form-control"  placeholder="Enter a longitude"  ng-model="gym.longitude"  ng-minlength="2" ng-maxlength="255"
+						required>
+
+						<span class="glyphicon form-control-feedback"  aria-hidden="true"
+						ng-class="{ 'glyphicon-ok' : gymGym.gym_longitude.$valid, 'glyphicon-remove' : gymGym.gym_longitude.$invalid && !gymGym.gym_longitude.$pristine }" ></span>
+						<span span ng-show="gymGym.gym_longitude.$invalid && gymGym.gym_longitude.$error.required" class="help-block">  Longitude is required.</span>
+
+
+					</div>
+				</div>
+
+
+				<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : gymGym.gym_latitude.$valid, 'has-error' : gymGym.gym_latitude.$invalid && !gymGym.gym_latitude.$pristine }">
+
+					<label  > Latitude :<span class="danger">*</span></label>
+
+					<div class="col-sm-12">
+
+						<input type="text" name="gym_latitude" class="form-control"  placeholder="Enter a latitude"  ng-model="gym.latitude"  ng-minlength="2" ng-maxlength="255"
+						required>
+
+						<span class="glyphicon form-control-feedback"  aria-hidden="true"
+						ng-class="{ 'glyphicon-ok' : gymGym.gym_latitude.$valid, 'glyphicon-remove' : gymGym.gym_latitude.$invalid && !gymGym.gym_latitude.$pristine }" ></span>
+						<span span ng-show="gymGym.gym_latitude.$invalid && gymGym.gym_latitude.$error.required" class="help-block">  Latitude is required.</span>
+
+
+					</div>
+				</div>
+
+
+
+				<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : gymGym.gym_fee.$valid, 'has-error' : gymGym.gym_fee.$invalid && !gymGym.gym_fee.$pristine }" >
+
+					<label  > Fee :<span class="danger">*</span></label>
+
+					<div class="col-sm-12">
+
+						<input type="number" name="gym_fee" class="form-control"  placeholder="Enter fee amount"  ng-model="gym.amount"  ng-minlength="0" ng-maxlength="9" 
+						required>
+
+						<span class="glyphicon form-control-feedback"  aria-hidden="true"
+						ng-class="{ 'glyphicon-ok' : gymGym.gym_fee.$valid, 'glyphicon-remove' : gymGym.gym_fee.$invalid && !gymGym.gym_fee.$pristine }" ></span>
+						<span span ng-show="gymGym.gym_fee.$invalid && gymGym.gym_fee.$error.required" class="help-block">  Fee is required.</span>
+
+					</div>
+				</div>
+
+
+
+				<div class="form-group  	 has-feedback  " ng-class="{ 'has-success' : gymGym.class.$valid, 'has-error' : gymGym.class.$invalid && !gymGym.class.$pristine }">
+					<label >Gym Class :
+						<span class="danger">*</span>
+					</label>
+
+					<select class="form-control"  name="class" ng-model="gym.class_id"    required
+
+					ng-options="obj.id as obj.class_name for obj in categories" >
+					
+				</select>
+
+
+				<span class="glyphicon form-control-feedback"  aria-hidden="true"
+				ng-class="{ 'glyphicon-ok' : gymGym.class.$valid, 'glyphicon-remove' : gymGym.class.$invalid && !gymGym.class.$pristine }" ></span>
+				<span span ng-show="gymGym.class.$invalid && gymGym.class.$error.required" class="help-block">Select a gym class.</span>
+			</div>
+
+
+
+
+
+
+
+			<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : gymGym.max_take.$valid, 'has-error' : gymGym.max_take.$invalid && !gymGym.max_take.$pristine }" >
+
+				<label  > max take :<span class="danger">*</span></label>
+
+				<div class="col-sm-12">
+
+					<input type="number" name="max_take" class="form-control"  placeholder="Enter max take"  ng-model="gym.max_take"  ng-minlength="0" ng-maxlength="9" 
+					required>
+
+					<span class="glyphicon form-control-feedback"  aria-hidden="true"
+					ng-class="{ 'glyphicon-ok' : gymGym.max_take.$valid, 'glyphicon-remove' : gymGym.max_take.$invalid && !gymGym.max_take.$pristine }" ></span>
+					<span span ng-show="gymGym.max_take.$invalid && gymGym.max_take.$error.required" class="help-block">  max take is required.</span>
+
+				</div>
+			</div>
+
+
+
+			<style type="text/css">
+
+			.removeAll:last-of-type .removeMe{
+				display: block !important;
+				background: red;
+				color: white;
+				padding: 5px 10px;
+			}
+
+		</style>
+
+
+
+
+
+		<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : gymGym.attachment.$valid, 'has-error' : gymGym.attachment.$invalid && !gymGym.attachment.$pristine }">
+
+
+
+			<label  > Image :<span class="danger">*</span></label>
+
+
+
+			<label  > Attachment :<span class="danger">*</span></label>
+
+			<div   class="col-sm-12 removeAll" style="padding: 15px 10px;" ng-repeat="attachment in attachments track by $index">
+				<span style=" position: absolute; left: 2em; "> {{ $index +1 }} . </span>
+				<p  style=" margin-left: 2em;  margin-right: 2em; width: 90%;"  name="optionEach[]" class="form-control"
+				placeholder="Enter your optionEach"  ng-minlength="1"     >{{attachment.attachment_name}}</p>
+				<span class="removeMe" ng-click="removeAttachmentMe($index, attachment)" style="position: absolute;right: 2em;top: 22px;cursor:  pointer;"> X </span>
+			</div>
+
+
+
+
+
+			<label  >New images :<span class="danger">*</span></label>
+
+
+
+			<div class="col-sm-12">
+
+				<input type="text" name="attachment" class="form-control"  placeholder="Input  images"  ng-model="gym.attachment"  ng-min="0" ng-max="10" ng-pattern="/^[0-9]*$/" ng-value="0"
+				>
+
+				<span class="glyphicon form-control-feedback"  aria-hidden="true"
+				ng-class="{ 'glyphicon-ok' : gymGym.attachment.$valid, 'glyphicon-remove' : gymGym.attachment.$invalid && !gymGym.attachment.$pristine }" ></span>
+				<span span ng-show="gymGym.attachment.$invalid && gymGym.attachment.$error.required" class="help-block">  image is required.</span>
+				<span ng-show="gymGym.attachment.$invalid && gymGym.attachment.$error.minlength" class="help-block">  image is too short.</span>
+				<span ng-show="gymGym.attachment.$invalid && gymGym.attachment.$error.maxlength" class="help-block">  image is too long.</span>
+
+				<span ng-show="gymGym.attachment.$invalid && gymGym.attachment.$error.pattern" class="help-block">  invalid input.</span>
+
+			</div>
+		</div>
+
+
+
+
+
+		<div class="form-group  	 has-feedback " ng-class="{ 'has-success' : gymGym.attachments.$valid, 'has-error' : gymGym.attachments.$invalid && !gymGym.attachments.$pristine }"  ng-if="gym.attachment >0">
+
+			<label  > Images :<span class="danger">*</span></label>
+
+			<div class="col-sm-12">
+
+				<input type="file" name="attachments" class="form-control"  placeholder="Input  images"  ng-model="gym.attachments"   ng-file-model="files" multiple  id="fileToUpload"   ng-show="false"
+				onchange="angular.element(this).scope().setFiles(this)">
+
+
+
+
+				<div style="cursor: pointer;" onclick="document.getElementById('fileToUpload').click()" id="dropbox" class="dropbox" ng-class="dropClass"><span>{{dropText}}</span></div>
+
+
+
+				<span class="glyphicon form-control-feedback"  aria-hidden="true"
+				ng-class="{ 'glyphicon-ok' : gymGym.attachments.$valid, 'glyphicon-remove' : gymGym.attachments.$invalid && !gymGym.attachments.$pristine }" ></span>
+				<span span ng-show="gymGym.attachments.$invalid && gymGym.attachments.$error.required" class="help-block">  images is required.</span>
+
+				<span ng-show="gymGym.attachments.$invalid && gymGym.attachments.$error.pattern" class="help-block">  invalid input.</span>
+
+
+
+
+				<div ng-show="files.length">
+
+
+					<div ng-repeat="file in files.slice(0)">
+						<span>{{file.webkitRelativePath || file.name}}</span>
+
+					</div>
+					<div ng-show="progressVisible">
+						<div class="percent">{{progress}}</div>
+						<div class="progress-bar">
+							<div class="uploaded" ng-style="{'width': progress+'%'}"></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+
+
+		<div class="form-group row">
+			<div class="ml-auto col-sm-10">
+				<button type="submit" class="btn btn-success"   ng-disabled="gymGym.$invalid || gymGym.$pristine ">Submit</button>
+			</div>
+		</div>
+	</form>
+</div>
+</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+
+
+
+	</div>
+
+
+</div>
+
+
+<!-- /.row -->
+
+</section>
+<!-- /.content -->

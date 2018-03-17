@@ -1,4 +1,4 @@
-var admin_app = angular.module( 'app-admin', ['ngRoute', 'ngAnimate', 'ngProgressLite', 'toastr', 'dcbImgFallback', 'ngtimeago', '720kb.datepicker', 'ngImgCrop', 'xeditable']); 
+var gym_app = angular.module( 'app-gym', ['ngRoute', 'ngAnimate', 'ngProgressLite', 'toastr', 'dcbImgFallback', 'ngtimeago', '720kb.datepicker', 'ngImgCrop', 'xeditable']); 
 
 var token = angular.element( document.querySelector( 'meta[name="csrf-token"]' ) );
 
@@ -12,34 +12,22 @@ var config = {
 }
 
 
-admin_app.config([ '$routeProvider', '$locationProvider', function( $routeProvider, $locationProvider ) {
+gym_app.config([ '$routeProvider', '$locationProvider', function( $routeProvider, $locationProvider ) {
 	$routeProvider
-	.when('/admin-dashboard', {
-		templateUrl: 'admin/pages/home.html',
-		controller: 'admin_appController0'
+	.when('/gym-dashboard', {
+		templateUrl: 'gym/pages/home.html',
+		controller: 'gym_appController0'
 	}) 
-	.when('/admin-profile', {
-		templateUrl: 'admin/pages/profile.html',
-		controller: 'admin_appControllerProfile'
+	.when('/gym-profile', {
+		templateUrl: 'gym/pages/profile.html',
+		controller: 'gym_appControllerProfile'
 	})  
-	.when('/admin-settings', {
-		templateUrl: 'admin/pages/settings.html',
-		controller: 'admin_appControllerSettings'
-	})  
-	.when('/admin-doctor-add', {
-		templateUrl: 'admin/pages/doctor-add.html',
-		controller: 'admin_appControllerDoctorAdd'
-	})  
-	.when('/admin-doctor-view', {
-		templateUrl: 'admin/pages/doctor-view.html',
-		controller: 'admin_appControllerDoctorView'
-	}) 
-	.when('/admin-doctor', {
-		templateUrl: 'admin/pages/doctor-single-view.html',
-		controller: 'admin_appControllerDoctorSingleView'
-	}) 
+	.when('/gym-settings', {
+		templateUrl: 'gym/pages/settings.html',
+		controller: 'gym_appControllerSettings'
+	})   
 	.otherwise({
-		redirectTo: '/admin-dashboard'
+		redirectTo: '/gym-dashboard'
 	});
 
 	$locationProvider.html5Mode({
@@ -49,7 +37,7 @@ admin_app.config([ '$routeProvider', '$locationProvider', function( $routeProvid
 
 }]);
 
-admin_app.run( function($rootScope, ngProgressLite,  $location, $timeout) {
+gym_app.run( function($rootScope, ngProgressLite,  $location, $timeout) {
 
 	$rootScope.$on('$routeChangeStart', function() {
 		ngProgressLite.start();
@@ -62,7 +50,7 @@ admin_app.run( function($rootScope, ngProgressLite,  $location, $timeout) {
 
 });
 
-admin_app.run(function(editableOptions, editableThemes) {
+gym_app.run(function(editableOptions, editableThemes) {
 	editableThemes.bs3.inputClass = 'input-sm';
 	editableThemes.bs3.buttonsClass = 'btn-sm';
 	editableOptions.theme = 'bs3';
@@ -72,7 +60,7 @@ admin_app.run(function(editableOptions, editableThemes) {
 
 
 
-// admin_app.directive('showTab',
+// gym_app.directive('showTab',
 // 	function () {
 // 		return {
 // 			link: function (scope, element, attrs) {
@@ -87,12 +75,12 @@ admin_app.run(function(editableOptions, editableThemes) {
 
 
 
-admin_app.service('myservice', function() {
+gym_app.service('myservice', function() {
 	this.value = null;
 	this.name = null;
 });
 
-admin_app.config(function(toastrConfig) {
+gym_app.config(function(toastrConfig) {
 	angular.extend(toastrConfig, {
 		allowHtml: false,
 		closeButton: false,
@@ -119,7 +107,7 @@ function pushMe($baseArr, $newArr) {
 
 
 
-admin_app.controller( 'SystemControllerBoady',  function($timeout, $location, $scope, $http , $window){ 
+gym_app.controller( 'SystemControllerBoady',  function($timeout, $location, $scope, $http , $window, toastr){ 
 	$scope.exit =  function(){ 
 		$window.location.href = 'exit';
 	}
@@ -245,7 +233,7 @@ $http.post("root/ajax.php", data, config)
 
 
 
-admin_app.controller( 'admin_appControllerProfile', function($timeout, $location, $scope, $http, $window, toastr){ 
+gym_app.controller( 'gym_appControllerProfile', function($timeout, $location, $scope, $http, $window, toastr){ 
 	doCheckUser($scope, $http);
 
 
@@ -287,7 +275,7 @@ $scope.isLoadingLog = false;
 
 
 
-	$scope.adminProfileSubmit = () => {
+	$scope.gymProfileSubmit = () => {
 		console.log($scope.profile); 
 
 
@@ -521,7 +509,7 @@ $scope.isLoadingLog = false;
 
 
 
-admin_app.controller( 'admin_appControllerSettings', function($timeout, $scope, $http, $location, $filter, myservice, toastr){
+gym_app.controller( 'gym_appControllerSettings', function($timeout, $scope, $http, $location, $filter, myservice, toastr){
 	doCheckUser($scope, $http);
 
 	//  new variable xxx xzzz 
@@ -540,8 +528,8 @@ admin_app.controller( 'admin_appControllerSettings', function($timeout, $scope, 
 		if ( a && b) 
 			if (a != b) { 
 				$scope.misMPassword = "Password mismatch";
-				$scope.adminLogin.repassword.$invalid = true;
-				$scope.adminLogin.$invalid = true;
+				$scope.gymLogin.repassword.$invalid = true;
+				$scope.gymLogin.$invalid = true;
 			}
 		});
 
@@ -554,8 +542,8 @@ admin_app.controller( 'admin_appControllerSettings', function($timeout, $scope, 
 		if ( a && b) 
 			if (a != b) { 
 				$scope.misMPassword = "Password mismatch";
-				$scope.adminLogin.repassword.$invalid = true;
-				$scope.adminLogin.$invalid = true;
+				$scope.gymLogin.repassword.$invalid = true;
+				$scope.gymLogin.$invalid = true;
 			}
 		});
 
@@ -571,13 +559,13 @@ admin_app.controller( 'admin_appControllerSettings', function($timeout, $scope, 
 		$scope.errorNewPassword = null;
 	});
 
-	$scope.adminLoginSubmit = function () {
+	$scope.gymLoginSubmit = function () {
 
 
 		if ($scope.login.newpassword != $scope.login.repassword) { 
 			$scope.misMPassword = "Password mismatch";
-			$scope.adminLogin.repassword.$invalid = true;
-			$scope.adminLogin.$invalid = true;			 
+			$scope.gymLogin.repassword.$invalid = true;
+			$scope.gymLogin.$invalid = true;			 
 			return;
 		}
 
@@ -609,15 +597,15 @@ admin_app.controller( 'admin_appControllerSettings', function($timeout, $scope, 
 
 			if(success == 2){ 
 				$scope.errorPassword = response.message;
-				$scope.adminLogin.password.$invalid = true;
-				$scope.adminLogin.$invalid = true;		
+				$scope.gymLogin.password.$invalid = true;
+				$scope.gymLogin.$invalid = true;		
 
 			}
 
 			if(success == 21){ 
 				$scope.errorNewPassword = response.message;
-				$scope.adminLogin.newpassword.$invalid = true;
-				$scope.adminLogin.$invalid = true;		
+				$scope.gymLogin.newpassword.$invalid = true;
+				$scope.gymLogin.$invalid = true;		
 
 			}
 
@@ -654,888 +642,12 @@ $timeout( function(){
 
 
 
-admin_app.controller( 'admin_appControllerDoctorAdd', function($timeout, $scope, $http, $location, $filter, myservice, toastr){
-	doCheckUser($scope, $http);
-	//  some veriable decla tion now
 
-	$scope.addDoctor = {
-		stepCompete1 : -1,
-		stepCompete2 : -1,
-		stepCompete3 : -1,
-		stepCompete4 : -1,
-		stepShow	 : 1
-	}
 
-	$scope.states = [];
-	$scope.cities = [];
 
 
 
-	$scope.emailErrorServer = null;
-	$scope.phoneErrorServer = null;
-
-
-	$scope.profile = { 
-		address: null,
-		city: null,
-		dob: null,
-		email: null,
-		fname: null,
-		image: null,
-		landline: null,
-		lname: null,
-		location: null,
-		oaddress: null,
-		officephone: null,
-		phone: null,
-		pin: null,
-		qualification: null,
-		remark: null,
-		sex: null,
-		state: null
-	};
-	////// declaration endsssss
-
-
-
-	$scope.$watch( 'profile.state', function(newdata) {
-
-		var data = $.param({
-			action: 'get-cities' ,
-			name: newdata
-		});	
-
-		$http.post("root/ajax.php", data, config)
-		.then(function mySuccess(response) { 
-			response = userAuthenticationAgent($scope, response);
-
-			if(! (response === null || response === undefined) )
-				if(response.status == 3) {
-					$scope.cities = [];
-					angular.forEach(response.data , function(value, key) {  
-						if( value != null)
-							this.push(value);   
-					}, $scope.cities );   
-				}
-
-			}, function myError(response) { 
-				console.log(response);
-			});
-
-	});
-
-
-/////////////////////////
-
-// iamge edit rpev start
-$scope.size='big';
-$scope.type='square';
-$scope.imageDataURI='';
-$scope.resImageDataURI='data:image/png;base64,iVBORw';
-$scope.resImgFormat='image/png';
-$scope.resImgQuality=1;
-$scope.selMinSize=50;
-$scope.resImgSize=300;
-$scope.enableCrop=false;
-
-$scope.doctorProfileSubmit = () => {
-	console.log($scope.profile); 
-
-
-	var data = $scope.profile;
-	pushMe(data, {action: 'add-doctor' }); 
-	var data = $.param(data); 
-
-
-	$http.post("root/ajax.php", data, config)
-	.then(function mySuccess(response) { 
-		response = userAuthenticationAgent($scope, response);
-
-
-		console.log(response);
-		if(! (response === null || response === undefined) ){
-			if(response.status == 1){
-
-				toastr.success(response.message ); 
-
-				$scope.profile = {  address: null, city: null, dob: null, email: null, fname: null,
-					image: null, landline: null, lname: null, location: null, oaddress: null, officephone: null,
-					phone: null, pin: null, qualification: null, remark: null, sex: null, state: null
-				};
-
-				$scope.addDoctor = null;	
-				$scope.addDoctor = {stepShow: 1};	
-
-			} else if(response.status == 2) { 
-				toastr.error(response.message ); 
-				$scope.addDoctor.stepShow = 2;	
-			} 
-
-		}
-
-
-
-		console.log($scope.profile);
-	}, function myError(response) { 
-		console.log(response);
-	});
-
-
-
-
-}
-
-
-
-var handleFileSelect=function(evt) {
-	console.log( ($scope.enableCrop + '').length );
-	console.log($scope.enableCrop);
-
-	if(($scope.enableCrop + '').length > 2){
-		$scope.enableCrop=true;
-	}
-
-	var file=evt.currentTarget.files[0];
-	var reader = new FileReader();
-	reader.onload = function (evt) {
-		$scope.$apply(function($scope){
-			$scope.imageDataURI=evt.target.result;
-		});
-	};
-	reader.readAsDataURL(file);
-};
-angular.element(document.querySelector('#fileInputM')).on('change',handleFileSelect);
-$scope.$watch('resImageDataURI',function(){
-	          //console.log('Res image', $scope.resImageDataURI);
-	      });
-
-
-
-
-$scope.fileNameChanged = () => {
-
-}
-
-
-$scope.doneImageCrop = () => {  
-	fvb =  angular.element( document.querySelector( '#opImageSrc' ) ); 
-
-	$scope.imageDataURI = '';
-	$scope.enableCrop= false;
-
-
-
-	pushMe( $scope.profile, { image: fvb.attr('src')});
-
-
-
-}
-
-
-$scope.clearImageNow = function (){
-	$scope.imageDataURI = '';
-	$scope.enableCrop= false;
-}
-
-
-$scope.uploadImgTriggen = function(){
-	setTimeout(function() {
-		document.getElementById('fileInputM').click()        
-	}, 0);
-}
-
-
-
-////////////////////////////\
-
-$isimgCh = false;
-
-$scope.chageEmail = () => {
-	$isimgCh = true;
-	$scope.emailErrorServer = null;
-}
-
-$scope.checkMaEmail = ( email) => {	
-	
-	if($isimgCh )
-		if( ! (email == null )){
-			var exdata = {
-				action: 'check-email', 
-				email: email
-			}
-			var data = $.param(exdata);	
-
-
-
-			$http.post("root/ajax.php", data, config)
-			.then(function mySuccess(response) { 
-				response = userAuthenticationAgent($scope, response);
-				console.log(response); 
-
-				success = response.status;	
-
-
-				if(success == 2){ 
-
-					$scope.formSecoStep.$invalid = true;
-					$scope.formSecoStep.email.$invalid =  true;
-					$scope.emailErrorServer = response.message;
-					toastr.error(response.message ); 	
-
-				}
-
-
-				if(success == 0){  
-					toastr.error('make sure that all details are correct, or refresh' ); 
-				}
-
-
-
-
-
-			}, function myError(response) { 
-				console.log(response);
-			});
-		} 
-
-		$isimgCh = false;
-
-	}
-
-
-
-
-
-
-	$isimgChPh = false;
-	$scope.chagePhone = () => {
-
-		$isimgChPh = true;
-		$scope.phoneErrorServer = null;
-	}
-
-	$scope.checkMaPhone = ( phone ) => {
-
-
-
-		
-		if($isimgChPh )
-			if( ! (phone == null )){
-				var exdata = {
-					action: 'check-phone', 
-					phone: phone
-				}
-				var data = $.param(exdata);	
-
-
-
-				$http.post("root/ajax.php", data, config)
-				.then(function mySuccess(response) { 
-					response = userAuthenticationAgent($scope, response);
-					console.log(response); 
-
-					success = response.status;	
-
-
-					if(success == 2){ 
-
-						$scope.formSecoStep.$invalid = true;
-						$scope.formSecoStep.phone.$invalid =  true;
-						$scope.phoneErrorServer = response.message;
-						toastr.error(response.message ); 	
-
-					}
-
-
-					if(success == 0){  
-						toastr.error('make sure that all details are correct, or refresh' ); 
-					}
-
-
-
-
-
-				}, function myError(response) { 
-					console.log(response);
-				});
-			} 
-
-			$isimgChPh = false;
-
-
-
-
-		}
-
-
-		$timeout( function(){
-
-		// toastr.success(' add new doctor' );
-
-
-
-
-
-		var data = $.param({
-			action: 'get-countries' 
-		});	
-
-		$http.post("root/ajax.php", data, config)
-		.then(function mySuccess(response) { 
-			response = userAuthenticationAgent($scope, response);
-
-			if(! (response === null || response === undefined) )
-				if(response.status == 3) 
-					angular.forEach(response.data , function(value, key) {  
-						this.push(value[0]);   
-					}, $scope.states);  
-
-
-				console.log($scope.profile);
-			}, function myError(response) { 
-				console.log(response);
-			});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	},3);
-	});
-
-
-
-
-
-admin_app.controller( 'admin_appControllerDoctorView', function($timeout, $scope, $http, $location, $filter, myservice, toastr){
-	doCheckUser($scope, $http);
-
-	$scope.doctors = [];
-	$scope.showDoctors = [];
-	docCount = 8;
-	$scope.docOfset = 0;
-	$scope.showOffset = 0;
-
-
-
-
-
-	$scope.viewSingleDoctor = ( doctor_id ) => {
-		$scope.myservice = myservice; 
-		var passData = { id: doctor_id};
-		$scope.myservice.value = passData; 
-		$location.path('/admin-doctor');
-	}
-
-
-	$scope.$watch('showOffset', function( ) {
-		console.log("change");	
-
-		if($scope.doctors[ $scope.showOffset ])	{
-			//
-			var test = angular.element( document.getElementsByClassName( 'myAmimateTe' ) ); 
-			test.addClass('fadeOutLeft');
-
-			$scope.showDoctors = $scope.doctors[$scope.showOffset ];
-		}
-
-	});
-
-	$scope.addOfset = ( key ) => {
-		$scope.showOffset = key;
-	}
-
-
-	var getDoctors = () => {
-
-
-		var data = $.param({
-			action: 'get-doctor', 
-			offset: $scope.docOfset,
-			count: docCount
-		});	
-
-		$http.post("root/ajax.php", data, config)
-		.then(function mySuccess(response) { 
-			response = userAuthenticationAgent($scope, response);
-			// console.log(response);
-
-			if(! (response === null || response === undefined) )
-				if(response.status == 3) {
-					if((response.data  != null ))
-						$scope.docOfset = $scope.docOfset  + response.data.length;
-					tempArr = [];
-
-					angular.forEach(response.data , function(value, key) {  
-
-						value.image =  'files/images/employee/' + value.image;
-						// str.substring(1, 4);
-						this.push(value);   
-					}, tempArr);  
-					$scope.doctors.push(tempArr);
-
-					if($scope.showDoctors.length == 0 )
-						$scope.showDoctors = $scope.doctors[0];
-
-					if((response.data  != null ))
-						if( (response.data.length > 1) && 1)
-							getDoctors();
-					}
-
-					console.log($scope.doctors); 
-
-				}, function myError(response) { 
-					console.log(response);
-				});
-
-	} 
-
-
-	$timeout( function(){ 
-
-
-		getDoctors();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	},3);
-});
-
-
-admin_app.controller( 'admin_appControllerDoctorSingleView', function($timeout, $scope, $http, $location, $filter, myservice, toastr){
-	doCheckUser($scope, $http); 
-	$scope.myservice = myservice;  
-	if($scope.myservice.value == null){
-		$location.path('/admin-doctor-view');
-		toastr.info("select a doctor first");
-	} else {
-		$scope.doctor_id = $scope.myservice.value.id;
-	}
-
-	
-	console.log($scope.doctor_id);
-
-
-
-	$scope.profile = [];	
-	$scope.oldProfile = [];
-
-	$scope.profile = { 
-		id: null,
-		address: null,
-		city: null,
-		dob: null,
-		email: null,
-		fname: null,
-		image: null,
-		landline: null,
-		lname: null,
-		location: null,
-		oaddress: null,
-		officephone: null,
-		phone: null,
-		pin: null,
-		qualification: null,
-		remark: null,
-		sex: null,
-		state: null
-	};
-
-
-	$scope.states = [];
-	$scope.cities = [];
-
-
-
-	$scope.emailErrorServer = null;
-	$scope.phoneErrorServer = null;
-
-
-
-	// iamge edit rpev start
-	$scope.size='big';
-	$scope.type='square';
-	$scope.imageDataURI='';
-	$scope.resImageDataURI='data:image/png;base64,iVBORw';
-	$scope.resImgFormat='image/png';
-	$scope.resImgQuality=1;
-	$scope.selMinSize=50;
-	$scope.resImgSize=300;
-	$scope.enableCrop=false;
-
-
-
-
-
-
-
-	$scope.singleDoctorSubmit = () => {
-		console.log($scope.profile); 
-
-
-		var data = $scope.profile;
-		pushMe(data, {action: 'update-doctor' }); 
-		var data = $.param(data); 
-
-
-		$http.post("root/ajax.php", data, config)
-		.then(function mySuccess(response) { 
-			response = userAuthenticationAgent($scope, response);
-
-
-			console.log(response);
-			if(! (response === null || response === undefined) ){
-				if(response.status == 1){
-
-					toastr.success(response.message ); 
-
-					// $scope.profile = {  address: null, city: null, dob: null, email: null, fname: null,
-					// 	image: null, landline: null, lname: null, location: null, oaddress: null, officephone: null,
-					// 	phone: null, pin: null, qualification: null, remark: null, sex: null, state: null
-					// };
-
-
-
-				} else if(response.status == 2) { 
-					toastr.error(response.message );  
-				} 
-
-			}
-
-
-
-			console.log($scope.profile);
-		}, function myError(response) { 
-			console.log(response);
-		});
-
-
-
-
-	}
-
-
-
-
-
-	$scope.$watch( 'profile.state', function(newdata) {
-
-		var data = $.param({
-			action: 'get-cities' ,
-			name: newdata
-		});	
-
-		$http.post("root/ajax.php", data, config)
-		.then(function mySuccess(response) { 
-			response = userAuthenticationAgent($scope, response);
-
-			if(! (response === null || response === undefined) )
-				if(response.status == 3) {
-					$scope.cities = [];
-					angular.forEach(response.data , function(value, key) {  
-						if( value != null)
-							this.push(value);   
-					}, $scope.cities );   
-				}
-
-			}, function myError(response) { 
-				console.log(response);
-			});
-
-	});
-
-
-	/////////////////////////
-//////////////////////////
-var handleFileSelect=function(evt) {
-	console.log( ($scope.enableCrop + '').length );
-	console.log($scope.enableCrop);
-
-	if(($scope.enableCrop + '').length > 2){
-		$scope.enableCrop=true;
-	}
-
-	var file=evt.currentTarget.files[0];
-	var reader = new FileReader();
-	reader.onload = function (evt) {
-		$scope.$apply(function($scope){
-			$scope.imageDataURI=evt.target.result;
-		});
-	};
-	reader.readAsDataURL(file);
-};
-angular.element(document.querySelector('#fileInputM')).on('change',handleFileSelect);
-$scope.$watch('resImageDataURI',function(){
-	          //console.log('Res image', $scope.resImageDataURI);
-	      });
-
-
-
-
-$scope.fileNameChanged = () => {
-
-}
-
-
-$scope.doneImageCrop = () => {  
-	fvb =  angular.element( document.querySelector( '#opImageSrc' ) ); 
-
-	$scope.imageDataURI = '';
-	$scope.enableCrop= false;
-
-
-
-	pushMe( $scope.profile, { image: fvb.attr('src')});
-
-
-
-}
-
-
-$scope.clearImageNow = function (){
-	$scope.imageDataURI = '';
-	$scope.enableCrop= false;
-}
-
-
-$scope.uploadImgTriggen = function(){
-	setTimeout(function() {
-		document.getElementById('fileInputM').click()        
-	}, 0);
-}
-
-
-
-
-
-////////////////////////////\
-
-$isimgCh = false;
-
-$scope.chageEmail = () => {
-	$isimgCh = true;
-	$scope.emailErrorServer = null;
-}
-
-$scope.checkMaEmail = ( email) => {	
-	
-	if($isimgCh )
-		if( ! (email == null )){
-			var exdata = {
-				action: 'check-email', 
-				email: email,
-				id: $scope.profile.id
-			}
-			var data = $.param(exdata);	
-
-
-
-			$http.post("root/ajax.php", data, config)
-			.then(function mySuccess(response) { 
-				response = userAuthenticationAgent($scope, response);
-				console.log(response); 
-
-				success = response.status;	
-
-
-				if(success == 2 ){ 
-
-					$scope.singleDoctor.$invalid = true;
-					$scope.singleDoctor.email.$invalid =  true;
-					$scope.emailErrorServer = response.message;
-					toastr.error(response.message ); 	
-
-				}
-
-
-				if(success == 0){  
-					toastr.error('make sure that all details are correct, or refresh' ); 
-				}
-
-
-
-
-
-			}, function myError(response) { 
-				console.log(response);
-			});
-		} 
-
-		$isimgCh = false;
-
-	}
-
-
-
-
-
-
-	$isimgChPh = false;
-	$scope.chagePhone = () => {
-
-		$isimgChPh = true;
-		$scope.phoneErrorServer = null;
-	}
-
-	$scope.checkMaPhone = ( phone ) => {
-
-
-
-		
-		if($isimgChPh )
-			if( ! (phone == null )){
-				var exdata = {
-					action: 'check-phone', 
-					phone: phone,
-					id: $scope.profile.id
-				}
-				var data = $.param(exdata);	
-
-
-
-				$http.post("root/ajax.php", data, config)
-				.then(function mySuccess(response) { 
-					response = userAuthenticationAgent($scope, response);
-					console.log(response); 
-
-					success = response.status;	
-
-
-					if(success == 2){ 
-
-						$scope.singleDoctor.$invalid = true;
-						$scope.singleDoctor.phone.$invalid =  true;
-						$scope.phoneErrorServer = response.message;
-						toastr.error(response.message ); 	
-
-					}
-
-
-					if(success == 0){  
-						toastr.error('make sure that all details are correct, or refresh' ); 
-					}
-
-
-
-
-
-				}, function myError(response) { 
-					console.log(response);
-				});
-			} 
-
-			$isimgChPh = false;
-
-
-
-
-		}
-
-
-///////////////////////
-
-$timeout( function(){
-
-
-
-
-	var data = $.param({
-		action: 'get-countries' 
-	});	
-
-	$http.post("root/ajax.php", data, config)
-	.then(function mySuccess(response) { 
-		response = userAuthenticationAgent($scope, response);
-
-		if(! (response === null || response === undefined) )
-			if(response.status == 3) 
-				angular.forEach(response.data , function(value, key) {  
-					this.push(value[0]);   
-				}, $scope.states);  
-
-
-			console.log($scope.profile);
-		}, function myError(response) { 
-			console.log(response);
-		});
-
-
-
-
-	var data = $.param({
-		id: $scope.doctor_id,
-		action: 'get-single-doctor' 
-	});	
-
-	$http.post("root/ajax.php", data, config)
-	.then(function mySuccess(response) { 
-		response = userAuthenticationAgent($scope, response);
-		console.log(response);
-
-		if(! (response === null || response === undefined) )
-
-			if(response.status == 3) {
-				$scope.profile = response.data ;
-				pushMe ($scope.profile , {phone: parseInt(response.data.phone) , 
-					landline: ""  ,
-					officephone : ""   ,
-					image :   'files/images/employee/' + response.data.image} );
-
-				if(parseInt(response.data.landline) != 0) 
-					pushMe ($scope.profile , {landline: parseInt(response.data.landline)} );
-
-				if(  parseInt(response.data.officephone) != 0) 
-					pushMe ($scope.profile , { officephone : parseInt(response.data.officephone) } );
-
-
-				$scope.oldProfile = $scope.profile;
-			} else if(response.status == 2) {
-				toastr.error( response.message );				
-			} else {
-				toastr.info( response.message );
-
-
-			}
-
-		}, function myError(response) { 
-			console.log(response);
-		});
-
-},1);
-});
-
-
-
-
-
-
-
-
-admin_app.controller( 'admin_appController0', function($timeout, $scope, $http, $location, $filter, myservice, toastr){
+gym_app.controller( 'gym_appController0', function($timeout, $scope, $http, $location, $filter, myservice, toastr){
 	doCheckUser($scope, $http);
 	$timeout( function(){
 		toastr.success('I don\'t need a title to live' );
@@ -1584,7 +696,7 @@ function userAuthenticationAgent ($scope, response){
 				alert("something went wrong, manually reload the page !");
 			}			
 			$scope.$parent.authentication = {username : loname,
-				lockscreen: 'admin/pages/lockscreen.html',
+				lockscreen: 'gym/pages/lockscreen.html',
 				isLock: true,
 				password: null,
 				invalidPassword: false,

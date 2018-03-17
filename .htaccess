@@ -19,6 +19,7 @@
 
  RewriteRule ^admin-gym-add$  admin/index.php/#!admin-gym-add [L]    
  RewriteRule ^admin-gym-view$  admin/index.php/#!admin-gym-view [L]    
+ RewriteRule ^admin-gym-single$  admin/index.php/#!admin-gym-single [L]    
 
 
 
@@ -27,6 +28,13 @@
 
  RewriteRule ^gym-login$ gym/login.php [L]   
  RewriteRule ^gym-dashboard$ gym/index.php [L]   
+ RewriteRule ^gym-dashboard$  gym/index.php/#!gym-dashboard [L]   
+
+
+
+
+
+
 
 
 

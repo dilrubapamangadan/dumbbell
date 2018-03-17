@@ -12,7 +12,7 @@ if (empty($_SESSION[ SYSTEM_NAME . '_token'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en"  ng-app="app-admin">
+<html lang="en"  ng-app="app-gym">
 
 <head>
   <meta charset="utf-8">
@@ -53,14 +53,14 @@ if (empty($_SESSION[ SYSTEM_NAME . '_token'])) {
   <link rel="stylesheet" href="assets/components/bootstrap/dist/css/bootstrap-extend.css">
 
   <!-- theme style -->
-  <link rel="stylesheet" href="admin/css/master_style.css">
+  <link rel="stylesheet" href="gym/css/master_style.css">
 
 
   <!-- MinimalPro Admin skins. choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="admin/css/skins/_all-skins.css">
+  <link rel="stylesheet" href="gym/css/skins/_all-skins.css">
 
 
-  <link rel="stylesheet" type="text/css" href="admin/css/loading.css">
+  <link rel="stylesheet" type="text/css" href="gym/css/loading.css">
 
 
   <!-- Vector CSS -->
@@ -139,7 +139,7 @@ main.ng-enter.ng-enter-active {
 <!-- <script type="text/javascript" src="assets/plugins/ui-bootstrap/ui-bootstrap-tpls-2.5.0.min.js"></script> -->
 
 
-<script type="text/javascript"   src="admin/js/app.js"></script>
+<script type="text/javascript"   src="gym/js/app.js"></script>
 
 
 
@@ -170,13 +170,13 @@ main.ng-enter.ng-enter-active {
     <a href="index-2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <b class="logo-mini" style=" width:  30px;    height:  auto;">
-        <span class="light-logo"><img src="admin/images/aries-light.png" alt="logo"></span>
-        <span class="dark-logo"><img src="admin/images/aries-dark.png" alt="logo"></span>
+        <span class="light-logo"><img src="gym/images/aries-light.png" alt="logo"></span>
+        <span class="dark-logo"><img src="gym/images/aries-dark.png" alt="logo"></span>
       </b>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg">
-        <img src="admin/images/logo-light-text.png" alt="logo" class="light-logo">
-        <img src="admin/images/logo-dark-text.png" alt="logo" class="dark-logo">
+        <img src="gym/images/logo-light-text.png" alt="logo" class="light-logo">
+        <img src="gym/images/logo-dark-text.png" alt="logo" class="dark-logo">
       </span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
@@ -209,7 +209,7 @@ main.ng-enter.ng-enter-active {
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="admin/images/user2-160x160.jpg" class="rounded-circle" alt="User Image">
+                        <img src="gym/images/user2-160x160.jpg" class="rounded-circle" alt="User Image">
                       </div>
                       <div class="mail-contnet">
                        <h4>
@@ -224,7 +224,7 @@ main.ng-enter.ng-enter-active {
                 <li>
                   <a href="#">
                     <div class="pull-left">
-                      <img src="admin/images/user3-128x128.jpg" class="rounded-circle" alt="User Image">
+                      <img src="gym/images/user3-128x128.jpg" class="rounded-circle" alt="User Image">
                     </div>
                     <div class="mail-contnet">
                      <h4>
@@ -238,7 +238,7 @@ main.ng-enter.ng-enter-active {
               <li>
                 <a href="#">
                   <div class="pull-left">
-                    <img src="admin/images/user4-128x128.jpg" class="rounded-circle" alt="User Image">
+                    <img src="gym/images/user4-128x128.jpg" class="rounded-circle" alt="User Image">
                   </div>
                   <div class="mail-contnet">
                    <h4>
@@ -252,7 +252,7 @@ main.ng-enter.ng-enter-active {
             <li>
               <a href="#">
                 <div class="pull-left">
-                  <img src="admin/images/user3-128x128.jpg" class="rounded-circle" alt="User Image">
+                  <img src="gym/images/user3-128x128.jpg" class="rounded-circle" alt="User Image">
                 </div>
                 <div class="mail-contnet">
                  <h4>
@@ -266,7 +266,7 @@ main.ng-enter.ng-enter-active {
           <li>
             <a href="#">
               <div class="pull-left">
-                <img src="admin/images/user4-128x128.jpg" class="rounded-circle" alt="User Image">
+                <img src="gym/images/user4-128x128.jpg" class="rounded-circle" alt="User Image">
               </div>
               <div class="mail-contnet">
                <h4>
@@ -459,13 +459,13 @@ main.ng-enter.ng-enter-active {
     <li class="user-body">
       <div class="row no-gutters">
         <div class="col-12 text-left">
-          <a href="admin-profile"><i class="ion ion-person"></i> My Profile</a>
+          <a href="gym-profile"><i class="ion ion-person"></i> My Profile</a>
         </div>
         <div class="col-12 text-left">
           <a href="#"><i class="ion ion-email-unread"></i> Inbox</a>
         </div>
         <div class="col-12 text-left">
-          <a href="admin-settings"><i class="ion ion-settings"></i> Setting</a>
+          <a href="gym-settings"><i class="ion ion-settings"></i> Setting</a>
         </div>
         <div role="separator" class="divider col-12"></div>
         <div class="col-12 text-left">
@@ -505,16 +505,16 @@ main.ng-enter.ng-enter-active {
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="admin-profile"><i class="fa fa-user mr-5"></i>My Profile </a></li>
+        <li><a href="gym-profile"><i class="fa fa-user mr-5"></i>My Profile </a></li>
         <li><a href="javascript:void()"><i class="fa fa-money mr-5"></i>My Balance</a></li>
         <li><a href="javascript:void()"><i class="fa fa-envelope-open mr-5"></i>Inbox</a></li>
-        <li><a href="admin-settings"><i class="fa fa-cog mr-5"></i>Account Setting</a></li>
+        <li><a href="gym-settings"><i class="fa fa-cog mr-5"></i>Account Setting</a></li>
         <li><a href="javascript:void()"><i class="fa fa-power-off mr-5"></i>Logout</a></li>
       </ul>
     </li>
     <li class="header nav-small-cap">PERSONAL</li>
     <li class="">
-      <a menu-item href="admin-dashboard">
+      <a menu-item href="gym-dashboard">
         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         <span class="pull-right-container"> 
         </span>
@@ -530,290 +530,19 @@ main.ng-enter.ng-enter-active {
       </a>
 
       <ul class="treeview-menu">
-        <li><a href="admin-doctor-add"><i class="fa fa-circle-thin"></i>Add New</a></li>
-        <li><a href="admin-doctor-view"><i class="fa fa-circle-thin"></i>View</a></li> 
+        <li><a href="gym-doctor-add"><i class="fa fa-circle-thin"></i>Add New</a></li>
+        <li><a href="gym-doctor-view"><i class="fa fa-circle-thin"></i>View</a></li> 
       </ul>
     </li>
 
     <li class=" ">
-      <a href="admin-lockscreen">
+      <a href="gym-lockscreen">
         <i class="fa fa-key"></i> <span>Lockscreen</span>
         <span class="pull-right-container">
           <i class="fa fa-angle-right pull-right"></i>
         </span>
       </a>
     </li>
-
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-th"></i>
-        <span>App</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-right pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="pages/app/app-chat.html"><i class="fa fa-circle-thin"></i>Chat app</a></li>
-        <li><a href="pages/app/app-contact.html"><i class="fa fa-circle-thin"></i>Contact / Employee</a></li>
-        <li><a href="pages/app/app-ticket.html"><i class="fa fa-circle-thin"></i>Support Ticket</a></li>
-        <li><a href="pages/app/calendar.html"><i class="fa fa-circle-thin"></i>Calendar</a></li>
-        <li><a href="pages/app/profile.html"><i class="fa fa-circle-thin"></i>Profile</a></li>
-        <li><a href="pages/app/userlist-grid.html"><i class="fa fa-circle-thin"></i>Userlist Grid</a></li>
-        <li><a href="pages/app/userlist.html"><i class="fa fa-circle-thin"></i>Userlist</a></li>
-      </ul>
-    </li>
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-envelope"></i> <span>Mailbox</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-right pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="pages/mailbox/mailbox.html"><i class="fa fa-circle-thin"></i>Inbox</a></li>
-        <li><a href="pages/mailbox/compose.html"><i class="fa fa-circle-thin"></i>Compose</a></li>
-        <li><a href="pages/mailbox/read-mail.html"><i class="fa fa-circle-thin"></i>Read</a></li>
-      </ul>
-    </li>
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-laptop"></i>
-        <span>UI Elements</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-right pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="pages/UI/badges.html"><i class="fa fa-circle-thin"></i>Badges</a></li>
-        <li><a href="pages/UI/border-utilities.html"><i class="fa fa-circle-thin"></i>Border</a></li>
-        <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-thin"></i>Buttons</a></li>			
-        <li><a href="pages/UI/bootstrap-switch.html"><i class="fa fa-circle-thin"></i>Bootstrap Switch</a></li>
-        <li><a href="pages/UI/cards.html"><i class="fa fa-circle-thin"></i>User Card</a></li>
-        <li><a href="pages/UI/color-utilities.html"><i class="fa fa-circle-thin"></i>Color</a></li>
-        <li><a href="pages/UI/date-paginator.html"><i class="fa fa-circle-thin"></i>Date Paginator</a></li>
-        <li><a href="pages/UI/dropdown.html"><i class="fa fa-circle-thin"></i>Dropdown</a></li>
-        <li><a href="pages/UI/dropdown-grid.html"><i class="fa fa-circle-thin"></i>Dropdown Grid</a></li>
-        <li><a href="pages/UI/general.html"><i class="fa fa-circle-thin"></i>General</a></li>
-        <li><a href="pages/UI/icons.html"><i class="fa fa-circle-thin"></i>Icons</a></li>
-        <li><a href="pages/UI/media-advanced.html"><i class="fa fa-circle-thin"></i>Advanced Medias</a></li>
-        <li><a href="pages/UI/modals.html"><i class="fa fa-circle-thin"></i>Modals</a></li>
-        <li><a href="pages/UI/nestable.html"><i class="fa fa-circle-thin"></i>Nestable</a></li>
-        <li><a href="pages/UI/notification.html"><i class="fa fa-circle-thin"></i>Notification</a></li>
-        <li><a href="pages/UI/portlet-draggable.html"><i class="fa fa-circle-thin"></i>Draggable Portlets</a></li>
-        <li><a href="pages/UI/ribbons.html"><i class="fa fa-circle-thin"></i>Ribbons</a></li>
-        <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-thin"></i>Sliders</a></li>
-        <li><a href="pages/UI/sweatalert.html"><i class="fa fa-circle-thin"></i>Sweet Alert</a></li>
-        <li><a href="pages/UI/tab.html"><i class="fa fa-circle-thin"></i>Tabs</a></li>
-        <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-thin"></i>Timeline</a></li>
-        <li><a href="pages/UI/timeline-horizontal.html"><i class="fa fa-circle-thin"></i>Horizontal Timeline</a></li>
-      </ul>
-    </li>
-    <li class="header nav-small-cap">FORMS, TABLE & LAYOUTS</li>
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-bars"></i>
-        <span>Widgets</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-right pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="pages/widgets/blog.html"><i class="fa fa-circle-thin"></i>Blog</a></li>
-        <li><a href="pages/widgets/chart.html"><i class="fa fa-circle-thin"></i>Chart</a></li>
-        <li><a href="pages/widgets/list.html"><i class="fa fa-circle-thin"></i>List</a></li>
-        <li><a href="pages/widgets/social.html"><i class="fa fa-circle-thin"></i>Social</a></li>
-        <li><a href="pages/widgets/statistic.html"><i class="fa fa-circle-thin"></i>Statistic</a></li>
-        <li><a href="pages/widgets/weather.html"><i class="fa fa-circle-thin"></i>Weather</a></li>
-        <li><a href="pages/widgets/widgets.html"><i class="fa fa-circle-thin"></i>Widgets</a></li>
-      </ul>
-    </li>
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-files-o"></i>
-        <span>Layout Options</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-right pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-thin"></i>Boxed</a></li>
-        <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-thin"></i>Fixed</a></li>
-        <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-thin"></i>Collapsed Sidebar</a></li>
-      </ul>
-    </li>		
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-square-o"></i>
-        <span>Box</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-right pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="pages/box/advanced.html"><i class="fa fa-circle-thin"></i>Advanced</a></li>
-        <li><a href="pages/box/basic.html"><i class="fa fa-circle-thin"></i>Basic</a></li>
-        <li><a href="pages/box/color.html"><i class="fa fa-circle-thin"></i>Color</a></li>
-        <li><a href="pages/box/group.html"><i class="fa fa-circle-thin"></i>Group</a></li>
-      </ul>
-    </li>
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-pie-chart"></i>
-        <span>Charts</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-right pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-thin"></i>ChartJS</a></li>
-        <li><a href="pages/charts/flot.html"><i class="fa fa-circle-thin"></i>Flot</a></li>
-        <li><a href="pages/charts/inline.html"><i class="fa fa-circle-thin"></i>Inline charts</a></li>
-        <li><a href="pages/charts/morris.html"><i class="fa fa-circle-thin"></i>Morris</a></li>
-        <li><a href="pages/charts/peity.html"><i class="fa fa-circle-thin"></i>Peity</a></li>
-      </ul>
-    </li>
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-edit"></i> <span>Forms</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-right pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-thin"></i>Advanced Elements</a></li>
-        <li><a href="pages/forms/code-editor.html"><i class="fa fa-circle-thin"></i>Code Editor</a></li>
-        <li><a href="pages/forms/editor-markdown.html"><i class="fa fa-circle-thin"></i>Markdown</a></li>
-        <li><a href="pages/forms/editors.html"><i class="fa fa-circle-thin"></i>Editors</a></li>
-        <li><a href="pages/forms/form-validation.html"><i class="fa fa-circle-thin"></i>Form Validation</a></li>
-        <li><a href="pages/forms/form-wizard.html"><i class="fa fa-circle-thin"></i>Form Wizard</a></li>
-        <li><a href="pages/forms/general.html"><i class="fa fa-circle-thin"></i>General Elements</a></li>
-        <li><a href="pages/forms/mask.html"><i class="fa fa-circle-thin"></i>Formatter</a></li>
-        <li><a href="pages/forms/xeditable.html"><i class="fa fa-circle-thin"></i>Xeditable Editor</a></li>
-      </ul>
-    </li>
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-table"></i> <span>Tables</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-right pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="pages/tables/simple.html"><i class="fa fa-circle-thin"></i>Simple tables</a></li>
-        <li><a href="pages/tables/data.html"><i class="fa fa-circle-thin"></i>Data tables</a></li>
-        <li><a href="pages/tables/editable-tables.html"><i class="fa fa-circle-thin"></i>Editable Tables</a></li>
-        <li><a href="pages/tables/table-color.html"><i class="fa fa-circle-thin"></i>Table Color</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="pages/email/index.html">
-        <i class="fa fa-envelope-open-o"></i> <span>Emails</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-right pull-right"></i>
-        </span>
-      </a>
-    </li>
-    <li class="header nav-small-cap">EXTRA COMPONENTS</li>
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-map"></i> <span>Map</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-right pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="pages/map/map-google.html"><i class="fa fa-circle-thin"></i>Google Map</a></li>
-        <li><a href="pages/map/map-vector.html"><i class="fa fa-circle-thin"></i>Vector Map</a></li>
-      </ul>
-    </li>
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-plug"></i> <span>Extension</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-right pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="pages/extension/fullscreen.html"><i class="fa fa-circle-thin"></i>Fullscreen</a></li>
-      </ul>
-    </li>        
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-file"></i> <span>Sample Pages</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-right pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="pages/samplepage/blank.html"><i class="fa fa-circle-thin"></i>Blank</a></li>
-        <li><a href="pages/samplepage/coming-soon.html"><i class="fa fa-circle-thin"></i>Coming Soon</a></li>
-        <li><a href="pages/samplepage/custom-scroll.html"><i class="fa fa-circle-thin"></i>Custom Scrolls</a></li>
-        <li><a href="pages/samplepage/faq.html"><i class="fa fa-circle-thin"></i>FAQ</a></li>
-        <li><a href="pages/samplepage/gallery.html"><i class="fa fa-circle-thin"></i>Gallery</a></li>
-        <li><a href="pages/samplepage/invoice.html"><i class="fa fa-circle-thin"></i>Invoice</a></li>
-        <li><a href="pages/samplepage/lightbox.html"><i class="fa fa-circle-thin"></i>Lightbox Popup</a></li>
-        <li><a href="pages/samplepage/pace.html"><i class="fa fa-circle-thin"></i>Pace</a></li>
-        <li><a href="pages/samplepage/pricing.html"><i class="fa fa-circle-thin"></i>Pricing</a></li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-circle-thin"></i>Authentication 
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/samplepage/login.html"><i class="fa fa-circle"></i>Login</a></li>
-            <li><a href="pages/samplepage/register.html"><i class="fa fa-circle"></i>Register</a></li>
-            <li><a href="pages/samplepage/lockscreen.html"><i class="fa fa-circle"></i>Lockscreen</a></li>
-            <li><a href="pages/samplepage/user-pass.html"><i class="fa fa-circle"></i>Recover password</a></li>				  
-          </ul>
-        </li>            
-        <li class="treeview">
-          <a href="#"><i class="fa fa-circle-thin"></i>Error Pages 
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/samplepage/404.html"><i class="fa fa-circle"></i>404</a></li>
-            <li><a href="pages/samplepage/500.html"><i class="fa fa-circle"></i>500</a></li>
-            <li><a href="pages/samplepage/maintenance.html"><i class="fa fa-circle"></i>Maintenance</a></li>		  
-          </ul>
-        </li> 
-      </ul>
-    </li>
-    <li class="treeview">
-      <a href="#">
-        <i class="fa fa-share"></i> <span>Multilevel</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-right pull-right"></i>
-        </span>
-      </a>
-      <ul class="treeview-menu">
-        <li><a href="#">Level One</a></li>
-        <li class="treeview">
-          <a href="#">Level One
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Level Two</a></li>
-            <li class="treeview">
-              <a href="#">Level Two
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-right pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#">Level Three</a></li>
-                <li><a href="#">Level Three</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><a href="#">Level One</a></li>
-      </ul>
-    </li>        
     
   </ul>
 </section>
@@ -865,7 +594,7 @@ main.ng-enter.ng-enter-active {
   <div class="tab-content">
     <!-- Home tab content -->
     <div class="tab-pane" id="control-sidebar-home-tab">
-      <h3 class="control-sidebar-heading">Recent Activity <small><a class="float-right" href="admin-profile">up to date log </a></small></h3>
+      <h3 class="control-sidebar-heading">Recent Activity <small><a class="float-right" href="gym-profile">up to date log </a></small></h3>
 
       <ul class="control-sidebar-menu">
         <li  ng-repeat="logOne in logDataMin " class="bb-1  " style="height: 45px;"> 
@@ -1007,7 +736,7 @@ main.ng-enter.ng-enter-active {
 <script src="assets/components/jquery.peity/jquery.peity.js"></script>
 
 <!-- MinimalPro Admin App -->
-<script src="admin/js/template.js"></script>
+<script src="gym/js/template.js"></script>
 
 <script type="text/javascript" src="assets/plugins/ngprogress-lite/js/ngprogress-lite.min.js"></script>
 
@@ -1016,7 +745,7 @@ main.ng-enter.ng-enter-active {
 
 
 <!-- MinimalPro Admin for demo purposes -->
-<script src="admin/js/demo.js"></script>	
+<script src="gym/js/demo.js"></script>	
 
 <!-- Vector map JavaScript -->
 <script src="assets/components/jvectormap/lib2/jquery-jvectormap-2.0.2.min.js"></script>

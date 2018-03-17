@@ -122,6 +122,20 @@ function checkUser ( $type ){
 
 
 
+
+	// function mainMe($to , $subject, $message ) {
+
+	// 	$headers = 'From: webmaster@example.com' . "\r\n" .
+	// 	'Reply-To: webmaster@example.com' . "\r\n" .
+	// 	'X-Mailer: PHP/' . phpversion();
+
+	// 	mail($to, $subject, $message, $headers);
+	// }
+
+
+	// mainMe("indranspeaks@gmail.com", "subject ",  " niww tst");
+
+
 	function setProfile( $name , $email, $mobile , $image , $type ) {
 
 		global $a;
@@ -400,7 +414,167 @@ function checkUser ( $type ){
 
 
 
-		function addDoctor( $image, $address, $city, $dob, $email, $fname, $landline, $lname, $location, $oaddress, $officephone, $phone, $pin, $qualification, $remark, $sex, $state    ) {
+
+		function checkEmail( $data , $id  = null) {
+
+			global $a;
+
+			$returnArray = array('success' => 2, 
+				'data' => null ,
+				'remark' => "email already exist");
+
+
+
+			try {
+
+				if( $id == null )
+					$result = selectFromTable ('  email  ', ' admin ',  '  email = "' . $data . '"  '    , $a );
+				else
+					$result = selectFromTable ('  email  ', ' admin ',  '  email = "' . $data . '"  AND id != ' . $id    , $a );
+
+
+				if($result ){
+					$returnArray['success'] = 2;
+				} else {
+
+					$returnArray['success'] = 1;
+					$returnArray['remark'] = " go ";
+				}
+
+
+			} catch (Exception $e) {
+
+				$returnArray['success'] = 2;
+				$returnArray['remark'] = "email already exist";
+			}
+
+
+
+			return  $returnArray;
+
+		}
+
+
+
+
+		function checkPhone( $data , $id  = null ) {
+
+			global $a;
+
+			$returnArray = array('success' => 2, 
+				'data' => null ,
+				'remark' => "phone number already exist");
+
+
+
+			try {
+
+				if( $id == null )
+					$result = selectFromTable ('  phone  ', ' tbl_doctor ',  '  phone =  ' . $data . '   '    , $a );
+				else
+					$result = selectFromTable ('  phone  ', ' tbl_doctor ',  '  phone =  ' . $data . '  AND  user_id != ' . $id    , $a );
+
+
+				if($result ){
+					$returnArray['success'] = 2;
+				} else {
+
+					$returnArray['success'] = 1;
+					$returnArray['remark'] = " go ";
+				}
+
+
+			} catch (Exception $e) {
+
+				$returnArray['success'] = 2;
+				$returnArray['remark'] = "phone number already exist";
+			}
+
+
+
+			return  $returnArray;
+
+		}
+
+
+
+
+		function getDoctor ( $limit, $offset) {
+
+
+
+			global $a;
+
+			$returnArray = array('success' => 0, 
+				'data' => null ,
+				'remark' => "Invalid request");
+
+
+
+			try {
+
+				/*user_id, fname, lname, email, dob, sex, phone, landline, officephone, state, city, address, oaddress, location, pin, qualification, image, remark, delete_status, DATE_FORMAT( date , '%Y-%m-%d') AS date*/
+
+					//IF ( CHAR_LENGTH(fname) > 2 , CONCAT (SUBSTR(fname, 1, 2), "..") , fname ) 
+				$result = selectFromTable (' user_id AS id , CONCAT (fname, " ", lname) AS name, email, phone, IF ( CHAR_LENGTH(qualification) > 24 , CONCAT( SUBSTR(qualification, 1, 22), "..."), qualification )AS q, image, delete_status AS d , DATE_FORMAT( date , "%Y-%m-%d") AS date  ', ' tbl_doctor ',  '  1 = 1 ORDER BY  fname ASC LIMIT  ' .  $limit . '  OFFSET ' . $offset    , $a );
+
+				$returnArray['success'] = 3;
+				$returnArray['data'] =  $result; 
+				$returnArray['remark'] = "data fetching success";
+
+
+			} catch (Exception $e) {
+
+				$returnArray['success'] = 2;
+				$returnArray['remark'] = "invalid request";
+			}
+
+
+
+			return  $returnArray;
+		}
+
+
+		function  getSingleDoctor( $id ) {
+
+
+			global $a;
+
+			$returnArray = array('success' => 0, 
+				'data' => null ,
+				'remark' => "Invalid request");
+
+
+
+			try {
+
+				/**/
+
+		//IF ( CHAR_LENGTH(fname) > 2 , CONCAT (SUBSTR(fname, 1, 2), "..") , fname ) 
+				$result = selectFromTable (' user_id AS id, fname, lname, email, dob, sex, phone, landline, officephone, state, city, address, oaddress, location, pin, qualification, image, remark, delete_status, DATE_FORMAT( date , "%Y-%m-%d") AS date ', ' tbl_doctor ',  ' user_id = ' . $id  , $a );
+
+				$returnArray['success'] = 3;
+				$returnArray['data'] =  $result[0]; 
+				$returnArray['remark'] = "data fetching success";
+
+
+			} catch (Exception $e) {
+
+				$returnArray['success'] = 2;
+				$returnArray['remark'] = "invalid request";
+			}
+
+
+
+			return  $returnArray;
+		}
+
+
+		function updateDoctor(  $id, $image, $address, $city, $dob, $email, $fname, $landline, $lname, $location, $oaddress, $officephone, $phone, $pin, $qualification, $remark, $sex, $state    ) {
+
+
+
+
 
 
 			$done = false;
@@ -408,9 +582,9 @@ function checkUser ( $type ){
 			$sitedirectory = '../files/images/employee';
 			global $a;
 
-			//$//myActivity_status = 0;
-			//$//myActivity_type = 0;
-			//$//myActivity_who = 0;
+				//$//myActivity_status = 0;
+				//$//myActivity_type = 0;
+				//$//myActivity_who = $id;
 
 
 			$returnArray = array('success' => 2, 
@@ -419,11 +593,11 @@ function checkUser ( $type ){
 
 
 
-			$temp  = checkEmail( $email ); 
+			$temp  = checkEmail( $email, $id ); 
 			if($temp['success'] != 1)  
 				return $temp;
 
-			$temp  = checkPhone( $phone ); 
+			$temp  = checkPhone( $phone, $id ); 
 			if($temp['success'] != 1)  
 				return $temp;
 
@@ -436,373 +610,194 @@ function checkUser ( $type ){
 
 			if( !$done  ) {
 				try {
-					$path =  saveImageNow($image , $sitedirectory );
-					$done = true;
-				} catch (Exception $e) {
-					$done = false;
+					if(preg_match("/^data:image\/(\w+);base64,/", $image))
+						$path =  saveImageNow($image , $sitedirectory );
+						else
+							$path["image"] = basename($image);
+						$done = true;
+					} catch (Exception $e) {
+						$done = false;
+					}
+
 				}
 
-			}
 
 
-
-			if( $done  ) {
-
-
-
-
-
-
-				try { 
-
-
-// ;
-
-					$password = mt_rand();
+				if( $done   ) {
 
 					$array = array(   
 						"email"  => $email,
 						"authentication"  => 2,
 						"Login"  => 1,
-						"Password"  => md5($password), 
 						"date" => date("Y-m-d H:i:s")
 					);
-					$result  = insertInToTable ('admin', $array, $a, true );
+					$result  = updateTable ('admin', $array , ' delete_status= 0 and user_id = ' . $id, $a );
 
 
-					//$//myActivity_who = $result;
 
-					$array = array(  
-						"user_id" => $result,
-						"address"  => $address,
-						"city"  => $city,
-						"dob"  => $dob,
-						"email"  => $email,
-						"fname"  => $fname,
-						"landline"  => $landline,
-						"lname"  => $lname,
-						"location"  => $location,
-						"oaddress"  => $oaddress,
-						"officephone"  => $officephone,
-						"phone"  => $phone,
-						"pin"  => $pin,
-						"qualification"  => $qualification,
-						"remark"  => $remark,
-						"sex"  => $sex,			
-						"image" => null,
-						"state"  => $state,
-						"date" => date("Y-m-d H:i:s")
-					);
 
-					if($path != null )		
-						if(isset($path['image']))				
-							$array["image"] = $path['image'];
 
-						$result  = insertInToTable ('tbl_doctor', $array, $a );
 
+					try { 
 
-
-						$returnArray['success'] = $result;
-						$returnArray['remark'] = "added successfully";
-
-
-						$returnArray['data'] = null;
-
-
-						//$//myActivity_status = $result;
-						//$//myActivity_type = 1;
-					// //myActivity("profile picture updated");
-
-					} catch (Exception $e) {
-
-						$returnArray['success'] = 2;
-						$returnArray['remark'] = "invalid request";
-					}
-
-
-
-				}
-
-
-				//myActivity( "attempt to add new doctor " , //$//myActivity_status, //$//myActivity_type, //$//myActivity_who);
-
-
-				return  $returnArray;
-
-			}
-
-			function checkEmail( $data , $id  = null) {
-
-				global $a;
-
-				$returnArray = array('success' => 2, 
-					'data' => null ,
-					'remark' => "email already exist");
-
-
-
-				try {
-
-					if( $id == null )
-						$result = selectFromTable ('  email  ', ' admin ',  '  email = "' . $data . '"  '    , $a );
-					else
-						$result = selectFromTable ('  email  ', ' admin ',  '  email = "' . $data . '"  AND id != ' . $id    , $a );
-
-
-					if($result ){
-						$returnArray['success'] = 2;
-					} else {
-
-						$returnArray['success'] = 1;
-						$returnArray['remark'] = " go ";
-					}
-
-
-				} catch (Exception $e) {
-
-					$returnArray['success'] = 2;
-					$returnArray['remark'] = "email already exist";
-				}
-
-
-
-				return  $returnArray;
-
-			}
-
-
-
-
-			function checkPhone( $data , $id  = null ) {
-
-				global $a;
-
-				$returnArray = array('success' => 2, 
-					'data' => null ,
-					'remark' => "phone number already exist");
-
-
-
-				try {
-
-					if( $id == null )
-						$result = selectFromTable ('  phone  ', ' tbl_doctor ',  '  phone =  ' . $data . '   '    , $a );
-					else
-						$result = selectFromTable ('  phone  ', ' tbl_doctor ',  '  phone =  ' . $data . '  AND  user_id != ' . $id    , $a );
-
-
-					if($result ){
-						$returnArray['success'] = 2;
-					} else {
-
-						$returnArray['success'] = 1;
-						$returnArray['remark'] = " go ";
-					}
-
-
-				} catch (Exception $e) {
-
-					$returnArray['success'] = 2;
-					$returnArray['remark'] = "phone number already exist";
-				}
-
-
-
-				return  $returnArray;
-
-			}
-
-
-
-
-			function getDoctor ( $limit, $offset) {
-
-
-
-				global $a;
-
-				$returnArray = array('success' => 0, 
-					'data' => null ,
-					'remark' => "Invalid request");
-
-
-
-				try {
-
-					/*user_id, fname, lname, email, dob, sex, phone, landline, officephone, state, city, address, oaddress, location, pin, qualification, image, remark, delete_status, DATE_FORMAT( date , '%Y-%m-%d') AS date*/
-
-					//IF ( CHAR_LENGTH(fname) > 2 , CONCAT (SUBSTR(fname, 1, 2), "..") , fname ) 
-					$result = selectFromTable (' user_id AS id , CONCAT (fname, " ", lname) AS name, email, phone, IF ( CHAR_LENGTH(qualification) > 24 , CONCAT( SUBSTR(qualification, 1, 22), "..."), qualification )AS q, image, delete_status AS d , DATE_FORMAT( date , "%Y-%m-%d") AS date  ', ' tbl_doctor ',  '  1 = 1 ORDER BY  fname ASC LIMIT  ' .  $limit . '  OFFSET ' . $offset    , $a );
-
-					$returnArray['success'] = 3;
-					$returnArray['data'] =  $result; 
-					$returnArray['remark'] = "data fetching success";
-
-
-				} catch (Exception $e) {
-
-					$returnArray['success'] = 2;
-					$returnArray['remark'] = "invalid request";
-				}
-
-
-
-				return  $returnArray;
-			}
-
-
-			function  getSingleDoctor( $id ) {
-
-
-				global $a;
-
-				$returnArray = array('success' => 0, 
-					'data' => null ,
-					'remark' => "Invalid request");
-
-
-
-				try {
-
-					/**/
-
-		//IF ( CHAR_LENGTH(fname) > 2 , CONCAT (SUBSTR(fname, 1, 2), "..") , fname ) 
-					$result = selectFromTable (' user_id AS id, fname, lname, email, dob, sex, phone, landline, officephone, state, city, address, oaddress, location, pin, qualification, image, remark, delete_status, DATE_FORMAT( date , "%Y-%m-%d") AS date ', ' tbl_doctor ',  ' user_id = ' . $id  , $a );
-
-					$returnArray['success'] = 3;
-					$returnArray['data'] =  $result[0]; 
-					$returnArray['remark'] = "data fetching success";
-
-
-				} catch (Exception $e) {
-
-					$returnArray['success'] = 2;
-					$returnArray['remark'] = "invalid request";
-				}
-
-
-
-				return  $returnArray;
-			}
-
-
-			function updateDoctor(  $id, $image, $address, $city, $dob, $email, $fname, $landline, $lname, $location, $oaddress, $officephone, $phone, $pin, $qualification, $remark, $sex, $state    ) {
-
-
-
-
-
-
-				$done = false;
-				$path = null;
-				$sitedirectory = '../files/images/employee';
-				global $a;
-
-				//$//myActivity_status = 0;
-				//$//myActivity_type = 0;
-				//$//myActivity_who = $id;
-
-
-				$returnArray = array('success' => 2, 
-					'data' => null,
-					'remark' => "Invalid input");
-
-
-
-				$temp  = checkEmail( $email, $id ); 
-				if($temp['success'] != 1)  
-					return $temp;
-
-				$temp  = checkPhone( $phone, $id ); 
-				if($temp['success'] != 1)  
-					return $temp;
-
-
-
-
-
-				if( $image == null )
-					$done = true;
-
-				if( !$done  ) {
-					try {
-						if(preg_match("/^data:image\/(\w+);base64,/", $image))
-							$path =  saveImageNow($image , $sitedirectory );
-							else
-								$path["image"] = basename($image);
-							$done = true;
-						} catch (Exception $e) {
-							$done = false;
-						}
-
-					}
-
-
-
-					if( $done   ) {
-
-						$array = array(   
-							"email"  => $email,
-							"authentication"  => 2,
-							"Login"  => 1,
-							"date" => date("Y-m-d H:i:s")
-						);
-						$result  = updateTable ('admin', $array , ' delete_status= 0 and user_id = ' . $id, $a );
-
-
-
-
-
-
-						try { 
-
-							$oldImage = selectFromTable ('  image  ', ' tbl_doctor ',  '  user_id =  ' . $id . '   '    , $a);
+						$oldImage = selectFromTable ('  image  ', ' tbl_doctor ',  '  user_id =  ' . $id . '   '    , $a);
 				// ;
 
 
 
-							$array = array(  
-								"user_id" => $result,
-								"address"  => $address,
-								"city"  => $city,
-								"dob"  => $dob,
-								"email"  => $email,
-								"fname"  => $fname,
-								"landline"  => $landline,
-								"lname"  => $lname,
-								"location"  => $location,
-								"oaddress"  => $oaddress,
-								"officephone"  => $officephone,
-								"phone"  => $phone,
-								"pin"  => $pin,
-								"qualification"  => $qualification,
-								"remark"  => $remark,
-								"sex"  => $sex,			
-								"image" => null,
-								"state"  => $state,
-								"date" => date("Y-m-d H:i:s")
-							);
+						$array = array(  
+							"user_id" => $result,
+							"address"  => $address,
+							"city"  => $city,
+							"dob"  => $dob,
+							"email"  => $email,
+							"fname"  => $fname,
+							"landline"  => $landline,
+							"lname"  => $lname,
+							"location"  => $location,
+							"oaddress"  => $oaddress,
+							"officephone"  => $officephone,
+							"phone"  => $phone,
+							"pin"  => $pin,
+							"qualification"  => $qualification,
+							"remark"  => $remark,
+							"sex"  => $sex,			
+							"image" => null,
+							"state"  => $state,
+							"date" => date("Y-m-d H:i:s")
+						);
 
-							if($path != null )		
-								if(isset($path['image']))				
-									$array["image"] = $path['image'];
+						if($path != null )		
+							if(isset($path['image']))				
+								$array["image"] = $path['image'];
 
-								$result  = updateTable ('tbl_doctor', $array, ' delete_status= 0 and user_id = ' . $id , $a );
-
-
-
-								$returnArray['success'] = $result;
-								$returnArray['remark'] = "updated successfully";
+							$result  = updateTable ('tbl_doctor', $array, ' delete_status= 0 and user_id = ' . $id , $a );
 
 
-								$returnArray['data'] = null;
+
+							$returnArray['success'] = $result;
+							$returnArray['remark'] = "updated successfully";
+
+
+							$returnArray['data'] = null;
 
 
 								//$//myActivity_status = $result;
 								//$//myActivity_type = 1;
 									// //myActivity("profile picture updated");
 
-								$upStatus = unlink($sitedirectory . '/' . $oldImage );
+							$upStatus = unlink($sitedirectory . '/' . $oldImage );
+
+						} catch (Exception $e) {
+
+							$returnArray['success'] = 2;
+							$returnArray['remark'] = "invalid request";
+						}
+
+
+
+					}
+
+
+						//myActivity( "attempt to update doctor " , //$//myActivity_status, //$//myActivity_type, //$//myActivity_who);
+
+
+					return  $returnArray;
+
+				}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				function	addCategory( $name, $remark , $weigh  ) {
+
+
+
+
+
+					global $a;
+					$done = true ;
+					$myActivity_status = 0;
+					$myActivity_who = 0;
+					$result = 0;
+
+					$result = selectFromTable ('  id  ', ' gym_class ',  '  class_name =  "' . $name . '"  '    , $a );
+
+					if(isset($result)) 
+						if($result > 0)
+							$done = false;
+
+						if( $done  ) {
+
+
+
+
+
+
+							try { 
+
+
+								$array = array(   
+									"class_name"  => $name,
+									"remark"  => $remark,
+									'amount' => $weigh, 
+									"date" => date("Y-m-d H:i:s")
+								);
+
+								$result  = insertInToTable ('gym_class', $array, $a, true );
+
+
+								if($result > 0)
+									$myActivity_status = 1; 
+
+
+								$myActivity_who = $result;
+
+
+
+								$returnArray['success'] = $myActivity_status;
+								$returnArray['remark'] = "added successfully";
+
+								$returnArray['data'] = selectFromTable ('   id, class_name, remark, amount, delete_status, date   ', ' gym_class ',  '  id = ' . $result    , $a );
+								$returnArray['data'] = $returnArray['data'][0];
+
+
 
 							} catch (Exception $e) {
 
@@ -812,10 +807,13 @@ function checkUser ( $type ){
 
 
 
+						} else {
+							$returnArray['success'] = 11;
+							$returnArray['remark'] = "already exists";
+
 						}
 
-
-						//myActivity( "attempt to update doctor " , //$//myActivity_status, //$//myActivity_type, //$//myActivity_who);
+					//( $remark , $status = 1, $action = 1, $targ_table = NULL, $targ_id = 0) {
 
 
 						return  $returnArray;
@@ -832,87 +830,349 @@ function checkUser ( $type ){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-					function	addCategory( $name, $remark , $weigh  ) {
-
+					function getCategory (){
 
 
 
 
 						global $a;
-						$done = true ;
-						$myActivity_status = 0;
-						$myActivity_who = 0;
-						$result = 0;
 
-						$result = selectFromTable ('  id  ', ' gym_class ',  '  class_name =  "' . $name . '"  '    , $a );
-
-						if(isset($result)) 
-							if($result > 0)
-								$done = false;
-
-							if( $done  ) {
+						$returnArray = array('success' => 0, 
+							'data' => null ,
+							'remark' => "Invalid request");
 
 
 
+						try {
+
+							/**/
+
+							//IF ( CHAR_LENGTH(fname) > 2 , CONCAT (SUBSTR(fname, 1, 2), "..") , fname ) 
+							$result = selectFromTable ('   id, class_name, remark, amount, delete_status, date   ', ' gym_class ',  ' 1=1 ORDER BY date DESC'  , $a );
+
+							$returnArray['success'] = 3;
+							$returnArray['data'] =  $result ; 
+							$returnArray['remark'] = "data fetching success";
 
 
+						} catch (Exception $e) {
+
+							$returnArray['success'] = 2;
+							$returnArray['remark'] = "invalid request";
+						}
+
+
+
+						return  $returnArray;
+
+
+
+					}
+
+
+					function updateCategory( $id, $name, $details, $delete, $weigh ) {
+
+						global $a;
+
+						$returnArray = array('success' => 2, 
+							'data' => null, 
+							'remark' => "Invalid data");
+
+						$authentication = true;
+
+
+						try {
+
+
+
+							$result = selectFromTable (' * ', '   gym_class   ',  ' id <> ' . $id. ' AND class_name = "' . $name.  '"    '    , $a );
+
+
+							if(isset($result))
+								if(! is_null( $result))  {
+									$authentication = false;
+									$returnArray['data'] = ' id <>  ' . $id. ' AND gym_class = "' . $name.  '"    '  ;
+
+								}
+
+
+
+							} catch (Exception $e) {
+
+								$authentication = false;
+							}
+
+
+
+
+
+							if( ! $authentication     ) { 
+								$returnArray['success'] = 2;
+								$returnArray['remark'] = "name already used."; 
+							}
+
+
+
+							if( $authentication   ) {
+
+
+
+								$array =  array( 
+									'class_name' => $name, 
+									"remark" => $details,
+									'amount' => $weigh,
+									"delete_status" => $delete 
+								);
 
 								try { 
 
-
-									$array = array(   
-										"class_name"  => $name,
-										"remark"  => $remark,
-										'amount' => $weigh, 
-										"date" => date("Y-m-d H:i:s")
-									);
-
-									$result  = insertInToTable ('gym_class', $array, $a, true );
+									$result  = updateTable (' gym_class ', $array,  ' id = ' . $id . '  '  , $a ); 
 
 
-									if($result > 0)
-										$myActivity_status = 1; 
+									$returnArray['success'] = $result;
+									$returnArray['remark'] = "gym class updated successfully"; 
 
+								} catch (Exception $e) {
 
-									$myActivity_who = $result;
+									$returnArray['success'] = 2;
+									$returnArray['remark'] = "invalid data";
+								}
 
 
 
-									$returnArray['success'] = $myActivity_status;
-									$returnArray['remark'] = "added successfully";
+							} else {
 
-									$returnArray['data'] = selectFromTable ('   id, class_name, remark, amount, delete_status, date   ', ' gym_class ',  '  id = ' . $result    , $a );
-									$returnArray['data'] = $returnArray['data'][0];
 
+
+							}
+
+
+
+
+
+
+
+							return  $returnArray;
+						}
+
+
+
+
+
+						function addGym( 	$gym_licenseid , $gym_name, $gym_owner, $gym_email , $city , $longitude , $latitude , 
+							$amount, 	$class_id, $max_take , $gym_contact , $class , $gym_fee , $attachment , $files  ){
+
+
+
+							$password = mt_rand(99999,9999999);
+							$password = "1234567890";
+
+
+
+
+							$returnArray = array('success' => 0, 
+								'data' => $files,
+								'remark' => "Invalid data");
+
+										// $returnArray['data'] =	$optionEach; 
+
+
+							global $a;
+							$done = true ;
+
+
+							$result = selectFromTable ('  id  ', ' gym ',  '  gym_licenseid =  "' . $gym_licenseid . '"  '    , $a );
+
+							if(isset($result)) 
+								if($result > 0)
+									$done = false;
+
+
+								$returnArray['data'] = $result;
+
+
+
+
+								if( $done  ) {
+
+
+
+
+
+
+									try { 
+
+
+
+										$array = array(   
+											"gym_licenseid"  => $gym_licenseid,
+											"gym_name"  => $gym_name,
+											"gym_owner"  => $gym_owner,
+											"gym_email"  => $gym_email,
+											"city"  => $city,
+											"longitude"  => $longitude,
+											"latitude" => $latitude,
+											"amount" => $amount,
+											"class_id" => $class_id, 
+											"max_take" => $max_take, 
+											"mobile" => $gym_contact,  
+											"class_id" => $class, 
+											"password" => md5( $password),
+											"amount" => $gym_fee, 
+											"date" => date("Y-m-d H:i:s")
+										);
+
+										$result  = insertInToTable ('gym', $array, $a, true );
+
+										$isOpionsz1 = $result;
+
+										if($result > 0){
+											$myActivity_status = 1; 
+											$question_id = $result;
+
+
+											$myActivity_who = $result;
+
+
+
+
+
+
+											$insertedImage =	fileForQuesiton ($files, "../files/questions/");
+
+
+
+
+											foreach ($insertedImage as $key => $value) {
+
+
+												$path_parts = pathinfo( $value );
+
+
+
+												$array = array(   
+													"gym_id"  => $question_id,
+													"name"  => $value, 
+													"date" => date("Y-m-d H:i:s")
+												);
+
+												$result  = insertInToTable ('gym_image', $array, $a, true );
+
+											}
+
+
+
+
+
+
+
+										}
+
+
+
+
+										$returnArray['success'] = 1;
+
+											// $returnArray['success'] = $myActivity_status;
+										$returnArray['remark'] = "added successfully";
+
+
+
+
+									} catch (Exception $e) {
+
+										$returnArray['success'] = 2;
+										$returnArray['remark'] = "invalid request";
+									}
+
+
+
+								} else {
+									$returnArray['success'] = 11;
+									$returnArray['remark'] = "already exists";
+
+								}
+
+//( $remark , $status = 1, $action = 1, $targ_table = NULL, $targ_id = 0) {
+
+								return  $returnArray;
+
+
+
+
+
+
+							}
+
+
+
+							function fileForQuesiton ( $files, $path) {
+
+								$returnAr  = array();
+								if(isset( $files['file'])) {
+									foreach($files['file']['name'] as $key=>$val){
+										$upload_dir = "../files/temp/";
+										$upload_file = $upload_dir.$files['file']['name'][$key];
+										$filename = $files['file']['name'][$key];
+
+
+
+
+										if(move_uploaded_file($files['file']['tmp_name'][$key],$upload_file)){
+											$newFile =   $files['file']['name'][$key];
+
+											if (file_exists(  $path . $newFile )) 
+												$newFile =   rand(1, 999) .$files['file']['name'][$key];
+
+
+
+											if(rename( $upload_file, $path . $newFile ) ){
+												$arraySt = true;
+
+											}
+
+
+											array_push($returnAr, $newFile );
+
+										}
+									}
+
+								}
+
+								return $returnAr;
+
+							}
+
+
+
+
+
+
+
+
+
+							function getGym ( $limit, $offset) {
+
+
+
+								global $a;
+
+								$returnArray = array('success' => 0, 
+									'data' => null ,
+									'remark' => "Invalid request");
+
+
+
+								try {
+
+									/*user_id, fname, lname, email, dob, sex, phone, landline, officephone, state, city, address, oaddress, location, pin, qualification, image, remark, delete_status, DATE_FORMAT( date , '%Y-%m-%d') AS date*/
+
+					//IF ( CHAR_LENGTH(fname) > 2 , CONCAT (SUBSTR(fname, 1, 2), "..") , fname ) 
+									$result = selectFromTable (' q.* , c.class_name, DATE_FORMAT( q.date , "%Y-%m-%d") AS ddate  ', ' `gym` q LEFT JOIN gym_class c ON c.id = q.class_id ',  '  1 = 1 ORDER BY  q.id DESC LIMIT  ' .  $limit . '  OFFSET ' . $offset    , $a );
+
+									$returnArray['success'] = 3;
+									$returnArray['data'] =  $result; 
+									$returnArray['remark'] = "data fetching success";
 
 
 								} catch (Exception $e) {
@@ -923,149 +1183,50 @@ function checkUser ( $type ){
 
 
 
-							} else {
-								$returnArray['success'] = 11;
-								$returnArray['remark'] = "already exists";
-
-							}
-
-					//( $remark , $status = 1, $action = 1, $targ_table = NULL, $targ_id = 0) {
-
-
-							return  $returnArray;
-
-						}
-
-
-
-
-
-
-
-
-
-
-
-						function getCategory (){
-
-
-
-
-							global $a;
-
-							$returnArray = array('success' => 0, 
-								'data' => null ,
-								'remark' => "Invalid request");
-
-
-
-							try {
-
-								/**/
-
-							//IF ( CHAR_LENGTH(fname) > 2 , CONCAT (SUBSTR(fname, 1, 2), "..") , fname ) 
-								$result = selectFromTable ('   id, class_name, remark, amount, delete_status, date   ', ' gym_class ',  ' 1=1 ORDER BY date DESC'  , $a );
-
-								$returnArray['success'] = 3;
-								$returnArray['data'] =  $result ; 
-								$returnArray['remark'] = "data fetching success";
-
-
-							} catch (Exception $e) {
-
-								$returnArray['success'] = 2;
-								$returnArray['remark'] = "invalid request";
+								return  $returnArray;
 							}
 
 
-
-							return  $returnArray;
-
+							function  getSingleGym( $id ) {
 
 
-						}
+								global $a;
+								$myActivity_status = 0;
 
-
-						function updateCategory( $id, $name, $details, $delete, $weigh ) {
-
-							global $a;
-
-							$returnArray = array('success' => 2, 
-								'data' => null, 
-								'remark' => "Invalid data");
-
-							$authentication = true;
-
-
-							try {
+								$returnArray = array('success' => 0, 
+									'data' => null ,
+									'remark' => "Invalid request");
 
 
 
-								$result = selectFromTable (' * ', '   gym_class   ',  ' id <> ' . $id. ' AND class_name = "' . $name.  '"    '    , $a );
+								try {
+
+									$temp = array( );
+									/**/
+
+		//IF ( CHAR_LENGTH(fname) > 2 , CONCAT (SUBSTR(fname, 1, 2), "..") , fname ) 
+									$result1 = selectFromTable (' q.* , c.class_name, DATE_FORMAT( q.date , "%Y-%m-%d") AS ddate  ', ' `gym` q LEFT JOIN gym_class c ON c.id = q.class_id ',  ' q.id=' . $id . ' ORDER BY  q.id DESC    '     , $a );
+
+									$temp[0] = $result1[0];							
+
+									$result1 = selectFromTable (' * ', ' gym_image ',  ' gym_id = ' . $result1[0]['id'] . '   '     , $a );
+
+									$temp[1] = $result1;					
 
 
-								if(isset($result))
-									if(! is_null( $result))  {
-										$authentication = false;
-										$returnArray['data'] = ' id <>  ' . $id. ' AND gym_class = "' . $name.  '"    '  ;
 
-									}
+									$myActivity_status = 1;
 
+									$returnArray['success'] = 3;
+									$returnArray['data'] =  $temp ; 
+									$returnArray['remark'] = "data fetching success";
 
 
 								} catch (Exception $e) {
 
-									$authentication = false;
-								}
-
-
-
-
-
-								if( ! $authentication     ) { 
 									$returnArray['success'] = 2;
-									$returnArray['remark'] = "name already used."; 
+									$returnArray['remark'] = "invalid request";
 								}
-
-
-
-								if( $authentication   ) {
-
-
-
-									$array =  array( 
-										'class_name' => $name, 
-										"remark" => $details,
-										'amount' => $weigh,
-										"delete_status" => $delete 
-									);
-
-									try { 
-
-										$result  = updateTable (' gym_class ', $array,  ' id = ' . $id . '  '  , $a ); 
-
-
-										$returnArray['success'] = $result;
-										$returnArray['remark'] = "gym class updated successfully"; 
-
-									} catch (Exception $e) {
-
-										$returnArray['success'] = 2;
-										$returnArray['remark'] = "invalid data";
-									}
-
-
-
-								} else {
-
-									
-
-								}
-
-
-
-
-
 
 
 								return  $returnArray;
@@ -1077,4 +1238,373 @@ function checkUser ( $type ){
 
 
 
-							?>
+
+
+
+
+
+
+
+
+
+							function  updateGym( 	$gym_licenseid , $gym_name, $gym_owner, $gym_email , $city , $longitude , $latitude , 
+								$amount, 	$class_id, $max_take , $gym_contact , $class , $gym_fee , $attachment , $files  ) {
+
+
+
+
+								$password = mt_rand(99999,9999999);
+
+
+
+
+								$returnArray = array('success' => 0, 
+									'data' => $files,
+									'remark' => "Invalid data");
+
+										// $returnArray['data'] =	$optionEach; 
+
+
+								global $a;
+								$done = true ;
+
+
+								$result = selectFromTable ('  id  ', ' gym ',  '  gym_licenseid =  "' . $gym_licenseid . '"  '    , $a );
+
+								if(isset($result)) 
+									if($result > 0)
+										$done = false;
+
+
+									$returnArray['data'] = $result;
+
+
+
+
+									if( ! $done  ) {
+
+
+
+
+
+
+										try { 
+
+
+
+											$array = array(   
+												"gym_licenseid"  => $gym_licenseid,
+												"gym_name"  => $gym_name,
+												"gym_owner"  => $gym_owner,
+												"gym_email"  => $gym_email,
+												"city"  => $city,
+												"longitude"  => $longitude,
+												"latitude" => $latitude,
+												"amount" => $amount,
+												"class_id" => $class_id, 
+												"max_take" => $max_take, 
+												"mobile" => $gym_contact,  
+												"class_id" => $class, 
+												"password" => $password,
+												"amount" => $gym_fee, 
+												"date" => date("Y-m-d H:i:s")
+											);
+
+											$result  = updateTable ('gym', $array,  ' id = ' . $result  , $a );
+
+											$isOpionsz1 = $result;
+
+											if($result > 0){
+												$myActivity_status = 1; 
+												$question_id = $result;
+
+
+												$myActivity_who = $result;
+
+
+
+
+
+
+												$insertedImage =	fileForQuesiton ($files, "../files/questions/");
+
+
+
+
+												foreach ($insertedImage as $key => $value) {
+
+
+													$path_parts = pathinfo( $value );
+
+
+
+													$array = array(   
+														"gym_id"  => $question_id,
+														"name"  => $value, 
+														"date" => date("Y-m-d H:i:s")
+													);
+
+													$result  = insertInToTable ('gym_image', $array, $a, true );
+
+												}
+
+
+
+
+
+
+
+											}
+
+
+
+
+											$returnArray['success'] = 1;
+
+											// $returnArray['success'] = $myActivity_status;
+											$returnArray['remark'] = "added successfully";
+
+
+
+
+										} catch (Exception $e) {
+
+											$returnArray['success'] = 2;
+											$returnArray['remark'] = "invalid request";
+										}
+
+
+
+									} else {
+										$returnArray['success'] = 11;
+										$returnArray['remark'] = "already exists";
+
+									}
+
+//( $remark , $status = 1, $action = 1, $targ_table = NULL, $targ_id = 0) {
+
+									return  $returnArray;
+
+
+
+
+
+
+
+
+								}
+
+
+
+
+
+
+
+								function removeGym( $id , $delete) {
+
+
+
+									global $a;
+
+									$returnArray = array('success' => 2, 
+										'data' => null,
+										'remark' => "Invalid data");
+
+									$authentication = true;
+
+
+
+
+
+									if( $authentication   ) {
+
+
+
+										$array =  array(  
+											"delete_status" => $delete
+										);
+
+										try { 
+
+											$result  = updateTable (' gym ', $array,  ' id = ' . $id   , $a ); 
+
+
+											$returnArray['success'] = $result;
+											$returnArray['remark'] = "gym  deleted successfully"; 
+
+										} catch (Exception $e) {
+
+											$returnArray['success'] = 2;
+											$returnArray['remark'] = "invalid data";
+										}
+
+
+
+									} else {
+
+
+									}
+
+
+
+
+
+
+
+									return  $returnArray;
+								}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+								function userLogin2 ( $username, $password , $type, $header_token ) {
+
+
+									global $a;
+									$authentication = false;
+									$returnArray = array('success' => -2, 
+										'data' => null,
+										'remark' => "Invalid Username or Password");
+
+									$query = 'select * from gym where gym_email = :username and password = :password AND delete_status =0   ';
+									$userid = 0;
+									$params = array(
+										':username' =>  $username, 
+										':password' =>  md5($password) 
+									);  
+
+
+
+									$user = $a->display( $query, $params );
+
+									if( $user ) {
+										if($user[0]['gym_email'] == $username &&   md5($password) == $user[0]['password']) {
+											$userid = $user[0]['id'];
+											$authentication = true;
+
+										} 
+									} 
+
+
+									if( $authentication ){
+
+										$_SESSION[SYSTEM_NAME.'userid0'] = encrypt($user[0]['id']);
+										$_SESSION[SYSTEM_NAME.'userid'] = encrypt($username);
+										$_SESSION[SYSTEM_NAME.'type'] = encrypt($type);
+										$returnArray['success'] = 1;
+										$returnArray['remark'] = "yor login successful";
+
+
+									}
+
+									if(  $authentication &&  !is_null($header_token) && ($header_token != $_SESSION[SYSTEM_NAME .'_token'] ) )
+										$_SESSION[ SYSTEM_NAME .'_token' ] = $header_token;
+
+									return  $returnArray;
+
+
+
+								}
+
+
+
+								?>

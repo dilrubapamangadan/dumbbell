@@ -7,7 +7,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-		location.href="admin";
+		location.href="one-page";
 	</script>
 </body>
 </html>

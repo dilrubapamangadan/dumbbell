@@ -60,6 +60,13 @@ if( isset($_POST['action']) &&  IS_AJAX  ) {
 		$returnArray = userLogin($username, $password , 1, $header_token);
 		break;
 
+		case 'login-2':
+		$username = $_POST['username']; 
+		$password = $_POST['password']; 
+
+		$returnArray = userLogin2($username, $password , 2, $header_token);
+		break;
+
 
 
 

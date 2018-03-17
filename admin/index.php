@@ -726,61 +726,69 @@ main.ng-enter.ng-enter-active {
 <!-- <script src="//rawgit.com/angular-ui/angular-google-maps/2.1.5/dist/angular-google-maps.min.js"></script> -->
 
 
-<script src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
-<script src="assets/js/mapclustering/map.js"></script>
+
+
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsp1WqZjtOViQmJ2HbswctGzguIGgVijA&libraries=places&callback=initMap"
+  async defer></script> -->
+
+
+  <script src="https://maps.google.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&amp;language=en"></script>
+  <script src="assets/js/mapclustering/map.js"></script>
+<!-- 
+  <script type="text/javascript" src="admin/js/angular-google-maps.min.js"></script> -->
 
 
 
 
 
 
-<!-- ChartJS -->
-<script src="assets/components/chart-js/chart.js"></script>
+  <!-- ChartJS -->
+  <script src="assets/components/chart-js/chart.js"></script>
 
-<!-- Sparkline -->
-<script src="assets/components/jquery-sparkline/dist/jquery.sparkline.js"></script>
+  <!-- Sparkline -->
+  <script src="assets/components/jquery-sparkline/dist/jquery.sparkline.js"></script>
 
-<!-- daterangepicker -->
-<script src="assets/components/moment/min/moment.min.js"></script>
-<script src="assets/components/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <!-- daterangepicker -->
+  <script src="assets/components/moment/min/moment.min.js"></script>
+  <script src="assets/components/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-<!-- datepicker -->
-<script src="assets/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+  <!-- datepicker -->
+  <script src="assets/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
 
-<!-- Bootstrap WYSIHTML5 -->
-<script src="assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js"></script>
+  <!-- Bootstrap WYSIHTML5 -->
+  <script src="assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js"></script>
 
-<!-- Slimscroll -->
-<script src="assets/components/jquery-slimscroll/jquery.slimscroll.js"></script>
+  <!-- Slimscroll -->
+  <script src="assets/components/jquery-slimscroll/jquery.slimscroll.js"></script>
 
-<!-- FastClick -->
-<script src="assets/components/fastclick/lib/fastclick.js"></script>
+  <!-- FastClick -->
+  <script src="assets/components/fastclick/lib/fastclick.js"></script>
 
-<!-- peity -->
-<script src="assets/components/jquery.peity/jquery.peity.js"></script>
+  <!-- peity -->
+  <script src="assets/components/jquery.peity/jquery.peity.js"></script>
 
-<!-- MinimalPro Admin App -->
-<script src="admin/js/template.js"></script>
+  <!-- MinimalPro Admin App -->
+  <script src="admin/js/template.js"></script>
 
-<script type="text/javascript" src="assets/plugins/ngprogress-lite/js/ngprogress-lite.min.js"></script>
-
-
-<script type="text/javascript" src="assets/components/angular-xeditable/js/xeditable.min.js"></script>
+  <script type="text/javascript" src="assets/plugins/ngprogress-lite/js/ngprogress-lite.min.js"></script>
 
 
-<!-- MinimalPro Admin for demo purposes -->
-<script src="admin/js/demo.js"></script>	
+  <script type="text/javascript" src="assets/components/angular-xeditable/js/xeditable.min.js"></script>
 
-<!-- Vector map JavaScript -->
-<script src="assets/components/jvectormap/lib2/jquery-jvectormap-2.0.2.min.js"></script>
-<script src="assets/components/jvectormap/lib2/jquery-jvectormap-world-mill-en.js"></script>
-<script src="assets/components/jvectormap/lib2/jquery-jvectormap-us-aea-en.js"></script>
 
-<script src="assets/components/angular-toastr@2/js/angular-toastr.tpls.min.js"></script>
+  <!-- MinimalPro Admin for demo purposes -->
+  <script src="admin/js/demo.js"></script>	
 
-<script type="text/javascript">
+  <!-- Vector map JavaScript -->
+  <script src="assets/components/jvectormap/lib2/jquery-jvectormap-2.0.2.min.js"></script>
+  <script src="assets/components/jvectormap/lib2/jquery-jvectormap-world-mill-en.js"></script>
+  <script src="assets/components/jvectormap/lib2/jquery-jvectormap-us-aea-en.js"></script>
 
-</script>
+  <script src="assets/components/angular-toastr@2/js/angular-toastr.tpls.min.js"></script>
+
+  <script type="text/javascript">
+
+  </script>
 
 </body>
 
