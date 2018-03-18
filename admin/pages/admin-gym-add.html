@@ -183,7 +183,7 @@ table { border-collapse: collapse; }
 
 						<div class="col-sm-12">
 
-							<input type="text" name="gym_city" class="form-control"  placeholder="Enter gym city"  ng-model="gym.city"  ng-minlength="2" ng-maxlength="255"
+							<input id="pac-input" type="text" name="gym_city" class="form-control"  placeholder="Enter gym city"  ng-model="gym.city"  ng-minlength="2" ng-maxlength="255"
 							required>
 
 							<span class="glyphicon form-control-feedback"  aria-hidden="true"
@@ -196,12 +196,9 @@ table { border-collapse: collapse; }
 
 					<div class="form-group  	 has-feedback "  >
 
-						<label  > Cities :<span class="danger">*</span></label>
-
 						<div class="col-sm-12">
 
-							
-							<input type="text" id="pac-input" placeholder="Enter location..." required>
+
 							
 
 
@@ -259,7 +256,7 @@ table { border-collapse: collapse; }
 
 								</div>
 
-								
+
 								<style type="text/css">
 								#map {
 									height: 100%;
@@ -279,7 +276,7 @@ table { border-collapse: collapse; }
 
 					<div class="col-sm-12">
 
-						<input type="text" name="gym_longitude" class="form-control"  placeholder="Enter a longitude"  ng-model="gym.longitude"  ng-minlength="2" ng-maxlength="255"
+						<input type="text" id="l1" name="gym_longitude" class="form-control"  placeholder="Enter a longitude"  ng-model="gym.longitude"  ng-minlength="2" ng-maxlength="255"
 						required>
 
 						<span class="glyphicon form-control-feedback"  aria-hidden="true"
@@ -297,7 +294,7 @@ table { border-collapse: collapse; }
 
 					<div class="col-sm-12">
 
-						<input type="text" name="gym_latitude" class="form-control"  placeholder="Enter a latitude"  ng-model="gym.latitude"  ng-minlength="2" ng-maxlength="255"
+						<input type="text" id="l2" name="gym_latitude" class="form-control"  placeholder="Enter a latitude"  ng-model="gym.latitude"  ng-minlength="2" ng-maxlength="255"
 						required>
 
 						<span class="glyphicon form-control-feedback"  aria-hidden="true"

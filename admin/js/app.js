@@ -1,5 +1,6 @@
 var admin_app = angular.module( 'app-admin',
-	['ngRoute', 'ngAnimate', 'ngProgressLite', 'toastr', 'dcbImgFallback', 'ngtimeago', '720kb.datepicker', 'ngImgCrop', 'xeditable', 'simpleGrid']	); 
+	['ngRoute', 'ngAnimate', 'ngProgressLite', 'toastr', 'dcbImgFallback', 'ngtimeago', '720kb.datepicker', 'ngImgCrop', 'xeditable', 'simpleGrid',
+	'google.places'  ]	); 
 
 var token = angular.element( document.querySelector( 'meta[name="csrf-token"]' ) );
 
@@ -862,6 +863,9 @@ admin_app.controller( 'admin_appControllerAdminGymAdd', function($timeout, $scop
 	}
 
 
+	$scope.abc;
+	$scope.efg;
+
 
 
 
@@ -925,6 +929,89 @@ admin_app.controller( 'admin_appControllerAdminGymAdd', function($timeout, $scop
         	map: map,
         	anchorPoint: new google.maps.Point(0, -29)
         });
+
+
+
+
+        autocomplete.addListener('place_changed', function() {
+        	infowindow.close();
+        	marker.setVisible(false);
+        	var place = autocomplete.getPlace();
+        	if (!place.geometry) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            window.alert("No details available for input: '" + place.name + "'");
+            return;
+        }
+
+
+
+        var a = place.geometry.location.lat();
+        var b = place.geometry.location.lng(); 
+        var pyrmont = {lat: a, lng: b};
+        console.log(a, b);
+
+        $scope.$apply(function() { 
+   // every changes goes here
+   $('#l1').val(a); 
+   $('#l2').val(b); 
+});
+
+          // If the place has a geometry, then present it on a map.
+          if (place.geometry.viewport) {
+          	map.fitBounds(place.geometry.viewport);
+          } else {
+          	map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+        }
+        marker.setPosition(place.geometry.location);
+        marker.setVisible(true);
+
+        var address = '';
+        if (place.address_components) {
+        	address = [
+        	(place.address_components[0] && place.address_components[0].short_name || ''),
+        	(place.address_components[1] && place.address_components[1].short_name || ''),
+        	(place.address_components[2] && place.address_components[2].short_name || '')
+        	].join(' ');
+        }
+
+
+        createMarker(place);
+
+        function createMarker(place) {
+        	var placeLoc = place.geometry.location;
+        	var marker = new google.maps.Marker({
+        		map: map,
+        		position: place.geometry.location
+        	});
+
+        	google.maps.event.addListener(marker, 'click', function() {
+        		infowindow.setContent(place.name);
+        		infowindow.open(map, this);
+        	});
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+    });
+
+
+
+
+
+
+
 
 
     },3);

@@ -273,7 +273,7 @@
                     <div class="row">
                         <div class="col-lg-2 col-md-2 col-sm-2">
                             <div class="logo-area">
-                                <a href="index.html"><img src="img/logo.png" width="20px" height="20px" alt="logo"></a>
+                                <a href="index.html"><img src="img/logo.png" style=" display: none;" width="20px" height="20px" alt="logo"></a>  <strong style="font-size: 40px;">dumbbell</strong>
                             </div>
                         </div>
                         <div class="col-lg-10 col-md-10 col-sm-10">
@@ -718,9 +718,27 @@
         async defer></script>
 
 
+        <script type="text/javascript" src="../admin/js/pages/jquery.validate.min.js"></script>
+
 
 
         <script>
+
+
+          var localusername = null;
+
+          var config = {
+              headers : {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+                'X-Requested-With': 'XMLHttpRequest',   
+                'CsrfToken': $('meta[name="csrf-token"]').attr('content')
+            }
+        }
+
+
+
+
+
       // This example requires the Places library. Include the libraries=places
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
@@ -794,7 +812,7 @@
         var service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
           location:  pyrmont ,
-          radius: 2000,
+          radius: 10000,
           type: ['gym']
       }, callback);
 
@@ -804,17 +822,99 @@
               for (var i = 0; i < results.length; i++) {
 
                 iflocation = results[i] ;
-                createMarker( iflocation );
 
-                console.log(iflocation);
 
-                var latitude = iflocation.geometry.location.lat();
-                var longitude = iflocation.geometry.location.lng();
+               // createMarker( iflocation );
+               var latitude = iflocation.geometry.location.lat();
+               var longitude = iflocation.geometry.location.lng();
 
-                console.log(latitude, longitude);
-            }
-        }
+               console.log(latitude, longitude);
+
+
+
+
+               var dataString =   {action:'check-loc', 
+               latitude: latitude, 
+               longitude: longitude,
+               temp: i
+           };
+           console.log(dataString);
+           $.ajax({
+            url: '../root/ajax2.php',
+            type: 'POST',
+            data:  jQuery.param(dataString)  ,
+            dataType: 'JSON',
+            headers : {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+                'X-Requested-With': 'XMLHttpRequest',   
+                'CsrfToken': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response, textStatus, jqXHR) { 
+               console.log(response);
+       // response =$.parseJSON(response);
+
+       // console.log(response.remark.longitude);
+       if(response.success == 0){
+
+       } else if(response.success  == -2){    
+
+       } else if(response.success  == 1){  
+
+        var aa = {lat: response.remark.longitude , lng: response.remark.latitude };
+        var GB = response.remark.temp;
+        console.log(GB);
+        createMarker( results[GB] );
+
+
     }
+},
+error: function(jqXHR, textStatus, errorThrown){
+    console.log('Error');
+    console.log(jqXHR, textStatus, errorThrown);
+}
+});
+
+
+
+
+
+       }
+
+
+
+
+
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+    // $('#join_date').datepicker({
+    //   format: 'dd-mm-yyyy',
+    //   endDate: '1d',
+    //   startDate: '-10d'
+    // });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     function createMarker(place) {
         var placeLoc = place.geometry.location;

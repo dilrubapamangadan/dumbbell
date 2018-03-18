@@ -1010,8 +1010,8 @@ function checkUser ( $type ){
 											"gym_owner"  => $gym_owner,
 											"gym_email"  => $gym_email,
 											"city"  => $city,
-											"longitude"  => $longitude,
-											"latitude" => $latitude,
+											"longitude"  => trim($longitude," "),
+											"latitude" => trim($latitude, " "),
 											"amount" => $amount,
 											"class_id" => $class_id, 
 											"max_take" => $max_take, 
@@ -1125,12 +1125,17 @@ function checkUser ( $type ){
 												$newFile =   rand(1, 999) .$files['file']['name'][$key];
 
 
+											try {
 
-											if(rename( $upload_file, $path . $newFile ) ){
-												$arraySt = true;
+												if(rename( $upload_file, $path . $newFile ) ){
+													$arraySt = true;
+
+												}
+
+
+											} catch (Exception $e) {
 
 											}
-
 
 											array_push($returnAr, $newFile );
 
@@ -1607,4 +1612,74 @@ function checkUser ( $type ){
 
 
 
-								?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+								function checkLoc(  $longitude , $latitude, $temp) {
+
+									global $a;
+									$authentication = false;
+									$returnArray = array('success' => -2, 
+										'data' => $latitude . ' ' . $longitude ,
+										'remark' => "Invalid Username or Password");
+
+
+
+
+
+									try { 
+
+
+										$result = selectFromTable ('  id  ', ' gym ',  '  longitude =  "' . trim($longitude, " ") . '" AND   latitude =  "' . trim( $latitude , " " ). '"  '    , $a );
+
+										$done = 0;
+										if(isset($result)) 
+											if($result > 0)
+												$done = 1;
+
+
+
+
+											$returnArray['success'] = $done;
+											$returnArray['remark']  = array('longitude' => $longitude,'latitude' => $latitude , 'temp' => $temp); 
+
+										} catch (Exception $e) {
+
+											$returnArray['success'] = 2;
+											$returnArray['remark'] = "invalid data";
+										}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+										return  $returnArray;
+									}
+
+
+									?>
