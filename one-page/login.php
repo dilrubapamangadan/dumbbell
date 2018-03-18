@@ -22,6 +22,8 @@
 
 
     if( isset( $_SESSION['userid'] ) ) {
+
+
       if( $_SESSION['type'] == '1' ) {
         header('Location: ' . PATH . '/admin');
       }         
@@ -52,8 +54,8 @@
 
         $_SESSION['userid']=$username;
         $_SESSION['type']='3';
-        header('Location: dashbord.php');
-        exit();
+        echo '<script type="text/javascript">location.href="dashbord.php"</script>';
+        
       }else{
 
 

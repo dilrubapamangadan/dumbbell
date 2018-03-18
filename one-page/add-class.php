@@ -43,17 +43,22 @@
     $message = array(null, null);
 
 
+    if(isset($_POST['gotonext'])){
+
+      $stmnt  = 'update subscriber set class_id = :area_name where email = :area_id';
+      $params = array(
+        ':area_name' => $_POST['id'], 
+        ':area_id'  =>  $_SESSION['userid']
+      );
+      $istrue = $db->execute_query($stmnt, $params);
+      if ($istrue) {
+        echo '<script type="text/javascript">location.href="dashbord.php"</script>';
+      }
 
 
 
+    }
 
-    $stmnt='select * from subscriber where  email ="'.$_SESSION['userid']. '"';
-
-
-    $result = $db->display($stmnt);
-
-    if(is_null($result[0]['class_id']))
-      echo '<script type="text/javascript">location.href="add-class.php"</script>';
 
 
 
@@ -74,17 +79,35 @@
     <!-- Start feature classes area -->
 
     <div class="pricing" id="pricing" >
-     <h2 class="section-title-default title-bar-high">Choose your Classes</h2>
-     <div class="container">
+      <h2 class="section-title-default title-bar-high">Choose your Class First</h2>
+      <div class="container">
        <div class="row">
-        <h3>welcome to site message</h3>
 
-        <a href="setgym.php" class="btn btn-primary">find gym</a>
 
         <?php
 
         if($result)
           foreach ($result as $key => $value) {
+            echo '
+
+            <div class="col-lg-3 col-md-3 col-lg-3 col-md-3 wow flipInY" data-wow-delay="0.8s">
+            <div class="package">
+            <h4>' . $value['class_name'] . '</h4>
+            <h1>' . $value['amount'] . '</h1>
+            <b>Monthly</b>
+            <form action="" method="post">
+
+            <input type="hidden" name="id" value="' . $value['id'] . '">
+            <button class="btn btn-success" type="submit" name="gotonext" value="go">Get Started</button>
+
+
+            </form>
+
+            </div>
+            </div>
+
+
+            ';
 
 
           }
@@ -100,6 +123,7 @@
 
     <!-- End feature product area -->
 
+    <
 
 
     <?php

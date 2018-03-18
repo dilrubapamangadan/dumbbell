@@ -21,8 +21,9 @@
                    <div class="button" style="margin-top:20px;"><a href="login.php" class="btn custom-button" data-title="Join With Us">Sign In</a></div>
 
                    <div class="button" style="margin-top:20px;"><a href="register.php" class="btn custom-button" data-title="Join With Us">Join With Us</a></div>
-
-
+                   <br/>
+                   <a href="../admin"> login as admin </a>
+                   <a style="padding-left: 30px;" href="../gym"> login as gym </a>
                    <ul class="main-banner-link" style="padding-top: 30px;">
                     <li>
                       <a class="facebook" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>

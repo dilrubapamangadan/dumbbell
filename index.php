@@ -11,3 +11,17 @@
 	</script>
 </body>
 </html>
+
+<!-- 	<a href="admin">admin</a>
+
+	<br/>
+
+	
+	<a href="gym">gym</a>
+
+	<br/>
+	
+	<a href="one-page">user</a>
+
+	<br/>
+ -->

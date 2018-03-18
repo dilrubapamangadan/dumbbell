@@ -126,10 +126,14 @@
       ============================================ -->
       <script src="js/main.js"></script>
 
-
+<!-- 
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsp1WqZjtOViQmJ2HbswctGzguIGgVijA&libraries=places&callback=initMap"
       async defer></script>
+    -->
+      
 
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCR-KEWAVCn52mSdeVeTqZjtqbmVJyfSus&libraries=places&callback=initMap"
+      async defer></script>
 
       <script type="text/javascript" src="../admin/js/pages/jquery.validate.min.js"></script>
 

@@ -320,21 +320,26 @@ function show_error ($message) {
                     <div class="row">
                         <div class="col-lg-2 col-md-2 col-sm-2">
                             <div class="logo-area">
-                                <a href="index.html"><img src="img/logo.png" style=" display: none;" width="20px" height="20px" alt="logo"></a>  <strong style="font-size: 40px;">dumbbell</strong>
+                                <a href="."><img src="img/logo.png" style=" display: none;" width="20px" height="20px" alt="logo"></a>  <strong style="font-size: 40px;">dumbbell</strong>
                             </div>
                         </div>
                         <div class="col-lg-10 col-md-10 col-sm-10">
                             <div class="main-menu">
                                 <nav>
                                     <ul id="nav">
-                                        <li class="current"><a href="index4.html">Home</a></li>
+                                        <li class="index.php"><a href="">Home</a></li>
                                         <li><a href="#about">About</a></li>
                                         <li><a href="#classes">Classes</a></li>
                                         <li><a href="#contact">Contact</a></li>
 
                                         <?php  if( isset( $_SESSION['userid'] ) ) {
-                                            
-                                          
+                                            ?>
+
+                                            <li><a href="../logout.php">logout</a></li>
+
+
+                                            <?php
+
                                         }
 
 
@@ -356,7 +361,7 @@ function show_error ($message) {
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul>
-                                        <li class="current"><a href="index4.html">Home</a></li>
+                                        <li class="index.php"><a href="">Home</a></li>
                                         <li><a href="#about">About</a></li>
                                         <li><a href="#classes">Classes</a></li>
                                         <li><a href="#contact">Contact</a></li>
